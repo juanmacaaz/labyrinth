@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Juanma\source\repos\Engine_0.1\reactphysics3d\build\CMakeFiles\4d31ed82d61811a3c3d367dfff9c915d\RUN_TESTS_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{60D94918-1A21-3756-9155-BE1650E0823D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

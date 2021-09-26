@@ -1,0 +1,5 @@
+0 --> Nada
+1 --> WHITE
+2 --> WALL
+3 --> BOX
+4 --> WOOD
