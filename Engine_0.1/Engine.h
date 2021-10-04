@@ -31,6 +31,8 @@ public:
 	map<string, GLuint> getShaders();
 	map<int, GLuint> getTextures();
 	GLFWwindow* getEngineWindow();
+	int getWWidth();
+	int getWHeight();
 
 private:
 
@@ -39,11 +41,13 @@ private:
 	map<string, GLuint> shader;
 	map<int, GLuint> texture;
 	Space* space;
+	int w_width, w_height;
 	
 	// Funciones privadas
 	void loadShaders();
 	void loadTextures();
 	void initGlfwGL();
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	GLuint LoadShader(const char* vertex_file_path, const char* fragment_file_path);
 	GLuint loadTexture(const char* imagepath);

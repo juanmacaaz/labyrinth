@@ -55,7 +55,7 @@ inline void Actor::updateMain()
 {
 	double xpos, ypos;
 	glfwGetCursorPos(space->getWindow(), &xpos, &ypos);
-	glfwSetCursorPos(space->getWindow(), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	glfwSetCursorPos(space->getWindow(), space->getEngine()->getWWidth() / 2, space->getEngine()->getWHeight() / 2);
 
 	camera[MAIN_CAMERA].computeNewOrientation(xpos, ypos);
 

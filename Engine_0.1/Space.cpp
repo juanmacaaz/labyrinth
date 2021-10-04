@@ -11,13 +11,15 @@ Space::Space(Engine* engine)
 
 	world = Common::getPhysicsInstance().createPhysicsWorld(settings);
 
-	ProjectionData proyectionData = { 45.0f, 0.01f, 100.0f, WINDOW_WIDTH, WINDOW_HEIGHT };
+	ProjectionData proyectionData = { 45.0f, 0.01f, 100.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	Transform t(Vector3(3.0f, 2.0f, 3.0f), Quaternion().identity());
 	this->actor = new Actor(this, t);
 
-	this->actor->setMainCamera(Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), proyectionData));
-	this->actor->setMapCamera(Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), proyectionData));
+	this->actor->setMainCamera(Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
+		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
+	this->actor->setMapCamera(Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
+		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
 
 	this->labyrinth = new Labyrinth(this);
 }

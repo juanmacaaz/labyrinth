@@ -1,8 +1,11 @@
 #include "Camera.h"
 
-Camera::Camera(vec3 cameraPosition, vec3 cameraTarget, ProjectionData proyectionData)
+Camera::Camera(vec3 cameraPosition, vec3 cameraTarget, ProjectionData proyectionData, int w_width, int w_height)
 {
 	this->proyectionData = proyectionData;
+	this->w_width = w_width;
+	this->w_height = w_height;
+
 	this->proyectionMatrix = glm::perspective(
 		glm::radians(proyectionData.FOV),
 		proyectionData.wWidth / proyectionData.wHeigth,
@@ -25,8 +28,8 @@ mat4 Camera::getProyectionMatrix()
 
 void Camera::computeNewOrientation(double xpos, double ypos)
 {
-	horizontalAngle += mouseSpeed * float(WINDOW_WIDTH / 2 - xpos);
-	verticalAngle += mouseSpeed * float(WINDOW_HEIGHT / 2 - ypos);
+	horizontalAngle += mouseSpeed * float(w_width / 2 - xpos);
+	verticalAngle += mouseSpeed * float(w_height / 2 - ypos);
 }
 
 void Camera::setPosition(vec3 position)

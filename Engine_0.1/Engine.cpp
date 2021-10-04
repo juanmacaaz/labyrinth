@@ -17,6 +17,8 @@ int Engine::run()
 	double lasttime = glfwGetTime();
 	glUseProgram(shader["basic-nolight"]);
 
+	glfwSetKeyCallback(window, key_callback);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -51,6 +53,16 @@ GLFWwindow* Engine::getEngineWindow()
 	return window;
 }
 
+int Engine::getWWidth()
+{
+	return w_width;
+}
+
+int Engine::getWHeight()
+{
+	return w_height;
+}
+
 void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
@@ -69,13 +81,18 @@ void Engine::initGlfwGL()
 	if (!glfwInit())
 		return;
 
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+	w_width = mode->width;
+	w_height = mode->height;
+
 	glfwWindowHint(GLFW_SAMPLES, 8);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game", NULL, NULL);
+	window = glfwCreateWindow(w_width, w_height, "Game", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -95,11 +112,17 @@ void Engine::initGlfwGL()
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glfwPollEvents();
-	glfwSetCursorPos(window, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	glfwSetCursorPos(window, w_width / 2, w_height / 2);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);
+}
+
+void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
 GLuint Engine::LoadShader(const char* vertex_file_path, const char* fragment_file_path) {

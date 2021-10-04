@@ -6,9 +6,6 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 
-#define WINDOW_WIDTH  1280
-#define WINDOW_HEIGHT 720
-
 using namespace glm;
 
 struct ProjectionData
@@ -24,7 +21,7 @@ struct ProjectionData
 class Camera
 {
 public:
-	Camera(vec3 cameraPosition, vec3 cameraTarget, ProjectionData proyectionData);
+	Camera(vec3 cameraPosition, vec3 cameraTarget, ProjectionData proyectionData, int w_width, int w_height);
 	Camera() {}
 	mat4 getViewMatrix();
 	mat4 getProyectionMatrix();
@@ -54,6 +51,8 @@ private:
 
 	float speed = 0.10f;
 	float mouseSpeed = 0.005f;
+
+	int w_width, w_height;
 
 };
 
