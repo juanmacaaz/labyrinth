@@ -1,19 +1,20 @@
 #pragma once
 
-#include "Camera.h"
+
 #include <glm.hpp>
 
 #include <reactphysics3d/reactphysics3d.h>
 using namespace reactphysics3d;
 
-#include "Space.h"
+#include "Camera.h"
+
 class Space;
 
 class Actor
 {
 public:
 
-	const float VELOCIDAD = 100.0f;
+	const float VELOCIDAD = 10000.0f;
 	const float SALTO = 2.75f;
 	const float ALTURA_CAMARA = 0.5f;
 

@@ -7,9 +7,14 @@
 #include <fstream>
 #include <sstream>
 
-#include "Space.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
-class Space;
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+
+#include "Space.h"
+#include "read_model.h"
 
 using namespace std;
 
@@ -30,6 +35,7 @@ public:
 
 	map<string, GLuint> getShaders();
 	map<int, GLuint> getTextures();
+	map<string, Model> getModels();
 	GLFWwindow* getEngineWindow();
 	int getWWidth();
 	int getWHeight();
@@ -40,16 +46,20 @@ private:
 	GLFWwindow* window;
 	map<string, GLuint> shader;
 	map<int, GLuint> texture;
+	map<string, Model> models;
 	Space* space;
 	int w_width, w_height;
 	
 	// Funciones privadas
 	void loadShaders();
 	void loadTextures();
+	void loadModels();
+
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	GLuint LoadShader(const char* vertex_file_path, const char* fragment_file_path);
 	GLuint loadTexture(const char* imagepath);
+	struct Model loadModel(const char* imagepath);
 };
 

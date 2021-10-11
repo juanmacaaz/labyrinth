@@ -3,11 +3,14 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include "Space.h"
+
 Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
 	loadTextures();
+	loadModels();
 
 	space = new Space(this);
 }
@@ -48,6 +51,11 @@ map<int, GLuint> Engine::getTextures()
 	return texture;
 }
 
+map<string, Model> Engine::getModels()
+{
+	return models;
+}
+
 GLFWwindow* Engine::getEngineWindow()
 {
 	return window;
@@ -74,6 +82,12 @@ void Engine::loadTextures()
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera.jpg");
 	texture[Block::BOX] = loadTexture("textures\\uncompressed\\container.jpg");
 	texture[Block::WALL] = loadTexture("textures\\uncompressed\\wall.jpg");
+}
+
+void Engine::loadModels()
+{
+	models["waifu"] = loadModel("models\\waifu.obj");
+	models["cube"] = loadModel("models\\cube.obj");
 }
 
 void Engine::initGlfwGL()
@@ -244,4 +258,13 @@ GLuint Engine::loadTexture(const char* imagepath)
 	stbi_image_free(data);
 	std::cout << "Loaded:" << textureID << std::endl;
 	return textureID;
+}
+
+Model Engine::loadModel(const char* modelDir)
+{
+	vector<glm::vec3> out_vertices;
+	vector<glm::vec2> out_uvs;
+	vector<glm::vec3> out_normals;
+	loadOBJ(modelDir, out_vertices, out_uvs, out_normals);
+	return Model( out_vertices , out_uvs , out_normals );
 }

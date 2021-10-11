@@ -1,15 +1,13 @@
 #pragma once
 
+#include "Cube.h"
 #include <vector>
 using namespace std;
 
-#include "Space.h"
-#include "Cube.h"
-#include "Engine.h"
-
+class Camera;
 class Space;
 
-class Labyrinth: public IRender 
+class Labyrinth 
 {
 public:
 
@@ -22,7 +20,7 @@ private:
 	Space* space;
 
 	// Atributos
-	vector<Cube*> cubes;
+	vector<Cube> cubes;
 	
 	// Funciones privadas
 	void generateMap();

@@ -4,9 +4,8 @@
 #include <GLFW/glfw3.h>
 
 #include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-
 using namespace glm;
+#include <gtc/matrix_transform.hpp>
 
 struct ProjectionData
 {

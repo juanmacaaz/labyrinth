@@ -5,7 +5,8 @@
 #include <vector>
 #include <gtc/type_ptr.hpp>
 
-
+#include "Space.h"
+#include "Engine.h"
 
 Actor::Actor(Space* space, Transform transform)
 {
@@ -21,7 +22,7 @@ Actor::Actor(Space* space, Transform transform)
 	body->addCollider(capsuleShape, Transform::identity());
 
 	body->getCollider(0)->getMaterial().setBounciness(0.0f);
-	body->setMass(0.5);
+	body->setMass(68.5);
 }
 
 void Actor::setMainCamera(Camera camera)
@@ -51,7 +52,7 @@ void Actor::update()
 	}
 }
 
-inline void Actor::updateMain()
+void Actor::updateMain()
 {
 	double xpos, ypos;
 	glfwGetCursorPos(space->getWindow(), &xpos, &ypos);
