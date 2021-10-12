@@ -33,8 +33,8 @@ protected:
 
 public:
 
-	Entitie(Space* space, string model, int texture, string shader, Vector3 initPosition);
+	Entitie(Space* space, string model, int texture, string shader, Vector3 initPosition, float scale = 1);
 	void render(Camera* camera);
-	void update() {};
-
+	virtual void update() {};
+	CollisionBody* getBody();
 };

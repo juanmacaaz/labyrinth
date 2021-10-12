@@ -26,7 +26,7 @@ public:
 	void setMapCamera(Camera camera);
 
 	Camera* getCamera();
-
+	CollisionBody* getBody();
 	void update();
 	void updateMain();
 	void updateMap();

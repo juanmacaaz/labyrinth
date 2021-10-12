@@ -36,7 +36,7 @@ BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 	return space->getPC().createBoxShape(halfExtents);
 }
 
-Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vector3 initPosition)
+Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vector3 initPosition, float scale)
 {
 	this->texture = space->getEngine()->getTextures()[texture];
 	this->shader = space->getEngine()->getShaders()[shader];
@@ -49,9 +49,9 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 	for (int i = 0; i < model.out_vertices.size(); i++) {
 		
-		vertices.push_back(model.out_vertices[i][0]);
-		vertices.push_back(model.out_vertices[i][1]);
-		vertices.push_back(model.out_vertices[i][2]);
+		vertices.push_back(model.out_vertices[i][0] * scale);
+		vertices.push_back(model.out_vertices[i][1] * scale);
+		vertices.push_back(model.out_vertices[i][2] * scale);
 
 		vertices.push_back(model.out_uvs[i][0]);
 		vertices.push_back(model.out_uvs[i][1]);
@@ -110,4 +110,9 @@ void Entitie::render(Camera* camera)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+}
+
+CollisionBody* Entitie::getBody()
+{
+	return body;
 }

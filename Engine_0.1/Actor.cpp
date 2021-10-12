@@ -40,6 +40,11 @@ Camera* Actor::getCamera()
 	return &camera[cameraID];
 }
 
+CollisionBody* Actor::getBody()
+{
+	return body;
+}
+
 void Actor::update()
 {
 	if (glfwGetKey(space->getWindow(), GLFW_KEY_Z)) {

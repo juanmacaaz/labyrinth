@@ -82,12 +82,14 @@ void Engine::loadTextures()
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera.jpg");
 	texture[Block::BOX] = loadTexture("textures\\uncompressed\\container.jpg");
 	texture[Block::WALL] = loadTexture("textures\\uncompressed\\wall.jpg");
+	//texture[Block::KEY] = loadTexture("textures\\uncompressed\\ceramica.jpg");
 }
 
 void Engine::loadModels()
 {
 	models["waifu"] = loadModel("models\\waifu.obj");
 	models["cube"] = loadModel("models\\cube.obj");
+	models["key"] = loadModel("models\\plastic_chair.obj");
 }
 
 void Engine::initGlfwGL()

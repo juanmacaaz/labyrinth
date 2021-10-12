@@ -6,6 +6,7 @@
 #include "Labyrinth.h"
 #include "Engine.h"
 #include "Entitie.h"
+#include "Key.h"
 
 Space::Space(Engine* engine)
 {
@@ -26,16 +27,19 @@ Space::Space(Engine* engine)
 	this->actor->setMapCamera(Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
 		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
 
-	
+	entidades.push_back(new Key(this, Vector3(6, 1.5, 6)));
 	this->labyrinth = new Labyrinth(this);
 
-	Entitie* entitie = new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8));
-	entidades.push_back(entitie);
+	entidades.push_back(new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8)));
+	
 }
 
 void Space::update()
 {
 	actor->update();
+	for (auto e : entidades) {
+		e->update();
+	}
 	world->update(1.0f / 60.0f);
 }
 
@@ -52,6 +56,11 @@ Engine* Space::getEngine()
 GLFWwindow* Space::getWindow()
 {
 	return engine->getEngineWindow();
+}
+
+Actor* Space::getActor()
+{
+	return actor;
 }
 
 PhysicsCommon& Space::getPC()

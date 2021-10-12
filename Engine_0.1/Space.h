@@ -31,6 +31,8 @@ public:
 	Engine* getEngine();
 	GLFWwindow* getWindow();
 
+	Actor* getActor();
+
 	PhysicsCommon& getPC();
 
 private:

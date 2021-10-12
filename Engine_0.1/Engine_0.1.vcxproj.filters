@@ -86,9 +86,6 @@
     <ClInclude Include="stb_image.h">
       <Filter>Archivos de encabezado\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="IRender.h">
-      <Filter>Archivos de encabezado\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>

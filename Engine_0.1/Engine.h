@@ -23,7 +23,8 @@ enum Block
 	WHITE = 1,
 	WALL = 2,
 	BOX = 3,
-	WOOD = 4
+	WOOD = 4,
+	KEY = 5
 };
 
 class Engine
