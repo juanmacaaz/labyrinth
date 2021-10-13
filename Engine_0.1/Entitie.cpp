@@ -9,6 +9,8 @@ using namespace std;
 #include "Space.h"
 #include "Camera.h"
 
+#define MAX_RENDER_DISTANCE 15
+
 BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 {
 	float minX = INFINITY;
@@ -77,6 +79,8 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 void Entitie::render(Camera* camera)
 {
+	if ( sqrt(pow(camera->getPosition()[0] - body->getTransform().getPosition()[0], 2) + pow( camera->getPosition()[2] - body->getTransform().getPosition()[2], 2 )) > MAX_RENDER_DISTANCE) return;
+
 	GLuint gWVP = glGetUniformLocation(shader, "gWVP");
 	GLuint tex = glGetUniformLocation(shader, "tex");
 

@@ -17,7 +17,7 @@ Space::Space(Engine* engine)
 
 	world = pc.createPhysicsWorld(settings);
 
-	ProjectionData proyectionData = { 45.0f, 0.01f, 100.0f, this->engine->getWWidth() , this->engine->getWHeight() };
+	ProjectionData proyectionData = { 45.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	Transform t(Vector3(3.0f, 1.0f, 3.0f), Quaternion().identity());
 	this->actor = new Actor(this, t);
@@ -40,7 +40,7 @@ void Space::update()
 	for (auto e : entidades) {
 		e->update();
 	}
-	world->update(1.0f / 60.0f);
+	world->update(1.0f / 30.0f);
 }
 
 PhysicsWorld* Space::getWorld()
