@@ -58,7 +58,7 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 		vertices.push_back(model.out_uvs[i][0]);
 		vertices.push_back(model.out_uvs[i][1]);
 	}
-
+	
 	body = space->getWorld()->createRigidBody(transform);
 	
 	Transform t;
@@ -75,6 +75,17 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+}
+
+Entitie::~Entitie()
+{
+}
+
+void Entitie::deleteData()
+{
+	space->getWorld()->destroyRigidBody(body);
+	glDeleteBuffers(1, &VAO);
+	glDeleteBuffers(1, &VBO);
 }
 
 void Entitie::render(Camera* camera)

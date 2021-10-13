@@ -35,6 +35,8 @@ public:
 
 	PhysicsCommon& getPC();
 
+	void deleteEntitie(Entitie* entitie);
+
 private:
 
 	// Apuntador a clase contenedora
