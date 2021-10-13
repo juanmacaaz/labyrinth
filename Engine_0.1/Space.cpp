@@ -28,6 +28,12 @@ Space::Space(Engine* engine)
 		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
 
 	entidades.push_back(new Key(this, Vector3(6, 1.5, 6)));
+	entidades.push_back(new Key(this, Vector3(8, 1.5, 6)));
+	entidades.push_back(new Key(this, Vector3(10, 1.5, 6)));
+	entidades.push_back(new Key(this, Vector3(6, 1.5, 8)));
+	entidades.push_back(new Key(this, Vector3(6, 1.5, 10)));
+	entidades.push_back(new Key(this, Vector3(7, 1.5, 7)));
+
 	this->labyrinth = new Labyrinth(this);
 
 	entidades.push_back(new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8)));
@@ -37,9 +43,7 @@ Space::Space(Engine* engine)
 void Space::update()
 {
 	actor->update();
-	for (auto e : entidades) {
-		e->update();
-	}
+	for (auto e : entidades) e->update();
 	world->update(1.0f / 60.0f);
 }
 
@@ -68,10 +72,13 @@ PhysicsCommon& Space::getPC()
 	return pc;
 }
 
+void Space::deleteEntitie(Entitie* entitie)
+{
+	entidades.erase(find(entidades.begin(), entidades.end(), entitie));
+}
+
 void Space::render()
 {
 	labyrinth->render(actor->getCamera());
-	for (auto e : entidades) {
-		e->render(actor->getCamera());
-	}
+	for (auto e : entidades) e->render(actor->getCamera());
 }
