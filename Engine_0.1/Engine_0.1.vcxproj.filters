@@ -57,6 +57,9 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
