@@ -34,6 +34,10 @@ protected:
 public:
 
 	Entitie(Space* space, string model, int texture, string shader, Vector3 initPosition, float scale = 1);
+	~Entitie();
+
+	void deleteData();
+
 	void render(Camera* camera);
 	virtual void update() {};
 	CollisionBody* getBody();

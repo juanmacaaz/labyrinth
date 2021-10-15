@@ -134,7 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)librerias\glfw\include;$(ProjectDir)librerias\glew-2.1.0\include;$(ProjectDir)librerias\glm;$(ProjectDir)librerias\reactphysics3d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Disabled</Optimization>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,7 +155,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Labyrinth.cpp" />
     <ClCompile Include="Entitie.cpp" />
+    <ClCompile Include="MenuSpace.cpp" />
     <ClCompile Include="read_model.cpp" />
+    <ClCompile Include="GameSpace.cpp" />
     <ClCompile Include="Space.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +169,9 @@
     <ClInclude Include="Key.h" />
     <ClInclude Include="Labyrinth.h" />
     <ClInclude Include="Entitie.h" />
+    <ClInclude Include="MenuSpace.h" />
     <ClInclude Include="read_model.h" />
+    <ClInclude Include="GameSpace.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>

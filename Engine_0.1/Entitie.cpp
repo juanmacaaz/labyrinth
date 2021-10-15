@@ -9,6 +9,8 @@ using namespace std;
 #include "Space.h"
 #include "Camera.h"
 
+#define MAX_RENDER_DISTANCE 15
+
 BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 {
 	float minX = INFINITY;
@@ -55,12 +57,13 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 		vertices.push_back(model.out_uvs[i][0]);
 		vertices.push_back(model.out_uvs[i][1]);
-	}
 
+	}
+	
 	body = space->getWorld()->createRigidBody(transform);
 	
 	Transform t;
-	BoxShape* e = genereateBoindingBox(t);
+	CollisionShape* e = genereateBoindingBox(t);
 
 	body->addCollider(e, t);
 	body->getCollider(0)->getMaterial().setBounciness(0.15f);
@@ -75,8 +78,25 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 }
 
+Entitie::~Entitie()
+{
+
+}
+
+void Entitie::deleteData()
+{
+	space->getWorld()->destroyRigidBody(body);
+	glDeleteBuffers(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+}
+
 void Entitie::render(Camera* camera)
 {
+	if ( sqrt(pow(camera->getPosition()[0] - body->getTransform().getPosition()[0], 2)
+		+ pow( camera->getPosition()[2]
+		- body->getTransform().getPosition()[2], 2 ))
+	> MAX_RENDER_DISTANCE) return;
+
 	GLuint gWVP = glGetUniformLocation(shader, "gWVP");
 	GLuint tex = glGetUniformLocation(shader, "tex");
 

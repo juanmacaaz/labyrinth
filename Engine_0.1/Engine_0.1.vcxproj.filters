@@ -39,7 +39,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Space.cpp">
+    <ClCompile Include="GameSpace.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Labyrinth.cpp">
@@ -57,6 +57,12 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Space.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSpace.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
     <ClCompile Include="Graph.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -71,7 +77,7 @@
     <ClInclude Include="Camera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Space.h">
+    <ClInclude Include="GameSpace.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Labyrinth.h">
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Space.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSpace.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">
       <Filter>Archivos de encabezado</Filter>

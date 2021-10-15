@@ -9,8 +9,8 @@ using namespace reactphysics3d;
 #include <glm.hpp>
 using namespace glm;
 
+#include "Space.h"
 #include "Camera.h"
-#include "Common.h"
 
 class Camera;
 class Actor;
@@ -18,27 +18,24 @@ class Entitie;
 class Labyrinth;
 class Engine;
 
-class Space
+class GameSpace : public Space
 {
 public:
-	Space(Engine* engine);
 
-	virtual void render();
-	virtual void update();
+	GameSpace(Engine* engine);
 
-	PhysicsWorld* getWorld();
-	Engine* getEngine();
-	GLFWwindow* getWindow();
+	void render();
+	void update();
+	
+	Actor* getActor();
 
-	PhysicsCommon& getPC();
 	void deleteEntitie(Entitie* entitie);
 
-protected:
-
-	// Apuntador a clase contenedora
-	Engine* engine;
-
+private:
 	// Atributos
-	PhysicsCommon pc;
-	PhysicsWorld* world;
+	Actor* actor;
+	Labyrinth* labyrinth;
+
+	vector<Entitie*> entidades;
 };
+

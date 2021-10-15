@@ -3,7 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-#include "Space.h"
+#include "GameSpace.h"
+#include "MenuSpace.h"
 
 Engine::Engine()
 {
@@ -12,7 +13,8 @@ Engine::Engine()
 	loadTextures();
 	loadModels();
 
-	space = new Space(this);
+	gameSpace = new GameSpace(this);
+	menuSpace = new MenuSpace(this);
 }
 
 int Engine::run()
@@ -26,9 +28,9 @@ int Engine::run()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		space->update();
+		gameSpace->update();
 
-		space->render();
+		gameSpace->render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -2,9 +2,10 @@
 
 #include "Engine.h"
 #include "Actor.h"
+#include "GameSpace.h"
 
-Key::Key(Space* space, Vector3 initPosition) :
-	Entitie(space, "key", Block::WOOD, "basic-nolight", initPosition, 5)
+Key::Key(GameSpace* space, Vector3 initPosition) :
+	Entitie(space, "key", Block::WOOD, "basic-nolight", initPosition, 10)
 {
 	this->space = space;
 	body->setType(BodyType::STATIC);
@@ -13,6 +14,8 @@ Key::Key(Space* space, Vector3 initPosition) :
 void Key::update()
 {
 	if (space->getWorld()->testOverlap(body, space->getActor()->getBody())) {
-		cout << "Han colisionado!!" << endl;
+		deleteData();
+		space->deleteEntitie(this);
+		cout << "Tienes una manzana" << endl;
 	};
 }

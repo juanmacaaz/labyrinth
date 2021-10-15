@@ -5,10 +5,10 @@
 #include <vector>
 #include <gtc/type_ptr.hpp>
 
-#include "Space.h"
+#include "GameSpace.h"
 #include "Engine.h"
 
-Actor::Actor(Space* space, Transform transform)
+Actor::Actor(GameSpace* space, Transform transform)
 {
 	this->space = space;
 
@@ -16,7 +16,6 @@ Actor::Actor(Space* space, Transform transform)
 
 	body->setType(BodyType::DYNAMIC);
 
-	//const Vector3 halfExtents(0.5f, 0.5f, 0.5f);
 	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.35, 1.2);
 
 	body->addCollider(capsuleShape, Transform::identity());
@@ -25,19 +24,19 @@ Actor::Actor(Space* space, Transform transform)
 	body->setMass(68.5);
 }
 
-void Actor::setMainCamera(Camera camera)
+void Actor::setMainCamera(Camera* camera)
 {
 	this->camera[MAIN_CAMERA] = camera;
 }
 
-void Actor::setMapCamera(Camera camera)
+void Actor::setMapCamera(Camera* camera)
 {
 	this->camera[MAP_CAMERA] = camera;
 }
 
 Camera* Actor::getCamera()
 {
-	return &camera[cameraID];
+	return camera[cameraID];
 }
 
 CollisionBody* Actor::getBody()
@@ -63,10 +62,10 @@ void Actor::updateMain()
 	glfwGetCursorPos(space->getWindow(), &xpos, &ypos);
 	glfwSetCursorPos(space->getWindow(), space->getEngine()->getWWidth() / 2, space->getEngine()->getWHeight() / 2);
 
-	camera[MAIN_CAMERA].computeNewOrientation(xpos, ypos);
-
-	float verticalAngle = camera[MAIN_CAMERA].getVerticalAngle();
-	float horizontalAngle = camera[MAIN_CAMERA].getHorizantalAngle();
+	camera[MAIN_CAMERA]->computeNewOrientation(xpos, ypos);
+	
+	float verticalAngle = camera[MAIN_CAMERA]->getVerticalAngle();
+	float horizontalAngle = camera[MAIN_CAMERA]->getHorizantalAngle();
 
 	vec3 direction(
 		cos(verticalAngle) * sin(horizontalAngle),
@@ -130,14 +129,14 @@ void Actor::updateMain()
 	body->setTransform(Transform(body->getTransform().getPosition(), Quaternion::identity()));
 	body->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 
-	camera[MAIN_CAMERA].setUP(up);
+	camera[MAIN_CAMERA]->setUP(up);
 
 	vec3 pos;
 	memcpy((void*)&pos[0], (void*)&body->getTransform().getPosition()[0], sizeof(float) * 3);
 
 	pos[1] += ALTURA_CAMARA;
-	camera[MAIN_CAMERA].setPosition(pos);
-	camera[MAIN_CAMERA].setDirection(direction);
+	camera[MAIN_CAMERA]->setPosition(pos);
+	camera[MAIN_CAMERA]->setDirection(direction);
 }
 
 inline void Actor::updateMap()
@@ -145,6 +144,6 @@ inline void Actor::updateMap()
 	vec3 pos;
 	body->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 	memcpy((void*)&pos[0], (void*)&body->getTransform().getPosition()[0], sizeof(float) * 3);
-	camera[MAP_CAMERA].setPosition(vec3(pos[0], 10, pos[2] + 0.001f));
-	camera[MAP_CAMERA].setDirection(vec3(camera[MAIN_CAMERA].getDirectrion()[0] * 0.0005f, -1, camera[MAIN_CAMERA].getDirectrion()[2] * 0.0005f));
+	camera[MAP_CAMERA]->setPosition(vec3(pos[0], 10, pos[2] + 0.001f));
+	camera[MAP_CAMERA]->setDirection(vec3(camera[MAIN_CAMERA]->getDirectrion()[0] * 0.0005f, -1, camera[MAIN_CAMERA]->getDirectrion()[2] * 0.0005f));
 }

@@ -1,6 +1,6 @@
 #include "Labyrinth.h"
 
-Labyrinth::Labyrinth(Space* space)
+Labyrinth::Labyrinth(GameSpace* space)
 {
 	this->space = space;
 	vector<vector<char>> map = generateMap();
