@@ -4,13 +4,13 @@
 
 #include "Entitie.h"
 
-class Space;
+class GameSpace;
 
 class Cube: public Entitie
 {
 public:
 
-	Cube(Space* space, int texture, Vector3 initPosition);
+	Cube(GameSpace* space, int texture, Vector3 initPosition);
 
 };
 

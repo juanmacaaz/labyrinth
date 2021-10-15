@@ -8,22 +8,22 @@ using namespace reactphysics3d;
 
 #include "Camera.h"
 
-class Space;
+class GameSpace;
 
 class Actor
 {
 public:
 
-	const float VELOCIDAD = 1000.0f;
+	const float VELOCIDAD = 3000.0f;
 	const float SALTO = 2.75f;
 	const float ALTURA_CAMARA = 0.5f;
 
 	enum CameraID { MAIN_CAMERA = 0, MAP_CAMERA = 1 };
 
-	Actor(Space* space, Transform transform);
+	Actor(GameSpace* space, Transform transform);
 
-	void setMainCamera(Camera camera);
-	void setMapCamera(Camera camera);
+	void setMainCamera(Camera* camera);
+	void setMapCamera(Camera* camera);
 
 	Camera* getCamera();
 	CollisionBody* getBody();
@@ -33,9 +33,9 @@ public:
 
 private:
 	// Apuntadores a clases contenedoras
-	Space* space;
+	GameSpace* space;
 
-	Camera camera[2];
+	Camera* camera[2];
 	RigidBody* body;
 	CameraID cameraID;
 };

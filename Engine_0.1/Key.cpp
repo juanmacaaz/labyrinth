@@ -2,8 +2,9 @@
 
 #include "Engine.h"
 #include "Actor.h"
+#include "GameSpace.h"
 
-Key::Key(Space* space, Vector3 initPosition) :
+Key::Key(GameSpace* space, Vector3 initPosition) :
 	Entitie(space, "key", Block::WOOD, "basic-nolight", initPosition, 10)
 {
 	this->space = space;

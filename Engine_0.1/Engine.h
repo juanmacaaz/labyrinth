@@ -13,10 +13,12 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 
-#include "Space.h"
 #include "read_model.h"
 
 using namespace std;
+
+class MenuSpace;
+class GameSpace;
 
 enum Block
 {
@@ -48,7 +50,8 @@ private:
 	map<string, GLuint> shader;
 	map<int, GLuint> texture;
 	map<string, Model> models;
-	Space* space;
+	GameSpace* gameSpace;
+	MenuSpace* menuSpace;
 	int w_width, w_height;
 	
 	// Funciones privadas

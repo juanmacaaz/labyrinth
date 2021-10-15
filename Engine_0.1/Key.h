@@ -2,17 +2,17 @@
 #include "Entitie.h"
 
 class Actor;
-class Space;
+class GameSpace;
 
 class Key : public Entitie
 {
 private:
 
-	Space* space;
+	GameSpace* space;
 
 public:
 
-	Key(Space* space, Vector3 initPosition);
+	Key(GameSpace* space, Vector3 initPosition);
 	void update();
 };
 

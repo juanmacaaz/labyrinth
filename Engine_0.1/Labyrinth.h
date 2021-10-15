@@ -5,19 +5,19 @@
 using namespace std;
 
 class Camera;
-class Space;
+class GameSpace;
 
 class Labyrinth 
 {
 public:
 
-	Labyrinth(Space* space);
+	Labyrinth(GameSpace* space);
 	void render(Camera* camera);
 
 private:
 
 	// Apuntadores a clases contenedoras
-	Space* space;
+	GameSpace* space;
 
 	// Atributos
 	vector<Cube> cubes;
