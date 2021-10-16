@@ -66,8 +66,6 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	CollisionShape* e = genereateBoindingBox(t);
 
 	body->addCollider(e, t);
-	body->getCollider(0)->getMaterial().setBounciness(0.15f);
-	body->getCollider(0)->getMaterial().setFrictionCoefficient(0.7f);
 
 	body->setLocalCenterOfMass(t.getPosition());
 
@@ -132,7 +130,7 @@ void Entitie::render(Camera* camera)
 	glDisableVertexAttribArray(1);
 }
 
-CollisionBody* Entitie::getBody()
+RigidBody* Entitie::getBody()
 {
 	return body;
 }

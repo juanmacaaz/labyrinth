@@ -9,12 +9,13 @@ using namespace reactphysics3d;
 #include "Camera.h"
 
 class GameSpace;
+class Entitie;
 
 class Actor
 {
 public:
 
-	const float VELOCIDAD = 3000.0f;
+	const float VELOCIDAD = 4000.0f;
 	const float SALTO = 2.75f;
 	const float ALTURA_CAMARA = 0.5f;
 
@@ -26,7 +27,9 @@ public:
 	void setMapCamera(Camera* camera);
 
 	Camera* getCamera();
+
 	CollisionBody* getBody();
+
 	void update();
 	void updateMain();
 	void updateMap();
@@ -36,7 +39,9 @@ private:
 	GameSpace* space;
 
 	Camera* camera[2];
-	RigidBody* body;
+
 	CameraID cameraID;
+	Entitie* entitie;
+	Matrix3x3 orientation;
 };
 
