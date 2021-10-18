@@ -33,7 +33,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	entidades.push_back(new Key(this, Vector3(6, 1.5, 10)));
 	entidades.push_back(new Key(this, Vector3(7, 1.5, 7)));
 
-	this->labyrinth = new Labyrinth(this);
+	this->labyrinth = new Labyrinth(this, 21, 21);
 
 	entidades.push_back(new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8)));
 }
