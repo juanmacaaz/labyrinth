@@ -7,21 +7,25 @@
 
 #include "GameSpace.h"
 #include "Engine.h"
+#include "Entitie.h"
 
 Actor::Actor(GameSpace* space, Transform transform)
 {
 	this->space = space;
 
-	body = space->getWorld()->createRigidBody(transform);
+	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", Vector3(0.0,1.5,0.0), 0.45f);
 
-	body->setType(BodyType::DYNAMIC);
+	RigidBody* body = entitie->getBody();
+	
+	body->setMass(65.0f);
+	
+	body->removeCollider(body->getCollider(0));
 
-	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.35, 1.2);
-
+	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.20, 1.2);
+	body->updateLocalCenterOfMassFromColliders();
 	body->addCollider(capsuleShape, Transform::identity());
-
 	body->getCollider(0)->getMaterial().setBounciness(0.0f);
-	body->setMass(68.5);
+	body->getCollider(0)->getMaterial().setFrictionCoefficient(0.2f);
 }
 
 void Actor::setMainCamera(Camera* camera)
@@ -41,7 +45,7 @@ Camera* Actor::getCamera()
 
 CollisionBody* Actor::getBody()
 {
-	return body;
+	return entitie->getBody();
 }
 
 void Actor::update()
@@ -94,11 +98,11 @@ void Actor::updateMain()
 	const float VEL = VELOCIDAD + factor;
 
 	if (glfwGetKey(space->getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-		body->applyForceToCenterOfMass(directionM * VEL);
+		entitie->getBody()->applyForceToCenterOfMass(directionM * VEL);
 	}
 
 	if (glfwGetKey(space->getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-		body->applyForceToCenterOfMass(-1 * directionM * VEL);
+		entitie->getBody()->applyForceToCenterOfMass(-1 * directionM * VEL);
 	}
 
 	if (glfwGetKey(space->getWindow(), GLFW_KEY_D) == GLFW_PRESS) {
@@ -106,7 +110,7 @@ void Actor::updateMain()
 		directionM[0] = -directionM[2];
 		directionM[2] = aux;
 
-		body->applyForceToCenterOfMass(directionM * VEL);
+		entitie->getBody()->applyForceToCenterOfMass(directionM * VEL);
 	}
 
 	if (glfwGetKey(space->getWindow(), GLFW_KEY_A) == GLFW_PRESS) {
@@ -114,25 +118,20 @@ void Actor::updateMain()
 		directionM[0] = directionM[2];
 		directionM[2] = -aux;
 
-		body->applyForceToCenterOfMass(directionM * VEL);
+		entitie->getBody()->applyForceToCenterOfMass(directionM * VEL);
 	}
 
-	const float gravity = body->getLinearVelocity()[1];
+	orientation = Matrix3x3 ( cos(horizontalAngle), 0, sin(horizontalAngle),
+								0,1,0,
+							 -sin(horizontalAngle), 0, cos(horizontalAngle));
 
-	/*
-		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && abs(gravity) < 0.001f) {
-		directionM[1] = SALTO;
-		body->applyForceToCenterOfMass(directionM * VELOCIDAD);
-	}
-	*/
-
-	body->setTransform(Transform(body->getTransform().getPosition(), Quaternion::identity()));
-	body->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
+	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 
 	camera[MAIN_CAMERA]->setUP(up);
 
 	vec3 pos;
-	memcpy((void*)&pos[0], (void*)&body->getTransform().getPosition()[0], sizeof(float) * 3);
+	memcpy((void*)&pos[0], (void*)&entitie->getBody()->getTransform().getPosition()[0], sizeof(float) * 3);
 
 	pos[1] += ALTURA_CAMARA;
 	camera[MAIN_CAMERA]->setPosition(pos);
@@ -142,8 +141,12 @@ void Actor::updateMain()
 inline void Actor::updateMap()
 {
 	vec3 pos;
-	body->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
-	memcpy((void*)&pos[0], (void*)&body->getTransform().getPosition()[0], sizeof(float) * 3);
-	camera[MAP_CAMERA]->setPosition(vec3(pos[0], 10, pos[2] + 0.001f));
+	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
+
+	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
+	memcpy((void*)&pos[0], (void*)&entitie->getBody()->getTransform().getPosition()[0], sizeof(float) * 3);
+	camera[MAP_CAMERA]->setPosition(vec3(pos[0], 15, pos[2] + 0.001f));
 	camera[MAP_CAMERA]->setDirection(vec3(camera[MAIN_CAMERA]->getDirectrion()[0] * 0.0005f, -1, camera[MAIN_CAMERA]->getDirectrion()[2] * 0.0005f));
+	entitie->render(camera[MAP_CAMERA]);
 }

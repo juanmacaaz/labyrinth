@@ -15,15 +15,16 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 
 	world = pc.createPhysicsWorld(settings);
 
-	ProjectionData proyectionData = { 45.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
+	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
+	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	Transform t(Vector3(3.0f, 1.0f, 3.0f), Quaternion().identity());
 	this->actor = new Actor(this, t);
 
 	this->actor->setMainCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
-		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
+		proyectionDataMain, this->engine->getWWidth(), this->engine->getWHeight()));
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
-		proyectionData, this->engine->getWWidth(), this->engine->getWHeight()));
+		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
 
 	entidades.push_back(new Key(this, Vector3(6, 1.5, 6)));
 	entidades.push_back(new Key(this, Vector3(8, 1.5, 6)));
@@ -32,10 +33,9 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	entidades.push_back(new Key(this, Vector3(6, 1.5, 10)));
 	entidades.push_back(new Key(this, Vector3(7, 1.5, 7)));
 
-	this->labyrinth = new Labyrinth(this);
+	this->labyrinth = new Labyrinth(this, 21, 21);
 
 	entidades.push_back(new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8)));
-	
 }
 
 void GameSpace::update()

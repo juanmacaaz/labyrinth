@@ -40,5 +40,5 @@ public:
 
 	void render(Camera* camera);
 	virtual void update() {};
-	CollisionBody* getBody();
+	RigidBody* getBody();
 };
