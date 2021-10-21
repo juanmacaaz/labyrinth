@@ -155,6 +155,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Labyrinth.cpp" />
     <ClCompile Include="Entitie.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="MenuSpace.cpp" />
     <ClCompile Include="read_model.cpp" />
     <ClCompile Include="GameSpace.cpp" />
@@ -169,6 +171,8 @@
     <ClInclude Include="Key.h" />
     <ClInclude Include="Labyrinth.h" />
     <ClInclude Include="Entitie.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuItem.h" />
     <ClInclude Include="MenuSpace.h" />
     <ClInclude Include="read_model.h" />
     <ClInclude Include="GameSpace.h" />

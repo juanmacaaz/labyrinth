@@ -9,7 +9,7 @@ using namespace std;
 #include "Space.h"
 #include "Camera.h"
 
-#define MAX_RENDER_DISTANCE 15
+#define MAX_RENDER_DISTANCE 100
 
 BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 {

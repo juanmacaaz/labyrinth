@@ -25,6 +25,12 @@
     <Filter Include="Archivos de origen\Utils">
       <UniqueIdentifier>{c9db34db-b099-4ee2-a366-6be7aa0348b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Menus">
+      <UniqueIdentifier>{57e9b804-7a49-47a4-8191-9da832796d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Menus">
+      <UniqueIdentifier>{6ac8baa3-2328-4bef-a382-909fec5495f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +72,12 @@
     <ClCompile Include="Graph.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Archivos de origen\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuItem.cpp">
+      <Filter>Archivos de origen\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -106,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="Graph.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Archivos de encabezado\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuItem.h">
+      <Filter>Archivos de encabezado\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

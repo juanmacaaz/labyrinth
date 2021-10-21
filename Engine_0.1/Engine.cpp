@@ -5,6 +5,7 @@
 
 #include "GameSpace.h"
 #include "MenuSpace.h"
+#include "Space.h"
 
 Engine::Engine()
 {
@@ -15,6 +16,7 @@ Engine::Engine()
 
 	gameSpace = new GameSpace(this);
 	menuSpace = new MenuSpace(this);
+	currentSpace = menuSpace;
 }
 
 int Engine::run()
@@ -28,9 +30,9 @@ int Engine::run()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		gameSpace->update();
+		currentSpace->update();
 
-		gameSpace->render();
+		currentSpace->render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -73,6 +75,16 @@ int Engine::getWHeight()
 	return w_height;
 }
 
+void Engine::setGameSpace()
+{
+	currentSpace = gameSpace;
+}
+
+void Engine::setMenuSpace()
+{
+	currentSpace = menuSpace;
+}
+
 void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
@@ -92,6 +104,21 @@ void Engine::loadModels()
 	models["waifu"] = loadModel("models\\waifu.obj");
 	models["cube"] = loadModel("models\\cube.obj");
 	models["key"] = loadModel("models\\plastic_chair.obj");
+	models["button"] = loadModel("models\\button.obj");
+	models["title"] = loadModel("models\\title.obj");
+
+	models["start"] = loadModel("models\\start.obj");
+	models["levels"] = loadModel("models\\levels.obj");
+	models["exit"] = loadModel("models\\exit.obj");
+
+	models["castle"] = loadModel("models\\castle.obj");
+	models["jungle"] = loadModel("models\\jungle.obj");
+	models["desert"] = loadModel("models\\desert.obj");
+	models["back"] = loadModel("models\\back.obj");
+
+	models["tower"] = loadModel("models\\tower.obj");
+	models["palm"] = loadModel("models\\palm.obj");
+	models["pyramid"] = loadModel("models\\pyramid.obj");
 }
 
 void Engine::initGlfwGL()

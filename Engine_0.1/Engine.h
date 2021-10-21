@@ -17,6 +17,7 @@
 
 using namespace std;
 
+class Space;
 class MenuSpace;
 class GameSpace;
 
@@ -40,8 +41,12 @@ public:
 	map<int, GLuint> getTextures();
 	map<string, Model> getModels();
 	GLFWwindow* getEngineWindow();
+
 	int getWWidth();
 	int getWHeight();
+
+	void setGameSpace();
+	void setMenuSpace();
 
 private:
 
@@ -52,6 +57,9 @@ private:
 	map<string, Model> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
+
+	Space* currentSpace;
+
 	int w_width, w_height;
 	
 	// Funciones privadas
