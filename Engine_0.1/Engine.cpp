@@ -7,6 +7,8 @@
 #include "MenuSpace.h"
 #include "Space.h"
 
+objl::Mesh& loadModel2(const char* imagepath, objl::Loader* Loader);
+
 Engine::Engine()
 {
 	initGlfwGL();
@@ -17,6 +19,8 @@ Engine::Engine()
 	gameSpace = new GameSpace(this);
 	menuSpace = new MenuSpace(this);
 	currentSpace = menuSpace;
+
+	models.clear();
 }
 
 int Engine::run()
@@ -55,7 +59,7 @@ map<int, GLuint> Engine::getTextures()
 	return texture;
 }
 
-map<string, Model> Engine::getModels()
+map<string, objl::Mesh> Engine::getModels()
 {
 	return models;
 }
@@ -101,24 +105,28 @@ void Engine::loadTextures()
 
 void Engine::loadModels()
 {
-	models["waifu"] = loadModel("models\\waifu.obj");
-	models["cube"] = loadModel("models\\cube.obj");
-	models["key"] = loadModel("models\\plastic_chair.obj");
-	models["button"] = loadModel("models\\button.obj");
-	models["title"] = loadModel("models\\title.obj");
+	objl::Loader* Loader = new objl::Loader();
 
-	models["start"] = loadModel("models\\start.obj");
-	models["levels"] = loadModel("models\\levels.obj");
-	models["exit"] = loadModel("models\\exit.obj");
+	models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+	models["cube"] = loadModel2("models\\cube.obj", Loader);
+	models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+	models["button"] = loadModel2("models\\button.obj", Loader);
+	models["title"] = loadModel2("models\\title.obj", Loader);
 
-	models["castle"] = loadModel("models\\castle.obj");
-	models["jungle"] = loadModel("models\\jungle.obj");
-	models["desert"] = loadModel("models\\desert.obj");
-	models["back"] = loadModel("models\\back.obj");
+	models["start"] = loadModel2("models\\start.obj", Loader);
+	models["levels"] = loadModel2("models\\levels.obj", Loader);
+	models["exit"] = loadModel2("models\\exit.obj", Loader);
 
-	models["tower"] = loadModel("models\\tower.obj");
-	models["palm"] = loadModel("models\\palm.obj");
-	models["pyramid"] = loadModel("models\\pyramid.obj");
+	models["castle"] = loadModel2("models\\castle.obj", Loader);
+	models["jungle"] = loadModel2("models\\jungle.obj", Loader);
+	models["desert"] = loadModel2("models\\desert.obj", Loader);
+	models["back"] = loadModel2("models\\back.obj", Loader);
+
+	models["tower"] = loadModel2("models\\tower.obj", Loader);
+	models["palm"] = loadModel2("models\\palm.obj", Loader);
+	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
+
+	models["materias"] = loadModel2("models\\box_stack.obj", Loader);
 }
 
 void Engine::initGlfwGL()
@@ -294,11 +302,8 @@ GLuint Engine::loadTexture(const char* imagepath)
 	return textureID;
 }
 
-Model Engine::loadModel(const char* modelDir)
+inline objl::Mesh& loadModel2(const char* imagepath, objl::Loader* Loader)
 {
-	vector<glm::vec3> out_vertices;
-	vector<glm::vec2> out_uvs;
-	vector<glm::vec3> out_normals;
-	loadOBJ(modelDir, out_vertices, out_uvs, out_normals);
-	return Model( out_vertices , out_uvs , out_normals );
+	Loader->LoadFile(imagepath);
+	return Loader->LoadedMeshes[0];
 }

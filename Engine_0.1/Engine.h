@@ -13,7 +13,7 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 
-#include "read_model.h"
+#include "OBJ_Loader.h"
 
 using namespace std;
 
@@ -39,7 +39,7 @@ public:
 
 	map<string, GLuint> getShaders();
 	map<int, GLuint> getTextures();
-	map<string, Model> getModels();
+	map<string, objl::Mesh> getModels();
 	GLFWwindow* getEngineWindow();
 
 	int getWWidth();
@@ -54,7 +54,7 @@ private:
 	GLFWwindow* window;
 	map<string, GLuint> shader;
 	map<int, GLuint> texture;
-	map<string, Model> models;
+	map<string, objl::Mesh> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
 
@@ -72,6 +72,4 @@ private:
 
 	GLuint LoadShader(const char* vertex_file_path, const char* fragment_file_path);
 	GLuint loadTexture(const char* imagepath);
-	struct Model loadModel(const char* imagepath);
 };
-

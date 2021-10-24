@@ -1,13 +1,13 @@
 #include "Entitie.h"
 
-#include "read_model.h"
-
 using namespace std;
 #include <gtc/type_ptr.hpp>
 
 #include "Engine.h"
 #include "Space.h"
 #include "Camera.h"
+
+#include "OBJ_Loader.h"
 
 #define MAX_RENDER_DISTANCE 100
 
@@ -44,19 +44,19 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	this->shader = space->getEngine()->getShaders()[shader];
 	this->space = space;
 
-	Model model = space->getEngine()->getModels()[modelName];
+	objl::Mesh model = space->getEngine()->getModels()[modelName];
 
 	Quaternion orientation = Quaternion::identity();
 	Transform transform(initPosition, orientation);
 
-	for (int i = 0; i < model.out_vertices.size(); i++) {
+	for (int i = 0; i < model.Vertices.size(); i++) {
 		
-		vertices.push_back(model.out_vertices[i][0] * scale);
-		vertices.push_back(model.out_vertices[i][1] * scale);
-		vertices.push_back(model.out_vertices[i][2] * scale);
+		vertices.push_back(model.Vertices[i].Position.X * scale);
+		vertices.push_back(model.Vertices[i].Position.Y * scale);
+		vertices.push_back(model.Vertices[i].Position.Z * scale);
 
-		vertices.push_back(model.out_uvs[i][0]);
-		vertices.push_back(model.out_uvs[i][1]);
+		vertices.push_back(model.Vertices[i].TextureCoordinate.X);
+		vertices.push_back(model.Vertices[i].TextureCoordinate.Y);
 
 	}
 	

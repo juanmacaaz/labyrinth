@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include <glm.hpp>
 
 #include <reactphysics3d/reactphysics3d.h>

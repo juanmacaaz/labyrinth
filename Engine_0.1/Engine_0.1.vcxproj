@@ -135,6 +135,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)librerias\glfw\include;$(ProjectDir)librerias\glew-2.1.0\include;$(ProjectDir)librerias\glm;$(ProjectDir)librerias\reactphysics3d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,8 +159,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="MenuSpace.cpp" />
-    <ClCompile Include="read_model.cpp" />
     <ClCompile Include="GameSpace.cpp" />
+    <ClCompile Include="OBJ_Loader.cpp" />
     <ClCompile Include="Space.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +175,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="MenuSpace.h" />
-    <ClInclude Include="read_model.h" />
+    <ClInclude Include="OBJ_Loader.h" />
     <ClInclude Include="GameSpace.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="stb_image.h" />
