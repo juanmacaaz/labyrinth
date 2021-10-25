@@ -26,13 +26,11 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 		proyectionDataMain, this->engine->getWWidth(), this->engine->getWHeight()));
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
+	vector<vector<int>> visitas = this->labyrinth->getVisitsPositions(5);
+	for (int i = 0; i < visitas.size(); i++) {
+		entidades.push_back(new Key(this, Vector3(visitas[i][0], 1.5, visitas[1][1])));
+	}
 
-	entidades.push_back(new Key(this, Vector3(6, 1.5, 6)));
-	entidades.push_back(new Key(this, Vector3(8, 1.5, 6)));
-	entidades.push_back(new Key(this, Vector3(10, 1.5, 6)));
-	entidades.push_back(new Key(this, Vector3(6, 1.5, 8)));
-	entidades.push_back(new Key(this, Vector3(6, 1.5, 10)));
-	entidades.push_back(new Key(this, Vector3(7, 1.5, 7)));
 
 	
 

@@ -17,7 +17,7 @@ public:
 	CGraph getGraph();
 	vector<vector<char>> getMaze();
 	vector<int> getInitialPosition();
-
+	vector<vector<int>> getVisitsPositions(int n_visites);
 private:
 
 	// Apuntadores a clases contenedoras

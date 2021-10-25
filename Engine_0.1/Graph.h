@@ -95,7 +95,7 @@ public:
 
 public:
 	CGraph() {}
-	CGraph(vector<vector<char>> map);
+	CGraph(vector<vector<char>> &map);
 	~CGraph() {}
 	void Clear();
 

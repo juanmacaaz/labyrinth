@@ -55,7 +55,7 @@ void CVertex::Unlink(CEdge* pEdge)
 // =============================================================================
 
 
-CGraph::CGraph(vector<vector<char>> map)
+CGraph::CGraph(vector<vector<char>> &map)
 {
     createNodes(map);
     createEdges(map);

@@ -217,3 +217,24 @@ void Labyrinth::repairLeft() {
 		}
 	}
 }
+
+
+vector<vector<int>> Labyrinth::getVisitsPositions(int n_visites) {
+	vector<vector<int>> visites;
+	vector<bool> visitat(m_maze.size(), false);
+	srand((unsigned)time(NULL));
+	while (n_visites > 0) {
+		int pos = 1 + rand() % m_maze.size() - 1;
+		if (!visitat[pos]) {
+			for (int i = 0; i < m_maze[pos].size(); i++) {
+				if (m_maze[pos][i] == 'V') {
+					visites.push_back({ pos,i });
+					n_visites--;
+					break;
+				}
+			}
+		}
+		visitat[pos] = true;
+	}
+	return visites;
+}
