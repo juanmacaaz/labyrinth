@@ -19,7 +19,7 @@ public:
 
 	enum CameraID { MAIN_CAMERA = 0, MAP_CAMERA = 1 };
 
-	Actor(GameSpace* space, Transform transform);
+	Actor(GameSpace* space);
 
 	void setMainCamera(Camera* camera);
 	void setMapCamera(Camera* camera);

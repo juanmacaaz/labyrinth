@@ -28,6 +28,7 @@ public:
 	void update();
 	
 	Actor* getActor();
+	Labyrinth* getlabyrinth();
 
 	void deleteEntitie(Entitie* entitie);
 

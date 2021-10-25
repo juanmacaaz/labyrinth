@@ -16,6 +16,7 @@ public:
 	void render(Camera* camera);
 	CGraph getGraph();
 	vector<vector<char>> getMaze();
+	vector<int> getInitialPosition();
 
 private:
 
@@ -27,6 +28,7 @@ private:
 	vector<Cube> cubes;
 	vector<vector<char>> m_maze;
 	int m_width, m_height;
+	vector<int> m_initialPosition;
 	
 	// Funciones privadas
 	void generateMap();

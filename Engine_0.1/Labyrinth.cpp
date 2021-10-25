@@ -30,25 +30,27 @@ vector<vector<char>> Labyrinth::getMaze()
 	return this->m_maze;
 }
 
+vector<int> Labyrinth::getInitialPosition()
+{
+	return this->m_initialPosition;
+}
+
 void Labyrinth::generateMap()
 {
-	vector<vector<vector<int>>> zone = {
-		{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}} };
-
-	float y = 0.0f;
-	for (int m = 0; m < zone.size(); m++) {
-		float z = 0.0f;
-		for (int i = 0; i < zone[m].size(); i++) {
-			float x = 0.0f;
-			for (int j = 0; j < zone[m][i].size(); j++) {
-				if (zone[m][i][j] != 0) {
-					cubes.push_back(Cube(space, zone[m][i][j], Vector3(x, y, z)));
-				}
-				x += 1.0f;
+	for (int i = 0; i < m_maze.size(); i++) {
+		for (int j = 0; j < m_maze[i].size(); j++) {
+			if (m_maze[i][j] == '#') {
+				cubes.push_back(Cube(space, 2, Vector3(j, 1.0f, i)));
+				cubes.push_back(Cube(space, 2, Vector3(j, 2.0f, i)));
 			}
-			z += 1.0f;
+			else if (m_maze[i][j] == '2') { //Para colocar las llaves
+				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
+				cubes.push_back(Cube(space, 5, Vector3(j, 1.0f, i)));
+			}
+			else {
+				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
+			}
 		}
-		y += 1.0f;
 	}
 }
 
@@ -90,14 +92,28 @@ void Labyrinth::generateMaze()
 		}
 
 	}
+
+	repairUp();
+	repairRight();
+	repairLeft();
+	repairDown();
+
+	do {
+		x_start = 1 + rand() % (m_maze.size() - 1);
+		y_start = 1 + rand() % (m_maze.size() - 1);
+	} while (m_maze[x_start][y_start] == '#' || m_maze[x_start][y_start] == 'E');
+
+	
 	m_maze[x_start][y_start] = 'E';
+	this->m_initialPosition = { y_start, x_start };
 
 	while (m_maze[x_end][y_end] == '#' || m_maze[x_end][y_end] == 'E') {
-		x_end = 1 + rand() % (m_height - 1);
-		y_end = 1 + rand() % (m_width - 1);
+		x_end = 1 + rand() % (m_maze.size() - 1);
+		y_end = 1 + rand() % (m_maze.size() - 1);
 	}
 
 	m_maze[x_end][y_end] = 'S';
+
 }
 
 void Labyrinth::getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours) {
