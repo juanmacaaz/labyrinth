@@ -27,6 +27,7 @@ protected:
 	GLuint shader;
 	RigidBody* body;
 	
+	float orientation[3];
 	vector<GLfloat> vertices;
 
 	BoxShape* genereateBoindingBox(Transform& transform);
@@ -37,6 +38,13 @@ public:
 	~Entitie();
 
 	void deleteData();
+
+	void rotateX(const float degrees);
+	void rotateY(const float degrees);
+
+	void rotateZ(const float degrees);
+
+	void movePosition(const Vector3& v);
 
 	void render(Camera* camera);
 	virtual void update() {};

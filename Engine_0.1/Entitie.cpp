@@ -67,7 +67,7 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 	body->addCollider(e, t);
 
-	body->setLocalCenterOfMass(t.getPosition());
+	body->updateLocalCenterOfMassFromColliders();
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -86,6 +86,36 @@ void Entitie::deleteData()
 	space->getWorld()->destroyRigidBody(body);
 	glDeleteBuffers(1, &VAO);
 	glDeleteBuffers(1, &VBO);
+}
+
+void Entitie::rotateX(const float degrees) {
+	orientation[0] = orientation[0] + degrees;
+	Matrix3x3 m = {
+		1, 0, 0,
+		0, cos(orientation[0]), -sin(orientation[0]),
+		0, sin(orientation[0]), cos(orientation[0])
+	};
+	body->setTransform(Transform(body->getTransform().getPosition(), m));
+}
+
+void Entitie::rotateY(const float degrees) {
+	orientation[1] = orientation[1] + degrees;
+	Matrix3x3 m = Matrix3x3(cos(orientation[1]), 0, sin(orientation[1]),
+		0, 1, 0,
+		-sin(orientation[1]), 0, cos(orientation[1]));
+	body->setTransform(Transform(body->getTransform().getPosition(), m));
+}
+
+void Entitie::rotateZ(const float degrees) {
+	orientation[2] = orientation[2] + degrees;
+	Matrix3x3 m = Matrix3x3(cos(orientation[2]), -sin(orientation[2]), 0,
+		sin(orientation[2]), cos(orientation[2]), 0,
+		0, 0, 1);
+	body->setTransform(Transform(body->getTransform().getPosition(), m));
+}
+
+void Entitie::movePosition(const Vector3& v) {
+	body->setTransform(Transform(body->getTransform().getPosition() + v, Quaternion::identity()));
 }
 
 void Entitie::render(Camera* camera)
