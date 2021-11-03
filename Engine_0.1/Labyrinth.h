@@ -3,21 +3,21 @@
 #include "Cube.h"
 #include "Graph.h"
 #include <vector>
+#include <queue>
 using namespace std;
 
 class Camera;
 class GameSpace;
 
-class Labyrinth 
+class Labyrinth
 {
 public:
 
-	Labyrinth(GameSpace* space, int width, int height);
+	Labyrinth(GameSpace* space, int width, int height, const int n_keys);
 	void render(Camera* camera);
 	CGraph getGraph();
 	vector<vector<char>> getMaze();
 	vector<int> getInitialPosition();
-	vector<vector<int>> getVisitsPositions(int n_visites);
 private:
 
 	// Apuntadores a clases contenedoras
@@ -29,9 +29,10 @@ private:
 	vector<vector<char>> m_maze;
 	int m_width, m_height;
 	vector<int> m_initialPosition;
-	
+
 	// Funciones privadas
 	void generateMap();
+	void generateVisits(const int n_keys);
 	void generateMaze();
 
 	void getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours);
@@ -44,4 +45,3 @@ private:
 	void repairLeft();
 	void repairDown();
 };
-

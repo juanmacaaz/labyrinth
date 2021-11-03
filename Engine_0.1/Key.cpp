@@ -5,7 +5,7 @@
 #include "GameSpace.h"
 
 Key::Key(GameSpace* space, Vector3 initPosition) :
-	Entitie(space, "key", Block::WOOD, "basic-nolight", initPosition, 10)
+	Entitie(space, "key", Block::WOOD, "basic-nolight", initPosition, 3)
 {
 	this->space = space;
 	body->setType(BodyType::STATIC);

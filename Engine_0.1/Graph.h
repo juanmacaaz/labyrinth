@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -53,7 +53,7 @@ public:
 	list<CEdge*> m_Edges;
 	CEdge* m_Origen;
 
-	// Métodes
+	// Mï¿½todes
 	CEdge* FindEdge(const char* name);
 	bool MemberP(CEdge* pEdge);
 	bool NeighbordP(CVertex* pVertex);
@@ -92,10 +92,11 @@ class CGraph {
 public:
 	list<CVertex> m_Vertices;
 	list<CEdge> m_Edges;
+	list<CVertex*> m_Visits;
 
 public:
 	CGraph() {}
-	CGraph(vector<vector<char>> &map);
+	CGraph(vector<vector<char>>& map);
 	~CGraph() {}
 	void Clear();
 

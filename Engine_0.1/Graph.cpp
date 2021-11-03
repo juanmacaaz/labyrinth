@@ -55,7 +55,7 @@ void CVertex::Unlink(CEdge* pEdge)
 // =============================================================================
 
 
-CGraph::CGraph(vector<vector<char>> &map)
+CGraph::CGraph(vector<vector<char>>& map)
 {
     createNodes(map);
     createEdges(map);
@@ -129,23 +129,6 @@ CVertex* CGraph::GetVertex(int x, int y)
 
 // NewEdge =====================================================================
 
-CEdge* CGraph::NewEdge(const char* name, int value, CVertex* pVOrigin, CVertex* pVDestination)
-{
-    m_Edges.push_back(CEdge(name, value, pVOrigin, pVDestination, NULL));
-    CEdge* pEdge = &m_Edges.back();
-    pVOrigin->m_Edges.push_back(pEdge);
-    string rname(name);
-    rname += "$Reverse";
-    m_Edges.push_back(CEdge(rname.c_str(), value, pVDestination, pVOrigin, NULL));
-    CEdge* pRevEdge = &m_Edges.back();
-    pVDestination->m_Edges.push_back(pRevEdge);
-    pEdge->m_pReverseEdge = pRevEdge;
-    pRevEdge->m_pReverseEdge = pEdge;
-    return pEdge;
-}
-
-// NewEdge =====================================================================
-
 CEdge* CGraph::NewEdge(CVertex* pVOrigin, CVertex* pVDestination, int distance)
 {
     char name[10];
@@ -203,22 +186,22 @@ bool CGraph::MemberP(CEdge* pEdge)
 // Create graph from a map of char =============================================
 
 bool CGraph::checkUp(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i - 1][j] == '1' || matriu[i - 1][j] == 'E' || matriu[i - 1][j] == 'S') { return true; }
+    if (matriu[i - 1][j] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkRight(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i][j + 1] == '1' || matriu[i][j + 1] == 'E' || matriu[i][j + 1] == 'S') { return true; }
+    if (matriu[i][j + 1] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkDown(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i + 1][j] == '1' || matriu[i + 1][j] == 'E' || matriu[i + 1][j] == 'S') { return true; }
+    if (matriu[i + 1][j] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkLeft(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i][j - 1] == '1' || matriu[i][j - 1] == 'E' || matriu[i][j - 1] == 'S') { return true; }
+    if (matriu[i][j - 1] != '#') { return true; }
     else { return false; }
 }
 
@@ -281,6 +264,11 @@ void CGraph::createNodes(vector<vector<char>>& map) {
             else if (map[i][j] == 'E') {
                 index++;
                 NewVertex("Entrada", j, i);
+            }
+            else if (map[i][j] == 'K') {
+                sprintf_s(name, "V%04llu", index);
+                index++;
+                m_Visits.push_back(NewVertex(name, j, i));
             }
         }
     }
