@@ -281,7 +281,7 @@ void CGraph::findandCreateUpEdge(vector<vector<char>>& map, int i, const int j) 
     i--;
     int distance = 1;
     while (i > 0 && map[i][j] != '#') {
-        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
             NewEdge(GetVertex(jOriginal, iOriginal), GetVertex(j, i), distance);
             break;
         }
@@ -296,7 +296,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
     j++;
     int distance = 1;
     while (j < map.size() - 1 && map[i][j] != '#') {
-        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
             NewEdge(GetVertex(jOriginal, iOriginal), GetVertex(j, i), distance);
             break;
         }
@@ -308,7 +308,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
 void CGraph::createEdges(vector<vector<char>>& map) {
     for (int i = 1; i < map.size() - 1; i++) {
         for (int j = 1; j < map.size() - 1; j++) {
-            if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+            if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
                 findandCreateUpEdge(map, i, j);
                 findAndCreateRightEdge(map, i, j);
             }
