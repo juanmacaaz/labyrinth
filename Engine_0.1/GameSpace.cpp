@@ -27,10 +27,11 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 		proyectionDataMain, this->engine->getWWidth(), this->engine->getWHeight()));
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
-	vector<vector<int>> visitas = this->labyrinth->getVisitsPositions(5);
-	for (int i = 0; i < visitas.size(); i++) {
-		entidades.push_back(new Key(this, Vector3(visitas[i][0], 1.5, visitas[1][1])));
-	}
+	// Mirar
+	//vector<vector<int>> visitas = this->labyrinth->getVisitsPositions(5);
+	//for (int i = 0; i < visitas.size(); i++) {
+	//	entidades.push_back(new Key(this, Vector3(visitas[i][0], 1.5, visitas[1][1])));
+	//}
 	//Enemy(GameSpace* space, Vector3 initPosition, float valocity);
 	enemy = new Enemy(this, Vector3(3, 0.505, 3));
 }

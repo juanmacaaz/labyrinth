@@ -12,7 +12,7 @@ Enemy::Enemy(GameSpace* space, Vector3 initPosition):
 	body->getCollider(0)->getMaterial().setFrictionCoefficient(0.005);
 	body->getCollider(0)->getMaterial().setBounciness(0);
 	body->enableGravity(false);
-	body->setType(BodyType::DYNAMIC);
+	body->setType(BodyType::STATIC);
 	velocity = 0.01f;
 }
 
