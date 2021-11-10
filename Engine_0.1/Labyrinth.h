@@ -33,6 +33,7 @@ private:
 	// Funciones privadas
 	void generateMap();
 	void generateMaze();
+	void generateTestMap();
 
 	void getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours);
 	void getFrontierRight(const int i, int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours);

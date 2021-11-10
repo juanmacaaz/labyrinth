@@ -17,6 +17,7 @@ class Actor;
 class Entitie;
 class Labyrinth;
 class Engine;
+class Enemy;
 
 class GameSpace : public Space
 {
@@ -36,6 +37,7 @@ private:
 	// Atributos
 	Actor* actor;
 	Labyrinth* labyrinth;
+	Enemy* enemy;
 
 	vector<Entitie*> entidades;
 };

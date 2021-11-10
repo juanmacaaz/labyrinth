@@ -78,6 +78,9 @@
     <ClCompile Include="OBJ_Loader.cpp">
       <Filter>Archivos de origen\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="OBJ_Loader.h">
       <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

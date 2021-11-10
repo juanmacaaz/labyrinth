@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Actor" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAJAAAgAwgAAgAAAAAAAAAIAAAAQQAAAAEgQEAAA=</HashCode>
+      <FileName>Actor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGYgAEAEAAQAAAAGAAAAACABCABYChAAIAAgAgAEE=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine" Collapsed="true">
+    <Position X="22.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AJAAAqAAREAAIAACAAAAAMAEAAAAAkAJBQIAEUAIABA=</HashCode>
+      <FileName>Engine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGPoint" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVertex" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAQAAACAAAIAAAAAAwAAAAEAAAAAQA=</HashCode>
+      <FileName>Graph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEdge" Collapsed="true">
+    <Position X="22.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAQAAAAAAAAAEAAAAAgAAAAABAAEAAAAAAg=</HashCode>
+      <FileName>Graph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGraph" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIEBJAACAAiQAAJAAJAACCAAAAgAAAAAggBABQA=</HashCode>
+      <FileName>Graph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Labyrinth" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UIAKAAAABwAgAIABAAEIAAAACEAIAGCAAQAAABASAAA=</HashCode>
+      <FileName>Labyrinth.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuSpace" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACQAAAAEACgAAAAAAAAAEJAAAAAAgAAAAAUAIA=</HashCode>
+      <FileName>MenuSpace.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSpace" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAIAAAAAAQAAAIAAAAAAAIAAJAAAAAAAAAAUAAA=</HashCode>
+      <FileName>GameSpace.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAECAAAAAAAAAAAAAAAAAAAAAAIAUAAAAAAAQUAIA=</HashCode>
+      <FileName>Space.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cube" Collapsed="true">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cube.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Key" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Key.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entitie" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAgAAAAA4AEAAAAAAWAAAAQAwAgACBAAAAEAUAAA=</HashCode>
+      <FileName>Entitie.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu" Collapsed="true">
+    <Position X="20.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAASAAAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuItem" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAIAAAAAAgABQAEAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="objl::Loader" Collapsed="true">
+    <Position X="19" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAMAAgAAAEAAAAAAAAAAAAAgAAAAQAAAAAQAEACBAA=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ProjectionData" Collapsed="true">
+    <Position X="22.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAIAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_2" Collapsed="true">
+    <Position X="1.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAEAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_3" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAACEAIAYAgAAgAAAAAAAhAAAAABACA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_5" Collapsed="true">
+    <Position X="13.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_7" Collapsed="true">
+    <Position X="5.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIIAAAAAAIAAACCAAAAAAAEAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_8" Collapsed="true">
+    <Position X="13.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgACBABEAAIAQEDEggMAAIBgAAgAAABAIBAQAAiAgg=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_10" Collapsed="true">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEEAAAAAAAAAAQAAAAAAAACAIABAIAAAgAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_11" Collapsed="true">
+    <Position X="9.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIIAAAAgIAAAACCAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_12" Collapsed="true">
+    <Position X="1.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAQAAAIEAJAAgAgAAAgAAAAAAIAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_13" Collapsed="true">
+    <Position X="10.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_14" Collapsed="true">
+    <Position X="9.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAQAAAAAAAAAAAAAAAIAAAIAAIAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_16" Collapsed="true">
+    <Position X="5.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAIAAAAACAQAAAAAAAAAAAgAAAAAKAABAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_17" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAIAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_18" Collapsed="true">
+    <Position X="1.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAgAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_001a_19" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEICAgAIAAARAQAgAEhAYAAgAAAAQAggAAAAJgQ=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="objl::Vector2" Collapsed="true">
+    <Position X="24.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAgAAAAYAA=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="objl::Vector3" Collapsed="true">
+    <Position X="19" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAAAgAAAAYAE=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="objl::Vertex" Collapsed="true">
+    <Position X="20.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="objl::Material" Collapsed="true">
+    <Position X="19" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAAAgAAEAAAAgAAAQAACAACUAAgFAAAAAAAAAAA=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="objl::Mesh" Collapsed="true">
+    <Position X="20.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAABAAAAAAAAAAAAAAAAAAAEQAAABAAAAA=</HashCode>
+      <FileName>OBJ_Loader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="stbi_uc" Collapsed="true">
+    <Position X="20.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi_us" Collapsed="true">
+    <Position X="22.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi_io_callbacks" Collapsed="true">
+    <Position X="1.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__uint16" Collapsed="true">
+    <Position X="24.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__int16" Collapsed="true">
+    <Position X="20.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__uint32" Collapsed="true">
+    <Position X="19" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__int32" Collapsed="true">
+    <Position X="22.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="validate_uint32" Collapsed="true">
+    <Position X="24.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__context" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__result_info" Collapsed="true">
+    <Position X="13.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__huffman" Collapsed="true">
+    <Position X="5.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__jpeg" Collapsed="true">
+    <Position X="13.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="resample_row_func" Collapsed="true">
+    <Position X="19" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__resample" Collapsed="true">
+    <Position X="13.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__zhuffman" Collapsed="true">
+    <Position X="9.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__zbuf" Collapsed="true">
+    <Position X="1.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__pngchunk" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__png" Collapsed="true">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__bmp_data" Collapsed="true">
+    <Position X="5.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__pic_packet" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__gif_lzw" Collapsed="true">
+    <Position X="1.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="stbi__gif" Collapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="Block" Collapsed="true">
+    <Position X="19" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAQAAAAAAAAABAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Engine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_001a_1" Collapsed="true">
+    <Position X="19" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAABAAAAAAAAAAEAAABAAAAAAAIAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_001a_4" Collapsed="true">
+    <Position X="22.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_001a_6" Collapsed="true">
+    <Position X="24.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_001a_15" Collapsed="true">
+    <Position X="20.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAECAAAABAAIAAAAAAAhAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stb_image.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Button" Collapsed="true">
+    <Position X="20.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>MenuItem.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

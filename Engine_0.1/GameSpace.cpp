@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "Entitie.h"
 #include "Key.h"
+#include "Enemy.h"
 
 GameSpace::GameSpace(Engine* engine) : Space(engine)
 {
@@ -30,16 +31,16 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	for (int i = 0; i < visitas.size(); i++) {
 		entidades.push_back(new Key(this, Vector3(visitas[i][0], 1.5, visitas[1][1])));
 	}
-
-
-	
-
-	entidades.push_back(new Entitie(this, "waifu", Block::WALL, "basic-nolight", Vector3(8, 0.5, 8)));
+	//Enemy(GameSpace* space, Vector3 initPosition, float valocity);
+	enemy = new Enemy(this, Vector3(3, 0.505, 3));
 }
 
 void GameSpace::update()
 {
+	Vector3 pos = actor->getBody()->getTransform().getPosition();
+	enemy->moveTo(pos.x, pos.z);
 	actor->update();
+	enemy->update();
 	for (auto e : entidades) e->update();
 	world->update(1.0f / 30.0f);
 }
@@ -61,6 +62,7 @@ void GameSpace::deleteEntitie(Entitie* entitie)
 
 void GameSpace::render()
 {
+	enemy->render(actor->getCamera());
 	labyrinth->render(actor->getCamera());
 	for (auto e : entidades) e->render(actor->getCamera());
 }

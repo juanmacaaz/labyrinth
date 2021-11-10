@@ -9,9 +9,8 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height)
 	generateMaze();
 	this->graph = CGraph(m_maze);
 
+	//generateTestMap();
 	generateMap();
-	
-	
 }
 
 void Labyrinth::render(Camera* camera)
@@ -114,6 +113,18 @@ void Labyrinth::generateMaze()
 
 	m_maze[x_end][y_end] = 'S';
 
+}
+
+void Labyrinth::generateTestMap()
+{
+	vector<vector<vector<int>>> zone = {
+{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}} };
+
+	for (int i = 0; i < zone[0].size(); i++) {
+		for (int j = 0; j < zone[0][i].size(); j++) {
+			cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
+		}
+	}
 }
 
 void Labyrinth::getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours) {
