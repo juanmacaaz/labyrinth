@@ -27,9 +27,10 @@ public:
 
 	void render();
 	void update();
-	
+
 	Actor* getActor();
 	Labyrinth* getlabyrinth();
+	vector<Entitie*>* getEntidades();
 
 	void deleteEntitie(Entitie* entitie);
 

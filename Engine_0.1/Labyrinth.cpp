@@ -1,12 +1,16 @@
 #include "Labyrinth.h"
+#include "Key.h"
+#include "GameSpace.h"
 
-Labyrinth::Labyrinth(GameSpace* space, int width, int height)
+Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
 {
 	this->space = space;
 	this->m_width = width;
 	this->m_height = height;
 
 	generateMaze();
+	generateVisits(n_keys);
+	
 	this->graph = CGraph(m_maze);
 
 	//generateTestMap();
@@ -42,9 +46,9 @@ void Labyrinth::generateMap()
 				cubes.push_back(Cube(space, 2, Vector3(j, 1.0f, i)));
 				cubes.push_back(Cube(space, 2, Vector3(j, 2.0f, i)));
 			}
-			else if (m_maze[i][j] == '2') { //Para colocar las llaves
+			else if (m_maze[i][j] == 'K') {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
-				cubes.push_back(Cube(space, 5, Vector3(j, 1.0f, i)));
+				this->space->getEntidades()->push_back(new Key(this->space, Vector3(j, 0.75, i)));
 			}
 			else {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
@@ -53,20 +57,46 @@ void Labyrinth::generateMap()
 	}
 }
 
+void Labyrinth::generateVisits(const int n_keys)
+{
+	srand((unsigned)time(NULL));
+	queue<int> limit;
+
+	int x, y = 0;
+	int length = round(m_width / n_keys);
+
+	for (int i = length; i < m_width - 1; i += length) { 
+		if (limit.size() != n_keys) { limit.push(i); }
+		else { break; }
+	}
+	if (limit.size() != n_keys) { limit.push(m_width - 2); }
+
+	int anterior = 1;
+	while (!limit.empty()) {
+		do {
+			x = rand() % (limit.front() - anterior + 1) + anterior;
+			y = 1 + rand() % (m_height - 1);
+		} while (m_maze[y][x] != '1');
+
+		anterior = limit.front();
+		limit.pop();
+		m_maze[y][x] = 'K';
+	}
+}
+
 void Labyrinth::generateMaze()
 {
+	srand((unsigned)time(NULL));
+
+	int x_start, y_start, x_end, y_end;
+	vector<pair<int, int>> frontiers;
+	vector<pair<int, int>> neighbours;
+	
 	m_maze.resize(m_height);
 	for (int i = 0; i < m_maze.size(); i++) { m_maze[i].resize(m_width, '#'); }
 
-	vector<pair<int, int>> frontiers;
-	vector<pair<int, int>> neighbours;
-
-	srand((unsigned)time(NULL));
-
-	int x_start = 1 + rand() % (m_height - 1);
-	int y_start = 1 + rand() % (m_width - 1);
-	int x_end = 1 + rand() % (m_height - 1);
-	int y_end = 1 + rand() % (m_width - 1);
+	x_start = 1 + rand() % (m_height - 1);
+	y_start = 1 + rand() % (m_width - 1);
 
 	frontiers.push_back(make_pair(x_start, y_start));
 	neighbours.push_back(make_pair(x_start, y_start));
@@ -97,22 +127,24 @@ void Labyrinth::generateMaze()
 	repairLeft();
 	repairDown();
 
-	do {
-		x_start = 1 + rand() % (m_maze.size() - 1);
-		y_start = 1 + rand() % (m_maze.size() - 1);
-	} while (m_maze[x_start][y_start] == '#' || m_maze[x_start][y_start] == 'E');
+	this->m_height = this->m_maze.size();
+	this->m_width = this->m_maze.size();
 
-	
+	do {
+		x_start = 1 + rand() % (m_width - 1);
+		y_start = 1 + rand() % (m_height - 1);
+	} while (m_maze[x_start][y_start] != '1');
+
+
 	m_maze[x_start][y_start] = 'E';
 	this->m_initialPosition = { y_start, x_start };
 
-	while (m_maze[x_end][y_end] == '#' || m_maze[x_end][y_end] == 'E') {
-		x_end = 1 + rand() % (m_maze.size() - 1);
-		y_end = 1 + rand() % (m_maze.size() - 1);
-	}
+	do {
+		x_end = 1 + rand() % (m_width - 1);
+		y_end = 1 + rand() % (m_height - 1);
+	} while (m_maze[x_end][y_end] != '1');
 
 	m_maze[x_end][y_end] = 'S';
-
 }
 
 void Labyrinth::generateTestMap()
@@ -227,25 +259,4 @@ void Labyrinth::repairLeft() {
 			m_maze[i].insert(m_maze[i].begin(), '#');
 		}
 	}
-}
-
-
-vector<vector<int>> Labyrinth::getVisitsPositions(int n_visites) {
-	vector<vector<int>> visites;
-	vector<bool> visitat(m_maze.size(), false);
-	srand((unsigned)time(NULL));
-	while (n_visites > 0) {
-		int pos = 1 + rand() % m_maze.size() - 1;
-		if (!visitat[pos]) {
-			for (int i = 0; i < m_maze[pos].size(); i++) {
-				if (m_maze[pos][i] == 'V') {
-					visites.push_back({ pos,i });
-					n_visites--;
-					break;
-				}
-			}
-		}
-		visitat[pos] = true;
-	}
-	return visites;
 }

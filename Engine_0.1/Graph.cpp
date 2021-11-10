@@ -55,7 +55,7 @@ void CVertex::Unlink(CEdge* pEdge)
 // =============================================================================
 
 
-CGraph::CGraph(vector<vector<char>> &map)
+CGraph::CGraph(vector<vector<char>>& map)
 {
     createNodes(map);
     createEdges(map);
@@ -129,23 +129,6 @@ CVertex* CGraph::GetVertex(int x, int y)
 
 // NewEdge =====================================================================
 
-CEdge* CGraph::NewEdge(const char* name, int value, CVertex* pVOrigin, CVertex* pVDestination)
-{
-    m_Edges.push_back(CEdge(name, value, pVOrigin, pVDestination, NULL));
-    CEdge* pEdge = &m_Edges.back();
-    pVOrigin->m_Edges.push_back(pEdge);
-    string rname(name);
-    rname += "$Reverse";
-    m_Edges.push_back(CEdge(rname.c_str(), value, pVDestination, pVOrigin, NULL));
-    CEdge* pRevEdge = &m_Edges.back();
-    pVDestination->m_Edges.push_back(pRevEdge);
-    pEdge->m_pReverseEdge = pRevEdge;
-    pRevEdge->m_pReverseEdge = pEdge;
-    return pEdge;
-}
-
-// NewEdge =====================================================================
-
 CEdge* CGraph::NewEdge(CVertex* pVOrigin, CVertex* pVDestination, int distance)
 {
     char name[10];
@@ -203,22 +186,22 @@ bool CGraph::MemberP(CEdge* pEdge)
 // Create graph from a map of char =============================================
 
 bool CGraph::checkUp(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i - 1][j] == '1' || matriu[i - 1][j] == 'E' || matriu[i - 1][j] == 'S') { return true; }
+    if (matriu[i - 1][j] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkRight(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i][j + 1] == '1' || matriu[i][j + 1] == 'E' || matriu[i][j + 1] == 'S') { return true; }
+    if (matriu[i][j + 1] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkDown(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i + 1][j] == '1' || matriu[i + 1][j] == 'E' || matriu[i + 1][j] == 'S') { return true; }
+    if (matriu[i + 1][j] != '#') { return true; }
     else { return false; }
 }
 
 bool CGraph::checkLeft(vector<vector<char>>& matriu, int i, int j) {
-    if (matriu[i][j - 1] == '1' || matriu[i][j - 1] == 'E' || matriu[i][j - 1] == 'S') { return true; }
+    if (matriu[i][j - 1] != '#') { return true; }
     else { return false; }
 }
 
@@ -282,6 +265,11 @@ void CGraph::createNodes(vector<vector<char>>& map) {
                 index++;
                 NewVertex("Entrada", j, i);
             }
+            else if (map[i][j] == 'K') {
+                sprintf_s(name, "V%04llu", index);
+                index++;
+                m_Visits.push_back(NewVertex(name, j, i));
+            }
         }
     }
     map = mapV;
@@ -293,7 +281,7 @@ void CGraph::findandCreateUpEdge(vector<vector<char>>& map, int i, const int j) 
     i--;
     int distance = 1;
     while (i > 0 && map[i][j] != '#') {
-        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
             NewEdge(GetVertex(jOriginal, iOriginal), GetVertex(j, i), distance);
             break;
         }
@@ -308,7 +296,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
     j++;
     int distance = 1;
     while (j < map.size() - 1 && map[i][j] != '#') {
-        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+        if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
             NewEdge(GetVertex(jOriginal, iOriginal), GetVertex(j, i), distance);
             break;
         }
@@ -320,7 +308,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
 void CGraph::createEdges(vector<vector<char>>& map) {
     for (int i = 1; i < map.size() - 1; i++) {
         for (int j = 1; j < map.size() - 1; j++) {
-            if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S') {
+            if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
                 findandCreateUpEdge(map, i, j);
                 findAndCreateRightEdge(map, i, j);
             }

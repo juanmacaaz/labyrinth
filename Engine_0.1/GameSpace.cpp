@@ -19,13 +19,13 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 21, 21);
+	this->labyrinth = new Labyrinth(this, 21, 21, 4);
 
 	this->actor = new Actor(this);
 
-	this->actor->setMainCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
+	this->actor->setMainCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMain, this->engine->getWWidth(), this->engine->getWHeight()));
-	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), 
+	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
 	vector<vector<int>> visitas = this->labyrinth->getVisitsPositions(5);
 	for (int i = 0; i < visitas.size(); i++) {
@@ -53,6 +53,11 @@ Actor* GameSpace::getActor()
 Labyrinth* GameSpace::getlabyrinth()
 {
 	return this->labyrinth;
+}
+
+vector<Entitie*>* GameSpace::getEntidades()
+{
+	return &this->entidades;
 }
 
 void GameSpace::deleteEntitie(Entitie* entitie)
