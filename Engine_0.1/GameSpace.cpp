@@ -44,6 +44,9 @@ void GameSpace::update()
 	enemy->update();
 	for (auto e : entidades) e->update();
 	world->update(1.0f / 30.0f);
+	if (glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		engine->setMenuSpace();
+	}
 }
 
 Actor* GameSpace::getActor()

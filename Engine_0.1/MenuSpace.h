@@ -19,6 +19,7 @@ public:
 
 	void updateMainMenu();
 	void updateLevelsMenu();
+	void updatePauseMenu();
 
 	Camera* getCamera();
 
@@ -30,6 +31,7 @@ private:
 
 	Menu* main_menu;
 	Menu* levels_menu;
+	Menu* pause_menu;
 	Menu* current_menu;
 	
 	int current_item;

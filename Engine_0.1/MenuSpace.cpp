@@ -17,6 +17,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	main_menu = new Menu();
 	levels_menu = new Menu();
+	pause_menu = new Menu();
 
 	main_menu->m_items.push_back(new MenuItem(this, "start", Block::WHITE, Vector3(20, -4, -8)));
 	main_menu->m_items.push_back(new MenuItem(this, "levels", Block::WHITE, Vector3(20, -4, 0)));
@@ -35,6 +36,10 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	levels_menu->m_items.push_back(new MenuItem(this, "tower", Block::WALL, Vector3(20, 2, -8)));
 	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::WALL, Vector3(20, 2, 0)));
 	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::WALL, Vector3(20, 2, 8)));
+
+
+	pause_menu->m_items.push_back(new MenuItem(this, "start", Block::WHITE, Vector3(20, 3, 0)));
+	pause_menu->m_items.push_back(new MenuItem(this, "exit", Block::WHITE, Vector3(20, -3, 0)));
 
 
 	current_menu = main_menu;
@@ -56,6 +61,10 @@ void MenuSpace::update()
 	if (current_menu == levels_menu) {
 		updateLevelsMenu();
 	}
+
+	if (current_menu == pause_menu) {
+		updatePauseMenu();
+	}
 }
 
 Camera* MenuSpace::getCamera() {
@@ -68,32 +77,33 @@ void MenuSpace::updateMainMenu()
 		switch (current_item) {
 			case 0:	main_menu->m_items[0]->move_item(Vector3(16, -4, -8));
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
-					main_menu->m_items[0]->move_item(Vector3(20, -4, -8));
 					press = true;
+					main_menu->m_items[0]->move_item(Vector3(20, -4, -8));
 					current_item = 1;
 				}
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 					press = true;
+					current_menu = pause_menu;
 					engine->setGameSpace();
 				}
 				break;
 
 			case 1: main_menu->m_items[1]->move_item(Vector3(16, -4, 0));
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
-					press = true;
 					main_menu->m_items[1]->move_item(Vector3(20, -4, 0));
+					press = true;
 					current_item = 2;
 				}
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
-					press = true;
 					main_menu->m_items[1]->move_item(Vector3(20, -4, 0));
+					press = true;
 					current_item = 0;
 				}
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 					main_menu->m_items[1]->move_item(Vector3(20, -4, 0));
+					press = true;
 					current_item = 0;
 					current_menu = levels_menu;
-					press = true;
 				}
 				break;
 
@@ -112,7 +122,7 @@ void MenuSpace::updateMainMenu()
 	
 	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
 		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE)
+		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
 		press = false;
 	
 }
@@ -171,7 +181,46 @@ void MenuSpace::updateLevelsMenu() {
 	}
 	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
 		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE)
+		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
 		press = false;
 	
+}
+
+void MenuSpace::updatePauseMenu()
+{
+	if (!press) {
+		switch (current_item) {
+		case 0:	pause_menu->m_items[0]->move_item(Vector3(16, 3, 0));
+			if (glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_PRESS) {
+				pause_menu->m_items[0]->move_item(Vector3(20, 3, 0));
+				press = true;
+				current_item = 1;
+			}
+			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+				press = true;
+				engine->setGameSpace();
+			}
+			break;
+
+		case 1: pause_menu->m_items[1]->move_item(Vector3(16, -3, 0));
+			if (glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_PRESS) {
+				press = true;
+				pause_menu->m_items[1]->move_item(Vector3(20, -3, 0));
+				current_item = 0;
+			}
+			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+				pause_menu->m_items[1]->move_item(Vector3(20, -3, 0));
+				current_item = 0;
+				current_menu = main_menu;
+				press = true;
+			}
+			break;
+		}
+	}
+
+	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
+		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
+		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
+		press = false;
+
 }

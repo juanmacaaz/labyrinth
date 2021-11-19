@@ -153,6 +153,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="HudSpace.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Labyrinth.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="HudSpace.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Labyrinth.h" />
     <ClInclude Include="Entitie.h" />

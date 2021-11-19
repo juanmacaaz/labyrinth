@@ -5,6 +5,7 @@
 
 #include "GameSpace.h"
 #include "MenuSpace.h"
+#include "HudSpace.h"
 #include "Space.h"
 
 objl::Mesh& loadModel2(const char* imagepath, objl::Loader* Loader);
@@ -18,6 +19,7 @@ Engine::Engine()
 
 	gameSpace = new GameSpace(this);
 	menuSpace = new MenuSpace(this);
+	hudSpace = new HudSpace(this);
 	currentSpace = menuSpace;
 
 	models.clear();
@@ -28,13 +30,17 @@ int Engine::run()
 	double lasttime = glfwGetTime();
 	glUseProgram(shader["basic-nolight"]);
 
-	glfwSetKeyCallback(window, key_callback);
+	//glfwSetKeyCallback(window, key_callback);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		currentSpace->update();
+
+		if (currentSpace == gameSpace) {
+			hudSpace->render();
+		}
 
 		currentSpace->render();
 

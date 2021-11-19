@@ -81,6 +81,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="HudSpace.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="HudSpace.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
