@@ -21,6 +21,8 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 
 	this->labyrinth = new Labyrinth(this, 21, 21, 15);
 
+	cout << "Tienes que coger 20 manzanas";
+
 	this->actor = new Actor(this);
 
 	this->actor->setMainCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),

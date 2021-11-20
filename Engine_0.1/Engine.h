@@ -40,7 +40,7 @@ public:
 
 	map<string, GLuint> getShaders();
 	map<int, GLuint> getTextures();
-	map<string, objl::Mesh> getModels();
+	map<string, vector<objl::Mesh>> getModels();
 	GLFWwindow* getEngineWindow();
 
 	int getWWidth();
@@ -55,7 +55,7 @@ private:
 	GLFWwindow* window;
 	map<string, GLuint> shader;
 	map<int, GLuint> texture;
-	map<string, objl::Mesh> models;
+	map<string, vector<objl::Mesh>> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
 	HudSpace* hudSpace;

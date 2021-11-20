@@ -44,21 +44,19 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	this->shader = space->getEngine()->getShaders()[shader];
 	this->space = space;
 
-	objl::Mesh model = space->getEngine()->getModels()[modelName];
+	vector<objl::Mesh> model = space->getEngine()->getModels()[modelName];
 
 	Quaternion orientation = Quaternion::identity();
 	Transform transform(initPosition, orientation);
 
-	for (int i = 0; i < model.Vertices.size(); i++) {
-		
-		vertices.push_back(model.Vertices[i].Position.X * scale);
-		vertices.push_back(model.Vertices[i].Position.Y * scale);
-		vertices.push_back(model.Vertices[i].Position.Z * scale);
-
-		vertices.push_back(model.Vertices[i].TextureCoordinate.X);
-		vertices.push_back(model.Vertices[i].TextureCoordinate.Y);
-
-	}
+	for (auto mesh: model)
+		for (int i = 0; i < mesh.Vertices.size(); i++) {
+			vertices.push_back(mesh.Vertices[i].Position.X * scale);
+			vertices.push_back(mesh.Vertices[i].Position.Y * scale);
+			vertices.push_back(mesh.Vertices[i].Position.Z * scale);
+			vertices.push_back(mesh.Vertices[i].TextureCoordinate.X);
+			vertices.push_back(mesh.Vertices[i].TextureCoordinate.Y);
+		}
 	
 	body = space->getWorld()->createRigidBody(transform);
 	
