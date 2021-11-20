@@ -33,6 +33,9 @@ public:
 	PhysicsCommon& getPC();
 	void deleteEntitie(Entitie* entitie);
 
+	void isPressed();
+	bool press;
+
 protected:
 
 	// Apuntador a clase contenedora

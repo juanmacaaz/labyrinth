@@ -31,6 +31,9 @@
     <Filter Include="Archivos de origen\Menus">
       <UniqueIdentifier>{6ac8baa3-2328-4bef-a382-909fec5495f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Algorithms">
+      <UniqueIdentifier>{5d970ead-92aa-4c06-bb01-78c2e7b513c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,18 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="HudSpace.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Backtracking.cpp">
+      <Filter>Archivos de origen\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Gready.cpp">
+      <Filter>Archivos de origen\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Dijkstra.cpp">
+      <Filter>Archivos de origen\Algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -130,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="HudSpace.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

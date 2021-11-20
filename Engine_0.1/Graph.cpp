@@ -59,6 +59,8 @@ CGraph::CGraph(vector<vector<char>>& map)
 {
     createNodes(map);
     createEdges(map);
+    //SalesmanTrackBacktracking(*this, m_Visits);
+    SalesmanTrackGreedy(*this, m_Visits);
 }
 
 // Clear =======================================================================
@@ -240,6 +242,8 @@ void CGraph::createNodes(vector<vector<char>>& map) {
     vector<vector<char>> mapV = map;
     char name[10];
     size_t index = 0;
+    CVertex* start_end;
+
     for (int i = 1; i < map.size() - 1; i++) {
         for (int j = 1; j < map.size() - 1; j++) {
 
@@ -259,7 +263,7 @@ void CGraph::createNodes(vector<vector<char>>& map) {
             }
             else if (map[i][j] == 'S') {
                 index++;
-                NewVertex("Salida", j, i);
+                start_end = NewVertex("Salida", j, i);
             }
             else if (map[i][j] == 'E') {
                 index++;
@@ -272,6 +276,8 @@ void CGraph::createNodes(vector<vector<char>>& map) {
             }
         }
     }
+    m_Visits.push_front(start_end);
+    m_Visits.push_back(start_end);
     map = mapV;
 }
 

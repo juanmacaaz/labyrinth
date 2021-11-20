@@ -20,6 +20,7 @@ using namespace std;
 class Space;
 class MenuSpace;
 class GameSpace;
+class HudSpace;
 
 enum Block
 {
@@ -57,6 +58,7 @@ private:
 	map<string, vector<objl::Mesh>> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
+	HudSpace* hudSpace;
 
 	Space* currentSpace;
 

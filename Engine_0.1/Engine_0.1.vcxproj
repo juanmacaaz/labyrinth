@@ -148,11 +148,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Backtracking.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="Gready.cpp" />
+    <ClCompile Include="HudSpace.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Labyrinth.cpp" />
@@ -171,6 +175,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="HudSpace.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Labyrinth.h" />
     <ClInclude Include="Entitie.h" />

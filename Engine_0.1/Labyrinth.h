@@ -18,6 +18,8 @@ public:
 	CGraph getGraph();
 	vector<vector<char>> getMaze();
 	vector<int> getInitialPosition();
+	vector<int> getEndPosition();
+	vector<pair<int, int>> getEnemyRoute();
 private:
 
 	// Apuntadores a clases contenedoras
@@ -28,7 +30,7 @@ private:
 	vector<Cube> cubes;
 	vector<vector<char>> m_maze;
 	int m_width, m_height;
-	vector<int> m_initialPosition;
+	vector<int> m_initialPosition, m_endPosition;
 
 	// Funciones privadas
 	void generateMap();

@@ -30,7 +30,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
 
-	enemy = new Enemy(this, Vector3(3, 0.505, 3));
+	enemy = new Enemy(this, Vector3(this->getlabyrinth()->getEndPosition()[0], 0.505, this->getlabyrinth()->getEndPosition()[1]));
 }
 
 void GameSpace::update()
@@ -41,6 +41,9 @@ void GameSpace::update()
 	enemy->update();
 	for (auto e : entidades) e->update();
 	world->update(1.0f / 30.0f);
+	if (glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		engine->setMenuSpace();
+	}
 }
 
 Actor* GameSpace::getActor()

@@ -5,6 +5,7 @@
 
 #include "GameSpace.h"
 #include "MenuSpace.h"
+#include "HudSpace.h"
 #include "Space.h"
 
 vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader);
@@ -18,6 +19,7 @@ Engine::Engine()
 
 	gameSpace = new GameSpace(this);
 	menuSpace = new MenuSpace(this);
+	hudSpace = new HudSpace(this);
 	currentSpace = menuSpace;
 
 	models.clear();
@@ -28,13 +30,17 @@ int Engine::run()
 	double lasttime = glfwGetTime();
 	glUseProgram(shader["basic-nolight"]);
 
-	glfwSetKeyCallback(window, key_callback);
+	//glfwSetKeyCallback(window, key_callback);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		currentSpace->update();
+
+		if (currentSpace == gameSpace) {
+			hudSpace->render();
+		}
 
 		currentSpace->render();
 
@@ -110,18 +116,21 @@ void Engine::loadModels()
 	models["waifu"] = loadModel2("models\\waifu.obj", Loader);
 	models["cube"] = loadModel2("models\\cube.obj", Loader);
 	models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
-	models["button"] = loadModel2("models\\button.obj", Loader);
-	models["title"] = loadModel2("models\\title.obj", Loader);
 
+
+	//Main Menu Buttons
+	models["title"] = loadModel2("models\\title.obj", Loader);
 	models["start"] = loadModel2("models\\start.obj", Loader);
 	models["levels"] = loadModel2("models\\levels.obj", Loader);
 	models["exit"] = loadModel2("models\\exit.obj", Loader);
 
+	//Levels Menu Buttons
 	models["castle"] = loadModel2("models\\castle.obj", Loader);
 	models["jungle"] = loadModel2("models\\jungle.obj", Loader);
 	models["desert"] = loadModel2("models\\desert.obj", Loader);
 	models["back"] = loadModel2("models\\back.obj", Loader);
 
+	//3D models
 	models["tower"] = loadModel2("models\\tower.obj", Loader);
 	models["palm"] = loadModel2("models\\palm.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
