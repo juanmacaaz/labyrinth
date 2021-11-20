@@ -38,6 +38,16 @@ vector<int> Labyrinth::getInitialPosition()
 	return this->m_initialPosition;
 }
 
+vector<int> Labyrinth::getEndPosition()
+{
+	return this->m_endPosition;
+}
+
+vector<pair<int, int>> Labyrinth::getEnemyRoute()
+{
+	return this->graph.enemyRoute;
+}
+
 void Labyrinth::generateMap()
 {
 	for (int i = 0; i < m_maze.size(); i++) {
@@ -145,6 +155,7 @@ void Labyrinth::generateMaze()
 	} while (m_maze[x_end][y_end] != '1');
 
 	m_maze[x_end][y_end] = 'S';
+	this->m_endPosition = { y_end, x_end };
 }
 
 void Labyrinth::generateTestMap()

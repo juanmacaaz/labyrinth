@@ -52,6 +52,8 @@ public:
 	CGPoint m_Point;
 	list<CEdge*> m_Edges;
 	CEdge* m_Origen;
+	double m_DijkstraDistance;
+	bool m_Visited, m_isVisita, m_DijkstraVisit;
 
 	// M�todes
 	CEdge* FindEdge(const char* name);
@@ -93,6 +95,7 @@ public:
 	list<CVertex> m_Vertices;
 	list<CEdge> m_Edges;
 	list<CVertex*> m_Visits;
+	vector<pair<int, int>> enemyRoute;
 
 public:
 	CGraph() {}
@@ -133,3 +136,35 @@ private:
 	void findAndCreateRightEdge(vector<vector<char>>& map, const int i, int j);
 	void createEdges(vector<vector<char>>& map);
 };
+
+// CTrack ======================================================================
+
+class CTrack {
+public:
+	list<CEdge*> m_Edges;
+	CGraph* m_pGraph;
+
+	CTrack(CGraph* pGraph) {
+		m_pGraph = pGraph;
+	}
+	void SetGraph(CGraph* pGraph) {
+		Clear();
+		m_pGraph = pGraph;
+
+	}
+	CTrack(const CTrack& t) : m_pGraph(t.m_pGraph), m_Edges(t.m_Edges) {}
+	CTrack operator=(const CTrack& t) {
+		m_pGraph = t.m_pGraph;
+		m_Edges = t.m_Edges;
+		return *this;
+	}
+
+	void Clear() { m_Edges.clear(); }
+
+};
+
+// ALGORITHMS ==================================================================
+
+void SalesmanTrackBacktracking(CGraph& g, list<CVertex*>& visits);
+void DijkstraQueue(CGraph& g, CVertex* pStart);
+void SalesmanTrackGreedy(CGraph& graph, list<CVertex*>& visits);

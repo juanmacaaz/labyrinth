@@ -8,7 +8,7 @@
 #include "HudSpace.h"
 #include "Space.h"
 
-objl::Mesh& loadModel2(const char* imagepath, objl::Loader* Loader);
+vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader);
 
 Engine::Engine()
 {
@@ -65,7 +65,7 @@ map<int, GLuint> Engine::getTextures()
 	return texture;
 }
 
-map<string, objl::Mesh> Engine::getModels()
+map<string, vector<objl::Mesh>> Engine::getModels()
 {
 	return models;
 }
@@ -313,8 +313,8 @@ GLuint Engine::loadTexture(const char* imagepath)
 	return textureID;
 }
 
-inline objl::Mesh& loadModel2(const char* imagepath, objl::Loader* Loader)
+inline vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader)
 {
 	Loader->LoadFile(imagepath);
-	return Loader->LoadedMeshes[0];
+	return Loader->LoadedMeshes;
 }

@@ -13,10 +13,12 @@
 Actor::Actor(GameSpace* space)
 {
 	this->space = space;
+	n_manzanas = 0;
 
-	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", 
-		Vector3(this->space->getlabyrinth()->getInitialPosition()[0], 1.5, 
-			this->space->getlabyrinth()->getInitialPosition()[1]), 0.25f);
+	original_position = Vector3(this->space->getlabyrinth()->getInitialPosition()[0], 1.5,
+		this->space->getlabyrinth()->getInitialPosition()[1]);
+
+	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", original_position, 0.25f);
 
 	RigidBody* body = entitie->getBody();
 	
@@ -34,6 +36,15 @@ Actor::Actor(GameSpace* space)
 void Actor::setMainCamera(Camera* camera)
 {
 	this->camera[MAIN_CAMERA] = camera;
+}
+
+void Actor::addManzana() {
+	n_manzanas++;
+	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
+}
+
+void Actor::toInitPosition() {
+	entitie->getBody()->setTransform(Transform(original_position, Quaternion::identity()));
 }
 
 void Actor::setMapCamera(Camera* camera)
