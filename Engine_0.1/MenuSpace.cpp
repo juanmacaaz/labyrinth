@@ -18,7 +18,10 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	main_menu = new Menu();
 	levels_menu = new Menu();
 	pause_menu = new Menu();
+	instruction_menu = new Menu();
 
+	
+	//Main Menu
 	main_menu->m_items.push_back(new MenuItem(this, "start", Block::WHITE, Vector3(20, -4, -8)));
 	main_menu->m_items.push_back(new MenuItem(this, "levels", Block::WHITE, Vector3(20, -4, 0)));
 	main_menu->m_items.push_back(new MenuItem(this, "exit", Block::WHITE, Vector3(20, -4, 8)));
@@ -26,7 +29,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	main_menu->m_items.push_back(new MenuItem(this, "title", Block::WALL, Vector3(6, 1, 0)));
 
 	
-
+	//Levels Menu
 	levels_menu->m_items.push_back(new MenuItem(this, "castle", Block::WALL, Vector3(20, 0, -8)));
 	levels_menu->m_items.push_back(new MenuItem(this, "jungle", Block::WALL, Vector3(20, 0, 0)));
 	levels_menu->m_items.push_back(new MenuItem(this, "desert", Block::WALL, Vector3(20, 0, 8)));
@@ -37,9 +40,14 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::WALL, Vector3(20, 2, 0)));
 	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::WALL, Vector3(20, 2, 8)));
 
-
+	
+	//Pause Menu
 	pause_menu->m_items.push_back(new MenuItem(this, "start", Block::WHITE, Vector3(20, 3, 0)));
 	pause_menu->m_items.push_back(new MenuItem(this, "exit", Block::WHITE, Vector3(20, -3, 0)));
+
+
+	//Instruction Menu
+	instruction_menu->m_items.push_back(new MenuItem(this, "start", Block::WHITE, Vector3(20, -4, 0)));
 
 
 	current_menu = main_menu;
@@ -65,6 +73,12 @@ void MenuSpace::update()
 	if (current_menu == pause_menu) {
 		updatePauseMenu();
 	}
+
+	if (current_menu == instruction_menu) {
+		updateInstructionMenu();
+	}
+
+	isPressed();
 }
 
 Camera* MenuSpace::getCamera() {
@@ -83,8 +97,7 @@ void MenuSpace::updateMainMenu()
 				}
 				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 					press = true;
-					current_menu = pause_menu;
-					engine->setGameSpace();
+					current_menu = instruction_menu;
 				}
 				break;
 
@@ -118,13 +131,7 @@ void MenuSpace::updateMainMenu()
 				}
 				break;
 		}
-	}
-	
-	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
-		press = false;
-	
+	}	
 }
 
 void MenuSpace::updateLevelsMenu() {
@@ -178,12 +185,7 @@ void MenuSpace::updateLevelsMenu() {
 			}
 			break;
 		}
-	}
-	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
-		press = false;
-	
+	}	
 }
 
 void MenuSpace::updatePauseMenu()
@@ -210,17 +212,27 @@ void MenuSpace::updatePauseMenu()
 			}
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 				pause_menu->m_items[1]->move_item(Vector3(20, -3, 0));
+				press = true;
 				current_item = 0;
 				current_menu = main_menu;
-				press = true;
 			}
 			break;
 		}
 	}
+}
 
-	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
-		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
-		press = false;
-
+void MenuSpace::updateInstructionMenu() 
+{
+	if (!press) {
+		switch (current_item) {
+		case 0:	instruction_menu->m_items[0]->move_item(Vector3(16, -4, 0));
+			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+				instruction_menu->m_items[0]->move_item(Vector3(20, -4, 0));
+				press = true;
+				current_menu = pause_menu;
+				engine->setGameSpace();
+			}
+			break;
+		}
+	}
 }

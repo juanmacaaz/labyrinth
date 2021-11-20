@@ -34,6 +34,13 @@ PhysicsCommon& Space::getPC()
 	return pc;
 }
 
+void Space::isPressed() {
+	if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_RELEASE &&
+		glfwGetKey(this->getWindow(), GLFW_KEY_UP) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_DOWN) == GLFW_RELEASE &&
+		glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_RELEASE && glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_RELEASE)
+		press = false;
+}
+
 void Space::deleteEntitie(Entitie* entitie)
 {
 	// 

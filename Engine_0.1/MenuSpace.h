@@ -20,6 +20,7 @@ public:
 	void updateMainMenu();
 	void updateLevelsMenu();
 	void updatePauseMenu();
+	void updateInstructionMenu();
 
 	Camera* getCamera();
 
@@ -28,15 +29,14 @@ private:
 
 	Camera* menuCamera;
 
-
 	Menu* main_menu;
 	Menu* levels_menu;
 	Menu* pause_menu;
+	Menu* instruction_menu;
+
 	Menu* current_menu;
 	
 	int current_item;
-
-	bool press;
 
 	vector<Menu> m_menus;
 };
