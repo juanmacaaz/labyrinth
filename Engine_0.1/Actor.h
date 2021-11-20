@@ -32,6 +32,14 @@ public:
 	void updateMain();
 	void updateMap();
 
+	void addManzana();
+
+	void toInitPosition();
+
+	int n_manzanas;
+
+	Vector3 original_position;
+
 private:
 	// Apuntadores a clases contenedoras
 	GameSpace* space;

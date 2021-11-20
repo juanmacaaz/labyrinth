@@ -19,7 +19,9 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 21, 21, 4);
+	this->labyrinth = new Labyrinth(this, 21, 21, 20);
+
+	cout << "Tienes que coger 20 manzanas";
 
 	this->actor = new Actor(this);
 
@@ -27,12 +29,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 		proyectionDataMain, this->engine->getWWidth(), this->engine->getWHeight()));
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
-	// Mirar
-	//vector<vector<int>> visitas = this->labyrinth->getVisitsPositions(5);
-	//for (int i = 0; i < visitas.size(); i++) {
-	//	entidades.push_back(new Key(this, Vector3(visitas[i][0], 1.5, visitas[1][1])));
-	//}
-	//Enemy(GameSpace* space, Vector3 initPosition, float valocity);
+
 	enemy = new Enemy(this, Vector3(3, 0.505, 3));
 }
 

@@ -15,5 +15,6 @@ public:
 
 	Enemy(GameSpace* space, Vector3 initPosition);
 	void moveTo(float x, float y);
+	void update();
 };
 

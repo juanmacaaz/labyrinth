@@ -18,5 +18,6 @@ void Key::update()
 		deleteData();
 		space->deleteEntitie(this);
 		cout << "Tienes una manzana" << endl;
+		space->getActor()->addManzana();
 	};
 }
