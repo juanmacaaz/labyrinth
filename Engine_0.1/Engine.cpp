@@ -135,6 +135,8 @@ void Engine::loadModels()
 	models["palm"] = loadModel2("models\\palm.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
 
+	//Materials
+	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);
 	models["materias"] = loadModel2("models\\box_stack.obj", Loader);
 }
 

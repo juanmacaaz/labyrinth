@@ -26,7 +26,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	main_menu->m_items.push_back(new MenuItem(this, "levels", Block::WHITE, Vector3(20, -4, 0)));
 	main_menu->m_items.push_back(new MenuItem(this, "exit", Block::WHITE, Vector3(20, -4, 8)));
 
-	main_menu->m_items.push_back(new MenuItem(this, "title", Block::WALL, Vector3(6, 1, 0)));
+	main_menu->m_items.push_back(new MenuItem(this, "title", Block::WHITE, Vector3(10, 0, 0)));
 
 	
 	//Levels Menu
