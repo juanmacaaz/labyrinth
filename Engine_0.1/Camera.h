@@ -30,6 +30,7 @@ public:
 	float getVerticalAngle();
 	float getHorizantalAngle();
 	float getSpeed();
+	void setVerticalAngle(float d);
 	void setDirection(vec3 d);
 	void setTarget(vec3 d);
 	vec3 getUP();

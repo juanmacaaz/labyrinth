@@ -85,6 +85,18 @@ void Actor::updateMain()
 	float verticalAngle = camera[MAIN_CAMERA]->getVerticalAngle();
 	float horizontalAngle = camera[MAIN_CAMERA]->getHorizantalAngle();
 
+	if (verticalAngle > 1.5f) {
+		camera[MAIN_CAMERA]->setVerticalAngle(1.5f);
+		verticalAngle = 1.5f;
+	}
+
+	if (verticalAngle < -1.5f) {
+		camera[MAIN_CAMERA]->setVerticalAngle(-1.5f);
+		verticalAngle = -1.5f;
+	}
+
+	cout << verticalAngle << " " << horizontalAngle << endl;
+
 	vec3 direction(
 		cos(verticalAngle) * sin(horizontalAngle),
 		sin(verticalAngle),
