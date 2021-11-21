@@ -34,7 +34,7 @@ private:
 
 	// Funciones privadas
 	void generateMap();
-	void generateVisits(const int n_keys);
+	void generateVisits(const int n_keys, const char representar);
 	void generateMaze();
 	void generateTestMap();
 

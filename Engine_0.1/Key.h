@@ -1,5 +1,6 @@
 #pragma once
 #include "Entitie.h"
+#include "Engine.h"
 
 class Actor;
 class GameSpace;
@@ -12,7 +13,7 @@ private:
 
 public:
 
-	Key(GameSpace* space, Vector3 initPosition);
+	Key(GameSpace* space, Vector3 initPosition, Block textura);
 	void update();
 };
 

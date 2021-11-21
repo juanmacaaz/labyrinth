@@ -19,7 +19,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 21, 21, 20);
+	this->labyrinth = new Labyrinth(this, 21, 21, 15);
 
 	cout << "Tienes que coger 20 manzanas";
 
