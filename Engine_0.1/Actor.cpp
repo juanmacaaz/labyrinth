@@ -95,8 +95,6 @@ void Actor::updateMain()
 		verticalAngle = -1.5f;
 	}
 
-	cout << verticalAngle << " " << horizontalAngle << endl;
-
 	vec3 direction(
 		cos(verticalAngle) * sin(horizontalAngle),
 		sin(verticalAngle),

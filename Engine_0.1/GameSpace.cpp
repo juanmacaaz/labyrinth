@@ -30,13 +30,24 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
 
-	enemy = new Enemy(this, Vector3(this->getlabyrinth()->getEndPosition()[0], 0.505, this->getlabyrinth()->getEndPosition()[1]));
+	int x = labyrinth->getEnemyRoute()[0].first;
+	int z = labyrinth->getEnemyRoute()[0].second;
+	enemy = new Enemy(this, Vector3(x, 0.505, z));
 }
 
 void GameSpace::update()
 {
-	Vector3 pos = actor->getBody()->getTransform().getPosition();
-	enemy->moveTo(pos.x, pos.z);
+	int x = labyrinth->getEnemyRoute()[enemy->getPosition()].first;
+	int z = labyrinth->getEnemyRoute()[enemy->getPosition()].second;
+
+	enemy->moveTo(x, z);
+
+	cout << x << " " << z << endl;
+
+	cout << enemy->getBody()->getTransform().getPosition()[0]
+		<< " " << enemy->getBody()->getTransform().getPosition()[2]
+		<< " POS:" << enemy->getPosition() << endl;
+
 	actor->update();
 	enemy->update();
 	for (auto e : entidades) e->update();

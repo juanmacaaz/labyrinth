@@ -10,11 +10,15 @@ private:
 
 	GameSpace* space;
 	float velocity;
+	int visita_pos;
+	long timer;
 
 public:
 
 	Enemy(GameSpace* space, Vector3 initPosition);
-	void moveTo(float x, float y);
+	bool moveTo(float x, float y);
 	void update();
+	void nextPosition();
+	int getPosition();
 };
 
