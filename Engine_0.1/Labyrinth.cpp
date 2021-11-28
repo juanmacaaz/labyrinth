@@ -1,5 +1,8 @@
 #include "Labyrinth.h"
-#include "Key.h"
+
+#include "KeyEnemy.h"
+#include "KeyActor.h"
+
 #include "GameSpace.h"
 #include "Engine.h"
 
@@ -60,11 +63,13 @@ void Labyrinth::generateMap()
 			}
 			else if (m_maze[i][j] == 'K') {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
-				this->space->getEntidades()->push_back(new Key(this->space, Vector3(j, 0.75, i),Block::KEY));
+				KeyEnemy* ka = new KeyEnemy(this->space, Vector3(j, 0.75, i));
+				enemyKeys.push_back(ka);
+				this->space->getEntidades()->push_back(new KeyEnemy(this->space, Vector3(j, 0.75, i)));
 			}
 			else if (m_maze[i][j] == 'A') {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
-				this->space->getEntidades()->push_back(new Key(this->space, Vector3(j, 0.75, i),Block::WOOD));
+				this->space->getEntidades()->push_back(new KeyActor(this->space, Vector3(j, 0.75, i)));
 			}
 			else {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));

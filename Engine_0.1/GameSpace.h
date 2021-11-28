@@ -29,6 +29,7 @@ public:
 	void update();
 
 	Actor* getActor();
+	Enemy* getEnemy();
 	Labyrinth* getlabyrinth();
 	vector<Entitie*>* getEntidades();
 

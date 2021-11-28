@@ -64,7 +64,8 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	CollisionShape* e = genereateBoindingBox(t);
 
 	body->addCollider(e, t);
-
+	body->getCollider(0)->setCollisionCategoryBits(0x0001);
+	body->getCollider(0)->setCollideWithMaskBits(0x0001);
 	body->updateLocalCenterOfMassFromColliders();
 
 	glGenVertexArrays(1, &VAO);

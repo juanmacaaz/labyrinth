@@ -21,9 +21,9 @@ Actor::Actor(GameSpace* space)
 	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", original_position, 0.25f);
 
 	RigidBody* body = entitie->getBody();
-	
+
 	body->setMass(65.0f);
-	
+	body->getCollider(0)->setCollideWithMaskBits(0x0003);
 	body->removeCollider(body->getCollider(0));
 
 	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.20, 1.2);

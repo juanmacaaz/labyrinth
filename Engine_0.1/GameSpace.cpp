@@ -32,7 +32,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 
 	int x = labyrinth->getEnemyRoute()[0].first;
 	int z = labyrinth->getEnemyRoute()[0].second;
-	enemy = new Enemy(this, Vector3(x, 0.505, z));
+	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
 }
 
 void GameSpace::update()
@@ -54,6 +54,11 @@ void GameSpace::update()
 Actor* GameSpace::getActor()
 {
 	return actor;
+}
+
+Enemy* GameSpace::getEnemy()
+{
+	return enemy;
 }
 
 Labyrinth* GameSpace::getlabyrinth()

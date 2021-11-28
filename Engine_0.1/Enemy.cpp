@@ -7,16 +7,18 @@
 #include "Engine.h"
 #include "Actor.h"
 
-Enemy::Enemy(GameSpace* space, Vector3 initPosition):
+Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys):
 	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
 {
-	timer = 0;
+	this->n_keys = n_keys;
 	this->visita_pos = 0;
 	this->space = space;
 	body->getCollider(0)->getMaterial().setFrictionCoefficient(0.005);
 	body->getCollider(0)->getMaterial().setBounciness(0);
 	body->enableGravity(false);
 	body->setType(BodyType::STATIC);
+	body->getCollider(0)->setCollisionCategoryBits(0x0003);
+	body->getCollider(0)->setCollideWithMaskBits(0x0002 | 0x0001);
 	velocity = 0.01f;
 }
 
@@ -29,6 +31,9 @@ bool Enemy::moveTo(float x, float z)
 
 	if (abs(x_m) + abs(z_m) < 0.002f) {
 		visita_pos++;
+		if (visita_pos == n_keys) {
+			exit(0);
+		}
 		return true;
 	}
 	
@@ -57,4 +62,9 @@ void Enemy::nextPosition()
 
 int Enemy::getPosition() {
 	return visita_pos;
+}
+
+CollisionBody* Enemy::getBody()
+{
+	return body;
 }

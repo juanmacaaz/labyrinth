@@ -235,7 +235,6 @@ bool objl::Loader::LoadFile(std::string Path)
 	if (Path.substr(Path.size() - 4, 4) != ".obj")
 		return false;
 
-
 	std::ifstream file(Path);
 
 	if (!file.is_open())

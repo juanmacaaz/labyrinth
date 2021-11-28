@@ -84,9 +84,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="HudSpace.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Backtracking.cpp">
       <Filter>Archivos de origen\Algorithms</Filter>
     </ClCompile>
@@ -95,6 +92,15 @@
     </ClCompile>
     <ClCompile Include="Dijkstra.cpp">
       <Filter>Archivos de origen\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="HudSpace.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyActor.cpp">
+      <Filter>Archivos de origen\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyEnemy.cpp">
+      <Filter>Archivos de origen\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="HudSpace.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEnemy.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyActor.h">
+      <Filter>Archivos de encabezado\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

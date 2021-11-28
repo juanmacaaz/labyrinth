@@ -7,9 +7,9 @@ class GameSpace;
 
 class Key : public Entitie
 {
-private:
+protected:
 
-	GameSpace* space;
+	GameSpace* space_c;
 
 public:
 
