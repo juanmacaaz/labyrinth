@@ -15,6 +15,7 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
 	this->graph = CGraph(m_maze);
 	generateVisits(n_keys, 'A');
 	//generateTestMap();
+	cout << "Total vertices: " << this->graph.enemyRoute.size() << endl;
 	generateMap();
 }
 

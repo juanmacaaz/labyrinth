@@ -19,7 +19,7 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 21, 21, 15);
+	this->labyrinth = new Labyrinth(this, 11, 11, 7);
 
 	cout << "Tienes que coger 20 manzanas";
 
@@ -41,12 +41,6 @@ void GameSpace::update()
 	int z = labyrinth->getEnemyRoute()[enemy->getPosition()].second;
 
 	enemy->moveTo(x, z);
-
-	cout << x << " " << z << endl;
-
-	cout << enemy->getBody()->getTransform().getPosition()[0]
-		<< " " << enemy->getBody()->getTransform().getPosition()[2]
-		<< " POS:" << enemy->getPosition() << endl;
 
 	actor->update();
 	enemy->update();

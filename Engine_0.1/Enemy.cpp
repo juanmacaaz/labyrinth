@@ -27,21 +27,16 @@ bool Enemy::moveTo(float x, float z)
 	float x_m = x - actPos.x;  
 	float z_m = z - actPos.z;
 
-	if (timer > 0) timer--;
-
-	if (abs(x_m < 0.002f) && abs(z_m < 0.002f) && timer == 0) {
-		timer = 200;
+	if (abs(x_m) + abs(z_m) < 0.002f) {
 		visita_pos++;
 		return true;
 	}
 	
-	
-
 	int x_o = 0;
 	int z_o = 0;
 
-	if (abs(x_m) > 0.001) x_o = (x_m >= 0) ? 1 : -1;
-	if (abs(z_m) > 0.001) z_o = (z_m >= 0) ? 1 : -1;
+	if (abs(x_m) > 0.001) x_o = (x_m >= 0) ? 2 : -2;
+	if (abs(z_m) > 0.001) z_o = (z_m >= 0) ? 2 : -2;
 
 	qua<float> a = safeQuatLookAt(vec3(x, 1, z), vec3(actPos.x, 1, actPos.z), vec3(0, 1, 0), vec3(0, 1, 0));
 	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y, (velocity * z_o) + actPos.z),  Quaternion(a.x, a.y, a.z, a.w)));
