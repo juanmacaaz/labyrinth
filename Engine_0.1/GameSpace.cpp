@@ -9,19 +9,17 @@
 #include "Key.h"
 #include "Enemy.h"
 
-GameSpace::GameSpace(Engine* engine) : Space(engine)
+GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 {
 	PhysicsWorld::WorldSettings settings;
 	settings.gravity = Vector3(0, -9.8f, 0);
 
 	world = pc.createPhysicsWorld(settings);
-
+	
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	this->labyrinth = new Labyrinth(this, 11, 11, 7);
-
-	cout << "Tienes que coger 20 manzanas";
 
 	this->actor = new Actor(this);
 

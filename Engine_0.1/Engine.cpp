@@ -17,7 +17,9 @@ Engine::Engine()
 	loadTextures();
 	loadModels();
 
-	gameSpace = new GameSpace(this);
+	Dificultad dificultad = {4, 10, 0.2, 0.2};
+
+	gameSpace = new GameSpace(this, dificultad);
 	menuSpace = new MenuSpace(this);
 	hudSpace = new HudSpace(this);
 	currentSpace = menuSpace;

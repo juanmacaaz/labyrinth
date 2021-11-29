@@ -19,11 +19,18 @@ class Labyrinth;
 class Engine;
 class Enemy;
 
+struct Dificultad {
+	int n_keys;
+	int size_map;
+	float velocity_e;
+	float velocity_a;
+};
+
 class GameSpace : public Space
 {
 public:
 
-	GameSpace(Engine* engine);
+	GameSpace(Engine* engine, Dificultad dificultad);
 
 	void render();
 	void update();
