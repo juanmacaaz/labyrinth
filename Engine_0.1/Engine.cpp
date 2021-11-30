@@ -17,14 +17,13 @@ Engine::Engine()
 	loadTextures();
 	loadModels();
 
-	Dificultad dificultad = {4, 10, 0.2, 0.2};
+	accumulator = 0;
 
-	gameSpace = new GameSpace(this, dificultad);
 	menuSpace = new MenuSpace(this);
 	hudSpace = new HudSpace(this);
 	currentSpace = menuSpace;
 
-	models.clear();
+	//models.clear();
 }
 
 int Engine::run()
@@ -36,21 +35,27 @@ int Engine::run()
 
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		double currentTime = glfwGetTime();
+		double elapseTime = currentTime - lasttime;
+		lasttime = currentTime;
 
-		currentSpace->update();
+		accumulator += elapseTime;
+		if (accumulator >= 1.0 / 60.0) {
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if (currentSpace == gameSpace) {
-			hudSpace->render();
+			currentSpace->update();
+
+			if (currentSpace == gameSpace) {
+				hudSpace->render();
+			}
+
+			currentSpace->render();
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+			accumulator = 0;
 		}
-
-		currentSpace->render();
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-
-		while (glfwGetTime() < lasttime + 1.0 / 60);
-		lasttime += 1.0 / 60;
+		
 	}
 
 	glfwTerminate();
@@ -87,6 +92,10 @@ int Engine::getWHeight()
 	return w_height;
 }
 
+void Engine::initGameSpace(Dificultad dificultad) {
+	gameSpace = new GameSpace(this, dificultad);
+}
+
 void Engine::setGameSpace()
 {
 	currentSpace = gameSpace;
@@ -104,10 +113,10 @@ void Engine::loadShaders()
 
 void Engine::loadTextures()
 {
-	texture[Block::WHITE] = loadTexture("textures\\uncompressed\\White.jpg");
-	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera.jpg");
+	texture[Block::WHITE] = loadTexture("textures\\uncompressed\\bedrock.jpg");
+	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
 	texture[Block::BOX] = loadTexture("textures\\uncompressed\\container.jpg");
-	texture[Block::WALL] = loadTexture("textures\\uncompressed\\wall.jpg");
+	texture[Block::WALL] = loadTexture("textures\\uncompressed\\wall-min.jpg");
 	//texture[Block::KEY] = loadTexture("textures\\uncompressed\\ceramica.jpg");
 }
 
@@ -150,7 +159,7 @@ void Engine::initGlfwGL()
 	w_width = mode->width;
 	w_height = mode->height;
 
-	glfwWindowHint(GLFW_SAMPLES, 8);
+	//glfwWindowHint(GLFW_SAMPLES, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);

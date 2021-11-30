@@ -32,6 +32,7 @@ bool Enemy::moveTo(float x, float z)
 	if (abs(x_m) + abs(z_m) < 0.002f) {
 		visita_pos++;
 		if (visita_pos == n_keys) {
+			cout << "Has PERDIDO!!" << endl;
 			exit(0);
 		}
 		return true;

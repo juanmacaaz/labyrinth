@@ -18,6 +18,5 @@ void KeyEnemy::update()
 		deleteData();
 		space_c->deleteEntitie(this);
 		cout << "El enemigo tiene una manzana" << endl;
-		space_c->getActor()->addManzana();
 	};
 }

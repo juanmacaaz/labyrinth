@@ -9,7 +9,7 @@ using namespace std;
 
 #include "OBJ_Loader.h"
 
-#define MAX_RENDER_DISTANCE 100
+#define MAX_RENDER_DISTANCE 20
 
 BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 {
@@ -119,10 +119,7 @@ void Entitie::movePosition(const Vector3& v) {
 
 void Entitie::render(Camera* camera)
 {
-	if ( sqrt(pow(camera->getPosition()[0] - body->getTransform().getPosition()[0], 2)
-		+ pow( camera->getPosition()[2]
-		- body->getTransform().getPosition()[2], 2 ))
-	> MAX_RENDER_DISTANCE) return;
+	//if (!Distance(camera->getPosition(), body->getTransform().getPosition(), MAX_RENDER_DISTANCE)) return;
 
 	GLuint gWVP = glGetUniformLocation(shader, "gWVP");
 	GLuint tex = glGetUniformLocation(shader, "tex");

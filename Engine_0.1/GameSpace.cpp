@@ -14,12 +14,14 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	PhysicsWorld::WorldSettings settings;
 	settings.gravity = Vector3(0, -9.8f, 0);
 
+	this->dificultad = dificultad;
+
 	world = pc.createPhysicsWorld(settings);
 	
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 11, 11, 7);
+	this->labyrinth = new Labyrinth(this, dificultad.size_map, dificultad.size_map, dificultad.n_keys);
 
 	this->actor = new Actor(this);
 
@@ -42,8 +44,9 @@ void GameSpace::update()
 
 	actor->update();
 	enemy->update();
+
 	for (auto e : entidades) e->update();
-	world->update(1.0f / 30.0f);
+	world->update(1.0f / 60.0f);
 	if (glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		engine->setMenuSpace();
 	}
@@ -62,6 +65,10 @@ Enemy* GameSpace::getEnemy()
 Labyrinth* GameSpace::getlabyrinth()
 {
 	return this->labyrinth;
+}
+
+void GameSpace::add_entitie(Entitie* e) {
+	this->entidades.push_back(e);
 }
 
 vector<Entitie*>* GameSpace::getEntidades()

@@ -41,6 +41,11 @@ void Actor::setMainCamera(Camera* camera)
 void Actor::addManzana() {
 	n_manzanas++;
 	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
+
+	if (space->dificultad.n_keys == n_manzanas) {
+		cout << "Has GANADO!! " << endl;
+		exit(2);
+	}
 }
 
 void Actor::toInitPosition() {
@@ -151,6 +156,8 @@ void Actor::updateMain()
 
 	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
 	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	
+	//entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
 
 	camera[MAIN_CAMERA]->setUP(up);
 

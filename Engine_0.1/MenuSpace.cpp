@@ -1,14 +1,12 @@
 #include "MenuSpace.h"
 #include "Engine.h"
-
+#include "GameSpace.h"
 MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 {
 	PhysicsWorld::WorldSettings settings;
 	settings.gravity = Vector3(0, -9.8f, 0);
 
 	world = pc.createPhysicsWorld(settings);
-
-
 
 	ProjectionData proyectionData = { 45.0f, 0.01f, 100.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
@@ -230,6 +228,8 @@ void MenuSpace::updateInstructionMenu()
 				instruction_menu->m_items[0]->move_item(Vector3(20, -4, 0));
 				press = true;
 				current_menu = pause_menu;
+				Dificultad dificultad = {1, 22, 31, 0.2, 0.2};
+				engine->initGameSpace(dificultad);
 				engine->setGameSpace();
 			}
 			break;

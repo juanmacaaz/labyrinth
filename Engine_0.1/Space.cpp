@@ -11,7 +11,7 @@ Space::Space(Engine* engine)
 
 void Space::update()
 {
-	world->update(1.0f / 30.0f);
+	//world->update(1.0f / 60.0f);
 }
 
 PhysicsWorld* Space::getWorld()
