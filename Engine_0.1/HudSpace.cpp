@@ -37,10 +37,6 @@ HudSpace::HudSpace(Engine* engine) : Space(engine)
 	for (int i = 0; i < 6; i++) {
 		scores.push_back(vectors_numeros[i][0]);
 	}
-
-	you_score = 12;
-	enemy_score = 22;
-	objective_score = 46;
 }
 
 void HudSpace::render() {
@@ -49,13 +45,11 @@ void HudSpace::render() {
 }
 
 void HudSpace::update() {
-	//updateYouScore();
-	//updateEnemyScore();
-	//updateObjectiveScore();
+
 }
 
 
-void HudSpace::updateYouScore() {
+void HudSpace::updateYouScore(int you_score) {
 	int left_number = 0;
 	int right_number = you_score % 10;
 
@@ -66,7 +60,7 @@ void HudSpace::updateYouScore() {
 	scores[1] = vectors_numeros[NUM::left_you][left_number];
 }
 
-void HudSpace::updateEnemyScore() {
+void HudSpace::updateEnemyScore(int  enemy_score) {
 	int left_number = 0;
 	int right_number = enemy_score % 10;
 
@@ -77,7 +71,7 @@ void HudSpace::updateEnemyScore() {
 	scores[3] = vectors_numeros[NUM::left_enemy][left_number];
 }
 
-void HudSpace::updateObjectiveScore() {
+void HudSpace::updateObjectiveScore(int objective_score) {
 	int left_number = 0;
 	int right_number = objective_score % 10;
 
