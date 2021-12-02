@@ -30,6 +30,8 @@ public:
 
 	void move_item(const Vector3& v);
 
+	void update();
+
 	Vector3 getPosition();
 
 	MenuSpace* space;

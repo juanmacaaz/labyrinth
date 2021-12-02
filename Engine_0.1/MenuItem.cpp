@@ -29,3 +29,7 @@ void MenuItem::move_item(const Vector3 &v) {
 Vector3 MenuItem::getPosition() {
 	return pos;
 }
+
+void MenuItem::update() {
+	rotateY(0.01f);
+}

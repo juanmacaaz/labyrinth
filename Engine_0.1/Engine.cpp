@@ -40,6 +40,7 @@ int Engine::run()
 
 		if (currentSpace == gameSpace) {
 			hudSpace->render();
+			hudSpace->update();
 		}
 
 		currentSpace->render();
@@ -119,21 +120,54 @@ void Engine::loadModels()
 
 
 	//Main Menu Buttons
-	models["title"] = loadModel2("models\\title.obj", Loader);
-	models["start"] = loadModel2("models\\start.obj", Loader);
-	models["levels"] = loadModel2("models\\levels.obj", Loader);
-	models["exit"] = loadModel2("models\\exit.obj", Loader);
+	models["main_title"] = loadModel2("models\\main_menu\\main_title.obj", Loader);
+	models["start_button"] = loadModel2("models\\main_menu\\start_button.obj", Loader);
+	models["levels_button"] = loadModel2("models\\main_menu\\levels_button.obj", Loader);
+	models["exit_button"] = loadModel2("models\\main_menu\\exit_button.obj", Loader);
 
 	//Levels Menu Buttons
-	models["castle"] = loadModel2("models\\castle.obj", Loader);
-	models["jungle"] = loadModel2("models\\jungle.obj", Loader);
-	models["desert"] = loadModel2("models\\desert.obj", Loader);
-	models["back"] = loadModel2("models\\back.obj", Loader);
+	models["levels_title"] = loadModel2("models\\levels_menu\\levels_title.obj", Loader);
+	models["difficulty_text"] = loadModel2("models\\levels_menu\\difficulty_text.obj", Loader);
+	models["back_button"] = loadModel2("models\\levels_menu\\back_button.obj", Loader);
+
+	models["low_text"] = loadModel2("models\\levels_menu\\low_text.obj", Loader);
+	models["medium_text"] = loadModel2("models\\levels_menu\\medium_text.obj", Loader);
+	models["high_text"] = loadModel2("models\\levels_menu\\high_text.obj", Loader);
+
+	models["castle_button"] = loadModel2("models\\levels_menu\\castle_button.obj", Loader);
+	models["jungle_button"] = loadModel2("models\\levels_menu\\jungle_button.obj", Loader);
+	models["desert_button"] = loadModel2("models\\levels_menu\\desert_button.obj", Loader);
+
+	models["x"] = loadModel2("models\\levels_menu\\x.obj", Loader);
+
+	//Pause Menu
+	models["continue_button"] = loadModel2("models\\pause_menu\\continue_button.obj", Loader);
+	models["return_main_menu"] = loadModel2("models\\pause_menu\\return_main_menu.obj", Loader);
+
+	//HUD
+	models["num_0"] = loadModel2("models\\hud\\numbers\\num_0.obj", Loader);
+	models["num_1"] = loadModel2("models\\hud\\numbers\\num_1.obj", Loader);
+	models["num_2"] = loadModel2("models\\hud\\numbers\\num_2.obj", Loader);
+	models["num_3"] = loadModel2("models\\hud\\numbers\\num_3.obj", Loader);
+	models["num_4"] = loadModel2("models\\hud\\numbers\\num_4.obj", Loader);
+	models["num_5"] = loadModel2("models\\hud\\numbers\\num_5.obj", Loader);
+	models["num_6"] = loadModel2("models\\hud\\numbers\\num_6.obj", Loader);
+	models["num_7"] = loadModel2("models\\hud\\numbers\\num_7.obj", Loader);
+	models["num_8"] = loadModel2("models\\hud\\numbers\\num_8.obj", Loader);
+	models["num_9"] = loadModel2("models\\hud\\numbers\\num_9.obj", Loader);
+
+	models["objective_text"] = loadModel2("models\\hud\\objective_text.obj", Loader);
+	models["enemy_text"] = loadModel2("models\\hud\\enemy_text.obj", Loader);
+	models["you_text"] = loadModel2("models\\hud\\you_text.obj", Loader);
 
 	//3D models
 	models["tower"] = loadModel2("models\\tower.obj", Loader);
 	models["palm"] = loadModel2("models\\palm.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
+
+	models["key_model"] = loadModel2("models\\hud\\key.obj", Loader);
+	models["banana_model"] = loadModel2("models\\hud\\banana.obj", Loader);
+	models["cactus_model"] = loadModel2("models\\hud\\cactus.obj", Loader);
 
 	//Materials
 	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);

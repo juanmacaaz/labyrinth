@@ -26,7 +26,7 @@ Actor::Actor(GameSpace* space)
 	
 	body->removeCollider(body->getCollider(0));
 
-	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.20, 1.2);
+	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.30, 1.2);
 	body->updateLocalCenterOfMassFromColliders();
 	body->addCollider(capsuleShape, Transform::identity());
 	body->getCollider(0)->getMaterial().setBounciness(0.0f);
