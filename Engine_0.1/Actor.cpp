@@ -21,9 +21,9 @@ Actor::Actor(GameSpace* space)
 	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", original_position, 0.25f);
 
 	RigidBody* body = entitie->getBody();
-	
+
 	body->setMass(65.0f);
-	
+	body->getCollider(0)->setCollideWithMaskBits(0x0003);
 	body->removeCollider(body->getCollider(0));
 
 	CapsuleShape* capsuleShape = Common::getPhysicsInstance().createCapsuleShape(0.30, 1.2);
@@ -41,6 +41,11 @@ void Actor::setMainCamera(Camera* camera)
 void Actor::addManzana() {
 	n_manzanas++;
 	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
+
+	if (space->dificultad.n_keys == n_manzanas) {
+		cout << "Has GANADO!! " << endl;
+		exit(2);
+	}
 }
 
 void Actor::toInitPosition() {
@@ -84,6 +89,16 @@ void Actor::updateMain()
 	
 	float verticalAngle = camera[MAIN_CAMERA]->getVerticalAngle();
 	float horizontalAngle = camera[MAIN_CAMERA]->getHorizantalAngle();
+
+	if (verticalAngle > 1.5f) {
+		camera[MAIN_CAMERA]->setVerticalAngle(1.5f);
+		verticalAngle = 1.5f;
+	}
+
+	if (verticalAngle < -1.5f) {
+		camera[MAIN_CAMERA]->setVerticalAngle(-1.5f);
+		verticalAngle = -1.5f;
+	}
 
 	vec3 direction(
 		cos(verticalAngle) * sin(horizontalAngle),
@@ -141,6 +156,8 @@ void Actor::updateMain()
 
 	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
 	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	
+	//entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
 
 	camera[MAIN_CAMERA]->setUP(up);
 

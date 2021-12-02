@@ -57,6 +57,11 @@ float Camera::getSpeed()
 	return speed;
 }
 
+void Camera::setVerticalAngle(float d)
+{
+	verticalAngle = d;
+}
+
 void Camera::setDirection(vec3 d)
 {
 	cameraTarget = d;

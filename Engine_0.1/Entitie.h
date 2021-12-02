@@ -49,4 +49,15 @@ public:
 	void render(Camera* camera);
 	virtual void update() {};
 	RigidBody* getBody();
+
+	static float Distance(vec3 c1, Vector3 c2, float distance)
+	{
+		float dx = abs(c2.x - c1.x);
+		if (dx > distance) return 0;
+
+		float dy = abs(c2.z - c1.z);
+		if (dy > distance) return 0;
+
+		return 1;
+	}
 };

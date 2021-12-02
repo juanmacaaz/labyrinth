@@ -1,6 +1,11 @@
 #include "Labyrinth.h"
-#include "Key.h"
+
+#include "KeyEnemy.h"
+#include "KeyActor.h"
+
 #include "GameSpace.h"
+#include "Engine.h"
+
 
 Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
 {
@@ -9,11 +14,11 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
 	this->m_height = height;
 
 	generateMaze();
-	generateVisits(n_keys);
-	
+	generateVisits(n_keys,'K');
 	this->graph = CGraph(m_maze);
-
+	generateVisits(n_keys, 'A');
 	//generateTestMap();
+	cout << "Total vertices: " << this->graph.enemyRoute.size() << endl;
 	generateMap();
 }
 
@@ -58,7 +63,13 @@ void Labyrinth::generateMap()
 			}
 			else if (m_maze[i][j] == 'K') {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
-				this->space->getEntidades()->push_back(new Key(this->space, Vector3(j, 0.75, i)));
+				KeyEnemy* ka = new KeyEnemy(this->space, Vector3(j, 0.75, i));
+				enemyKeys.push_back(ka);
+				this->space->add_entitie(new KeyEnemy(this->space, Vector3(j, 0.75, i)));
+			}
+			else if (m_maze[i][j] == 'A') {
+				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
+				this->space->add_entitie(new KeyActor(this->space, Vector3(j, 0.75, i)));
 			}
 			else {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
@@ -67,7 +78,7 @@ void Labyrinth::generateMap()
 	}
 }
 
-void Labyrinth::generateVisits(const int n_keys)
+void Labyrinth::generateVisits(const int n_keys,const char representar)
 {
 	srand((unsigned)time(NULL));
 	queue<int> limit;
@@ -86,11 +97,13 @@ void Labyrinth::generateVisits(const int n_keys)
 		do {
 			x = rand() % (limit.front() - anterior + 1) + anterior;
 			y = 1 + rand() % (m_height - 1);
-		} while (m_maze[y][x] != '1');
+		} while (m_maze[y][x] != '1' && m_maze[y][x] != 'V');
 
 		anterior = limit.front();
 		limit.pop();
-		m_maze[y][x] = 'K';
+		m_maze[y][x] = representar;
+		if (representar == 'A')
+			cout << "Y:" << y << "X:" << x << endl;;
 	}
 }
 

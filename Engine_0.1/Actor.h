@@ -13,7 +13,7 @@ class Actor
 {
 public:
 
-	const float VELOCIDAD = 4000.0f;
+	const float VELOCIDAD = 14500.0f;
 	const float SALTO = 2.75f;
 	const float ALTURA_CAMARA = 0.5f;
 

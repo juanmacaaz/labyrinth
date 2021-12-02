@@ -19,20 +19,31 @@ class Labyrinth;
 class Engine;
 class Enemy;
 
+struct Dificultad {
+	int id;
+	int n_keys;
+	int size_map;
+	float velocity_e;
+	float velocity_a;
+};
+
 class GameSpace : public Space
 {
 public:
 
-	GameSpace(Engine* engine);
+	GameSpace(Engine* engine, Dificultad dificultad);
 
 	void render();
 	void update();
 
 	Actor* getActor();
+	Enemy* getEnemy();
 	Labyrinth* getlabyrinth();
+	void add_entitie(Entitie* e);
 	vector<Entitie*>* getEntidades();
 
 	void deleteEntitie(Entitie* entitie);
+	Dificultad dificultad;
 
 private:
 	// Atributos

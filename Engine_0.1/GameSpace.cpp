@@ -9,19 +9,19 @@
 #include "Key.h"
 #include "Enemy.h"
 
-GameSpace::GameSpace(Engine* engine) : Space(engine)
+GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 {
 	PhysicsWorld::WorldSettings settings;
 	settings.gravity = Vector3(0, -9.8f, 0);
 
-	world = pc.createPhysicsWorld(settings);
+	this->dificultad = dificultad;
 
+	world = pc.createPhysicsWorld(settings);
+	
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, 21, 21, 20);
-
-	cout << "Tienes que coger 20 manzanas";
+	this->labyrinth = new Labyrinth(this, dificultad.size_map, dificultad.size_map, dificultad.n_keys);
 
 	this->actor = new Actor(this);
 
@@ -30,17 +30,23 @@ GameSpace::GameSpace(Engine* engine) : Space(engine)
 	this->actor->setMapCamera(new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f),
 		proyectionDataMap, this->engine->getWWidth(), this->engine->getWHeight()));
 
-	enemy = new Enemy(this, Vector3(this->getlabyrinth()->getEndPosition()[0], 0.505, this->getlabyrinth()->getEndPosition()[1]));
+	int x = labyrinth->getEnemyRoute()[0].first;
+	int z = labyrinth->getEnemyRoute()[0].second;
+	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
 }
 
 void GameSpace::update()
 {
-	Vector3 pos = actor->getBody()->getTransform().getPosition();
-	enemy->moveTo(pos.x, pos.z);
+	int x = labyrinth->getEnemyRoute()[enemy->getPosition()].first;
+	int z = labyrinth->getEnemyRoute()[enemy->getPosition()].second;
+
+	enemy->moveTo(x, z);
+
 	actor->update();
 	enemy->update();
+
 	for (auto e : entidades) e->update();
-	world->update(1.0f / 30.0f);
+	world->update(1.0f / 60.0f);
 	if (glfwGetKey(this->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		engine->setMenuSpace();
 	}
@@ -51,9 +57,18 @@ Actor* GameSpace::getActor()
 	return actor;
 }
 
+Enemy* GameSpace::getEnemy()
+{
+	return enemy;
+}
+
 Labyrinth* GameSpace::getlabyrinth()
 {
 	return this->labyrinth;
+}
+
+void GameSpace::add_entitie(Entitie* e) {
+	this->entidades.push_back(e);
 }
 
 vector<Entitie*>* GameSpace::getEntidades()

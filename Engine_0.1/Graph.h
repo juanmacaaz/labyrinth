@@ -54,7 +54,7 @@ public:
 	CEdge* m_Origen;
 	double m_DijkstraDistance;
 	bool m_Visited, m_isVisita, m_DijkstraVisit;
-
+	int id;
 	// M�todes
 	CEdge* FindEdge(const char* name);
 	bool MemberP(CEdge* pEdge);

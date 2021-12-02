@@ -8,6 +8,7 @@ using namespace std;
 
 class Camera;
 class GameSpace;
+class KeyEnemy;
 
 class Labyrinth
 {
@@ -20,6 +21,8 @@ public:
 	vector<int> getInitialPosition();
 	vector<int> getEndPosition();
 	vector<pair<int, int>> getEnemyRoute();
+	vector<KeyEnemy*> enemyKeys;
+
 private:
 
 	// Apuntadores a clases contenedoras
@@ -34,7 +37,7 @@ private:
 
 	// Funciones privadas
 	void generateMap();
-	void generateVisits(const int n_keys);
+	void generateVisits(const int n_keys, const char representar);
 	void generateMaze();
 	void generateTestMap();
 

@@ -21,6 +21,7 @@ class Space;
 class MenuSpace;
 class GameSpace;
 class HudSpace;
+struct Dificultad;
 
 enum Block
 {
@@ -46,6 +47,8 @@ public:
 	int getWWidth();
 	int getWHeight();
 
+	void initGameSpace(Dificultad dificultad);
+
 	void setGameSpace();
 	void setMenuSpace();
 
@@ -61,6 +64,7 @@ private:
 	HudSpace* hudSpace;
 
 	Space* currentSpace;
+	long double accumulator;
 
 	int w_width, w_height;
 	

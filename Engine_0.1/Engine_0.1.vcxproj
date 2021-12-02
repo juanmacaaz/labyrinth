@@ -158,6 +158,8 @@
     <ClCompile Include="Gready.cpp" />
     <ClCompile Include="HudSpace.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="KeyActor.cpp" />
+    <ClCompile Include="KeyEnemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Labyrinth.cpp" />
     <ClCompile Include="Entitie.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HudSpace.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="KeyActor.h" />
+    <ClInclude Include="KeyEnemy.h" />
     <ClInclude Include="Labyrinth.h" />
     <ClInclude Include="Entitie.h" />
     <ClInclude Include="Menu.h" />
