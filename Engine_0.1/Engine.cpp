@@ -14,8 +14,9 @@ Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
-	loadTextures();
+	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
 	loadModels();
+	loadModels(0);
 
 	accumulator = 0;
 
@@ -111,23 +112,57 @@ void Engine::loadShaders()
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
 }
 
-void Engine::loadTextures()
+void Engine::loadTextures(const char* wall, const char* floor)
 {
-	texture[Block::WHITE] = loadTexture("textures\\uncompressed\\bedrock.jpg");
+	texture[Block::WALL] = loadTexture(wall);
+	texture[Block::FLOOR] = loadTexture(floor);
+	//manzana y enemigo
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
-	texture[Block::BOX] = loadTexture("textures\\uncompressed\\container.jpg");
-	texture[Block::WALL] = loadTexture("textures\\uncompressed\\wall-min.jpg");
-	//texture[Block::KEY] = loadTexture("textures\\uncompressed\\ceramica.jpg");
 }
+
+void Engine::setTexturas(const int level)
+{
+	if (level == 0) {
+		//castillo
+		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+	}
+	else if (level == 1) {
+		//jungla
+		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+	}
+	else if (level == 2) {
+		//desirto
+		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+	}
+}
+
+void Engine::loadModels(const int level)
+{
+	objl::Loader* Loader = new objl::Loader();
+	if (level == 0) {
+		//castillo
+		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["cube"] = loadModel2("models\\cube.obj", Loader);
+	}
+	else if (level == 1) {
+		//jungla
+		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["cube"] = loadModel2("models\\cube.obj", Loader);
+	}
+	else if (level == 2) {
+		//desirto
+		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["cube"] = loadModel2("models\\cube.obj", Loader);
+	}
+}
+
 
 void Engine::loadModels()
 {
 	objl::Loader* Loader = new objl::Loader();
-
-	models["waifu"] = loadModel2("models\\waifu.obj", Loader);
-	models["cube"] = loadModel2("models\\cube.obj", Loader);
-	models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
-
 
 	//Main Menu Buttons
 	models["main_title"] = loadModel2("models\\main_menu\\main_title.obj", Loader);

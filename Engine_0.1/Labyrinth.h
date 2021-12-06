@@ -14,7 +14,7 @@ class Labyrinth
 {
 public:
 
-	Labyrinth(GameSpace* space, int width, int height, const int n_keys);
+	Labyrinth(GameSpace* space, int width, int height, const int n_keys, const int algorithm);
 	void render(Camera* camera);
 	CGraph getGraph();
 	vector<vector<char>> getMaze();

@@ -25,9 +25,8 @@ struct Dificultad;
 
 enum Block
 {
-	WHITE = 1,
+	FLOOR = 1,
 	WALL = 2,
-	BOX = 3,
 	WOOD = 4,
 	KEY = 5
 };
@@ -70,8 +69,10 @@ private:
 	
 	// Funciones privadas
 	void loadShaders();
-	void loadTextures();
+	void loadTextures(const char* wall, const char* floor);
 	void loadModels();
+	void setTexturas(const int level);
+	void loadModels(const int level);
 
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

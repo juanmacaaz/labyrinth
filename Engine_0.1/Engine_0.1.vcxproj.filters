@@ -102,6 +102,9 @@
     <ClCompile Include="MenuSpace.cpp">
       <Filter>Archivos de origen\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="BranchAndBound.cpp">
+      <Filter>Archivos de origen\Algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">

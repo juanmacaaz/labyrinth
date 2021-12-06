@@ -99,7 +99,7 @@ public:
 
 public:
 	CGraph() {}
-	CGraph(vector<vector<char>>& map);
+	CGraph(vector<vector<char>>& map, const int algorithm);
 	~CGraph() {}
 	void Clear();
 
@@ -160,11 +160,15 @@ public:
 	}
 
 	void Clear() { m_Edges.clear(); }
+	void AppendBefore(CTrack& t);
+	void Append(CTrack& t);
 
+	double Length();
 };
 
 // ALGORITHMS ==================================================================
 
 void SalesmanTrackBacktracking(CGraph& g, list<CVertex*>& visits);
+void SalesmanTrackBranchAndBound(CGraph& g, list<CVertex*>& visits);
 void DijkstraQueue(CGraph& g, CVertex* pStart);
 void SalesmanTrackGreedy(CGraph& graph, list<CVertex*>& visits);

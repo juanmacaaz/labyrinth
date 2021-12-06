@@ -21,7 +21,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
-	this->labyrinth = new Labyrinth(this, dificultad.size_map, dificultad.size_map, dificultad.n_keys);
+	this->labyrinth = new Labyrinth(this, dificultad.size_map, dificultad.size_map, dificultad.n_keys, dificultad.id);
 
 	this->actor = new Actor(this);
 
