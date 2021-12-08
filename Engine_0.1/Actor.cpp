@@ -9,6 +9,7 @@
 #include "Engine.h"
 #include "Entitie.h"
 #include "Labyrinth.h"
+#include "Enemy.h"
 
 Actor::Actor(GameSpace* space)
 {
@@ -81,6 +82,7 @@ void Actor::update()
 
 void Actor::updateMain()
 {
+	space->getEnemy()->setEnemyVelocity(0.01f);
 	double xpos, ypos;
 	glfwGetCursorPos(space->getWindow(), &xpos, &ypos);
 	glfwSetCursorPos(space->getWindow(), space->getEngine()->getWWidth() / 2, space->getEngine()->getWHeight() / 2);
@@ -172,6 +174,8 @@ void Actor::updateMain()
 inline void Actor::updateMap()
 {
 	vec3 pos;
+	space->getEnemy()->setEnemyVelocity(0.02f);
+
 	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 	entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
 

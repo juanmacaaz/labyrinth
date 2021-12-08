@@ -22,6 +22,8 @@ public:
 	void update();
 	void nextPosition();
 	int getPosition();
+	void setEnemyVelocity(float vel);
+	float getEnemyVelocity();
 	CollisionBody* getBody();
 };
 

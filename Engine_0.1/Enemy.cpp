@@ -29,7 +29,7 @@ bool Enemy::moveTo(float x, float z)
 	float x_m = x - actPos.x;  
 	float z_m = z - actPos.z;
 
-	if (abs(x_m) + abs(z_m) < 0.002f) {
+	if (abs(x_m) + abs(z_m) < 0.025f) {
 		visita_pos++;
 		if (visita_pos == n_keys) {
 			cout << "Has PERDIDO!!" << endl;
@@ -63,6 +63,14 @@ void Enemy::nextPosition()
 
 int Enemy::getPosition() {
 	return visita_pos;
+}
+
+void Enemy::setEnemyVelocity(float vel) {
+	velocity = vel;
+}
+
+float Enemy::getEnemyVelocity() {
+	return velocity;
 }
 
 CollisionBody* Enemy::getBody()
