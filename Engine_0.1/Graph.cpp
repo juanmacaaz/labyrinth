@@ -55,12 +55,18 @@ void CVertex::Unlink(CEdge* pEdge)
 // =============================================================================
 
 
-CGraph::CGraph(vector<vector<char>>& map)
+CGraph::CGraph(vector<vector<char>>& map, const int algorithm)
 {
     createNodes(map);
     createEdges(map);
     //SalesmanTrackBacktracking(*this, m_Visits);
-    SalesmanTrackGreedy(*this, m_Visits);
+    if (algorithm == 2) {
+        //SalesmanTrackBranchAndBound(*this, m_Visits);
+        SalesmanTrackGreedy(*this, m_Visits);
+    }
+    else {
+        SalesmanTrackGreedy(*this, m_Visits);
+    }
 }
 
 // Clear =======================================================================
@@ -320,4 +326,27 @@ void CGraph::createEdges(vector<vector<char>>& map) {
             }
         }
     }
+}
+
+void CTrack::AppendBefore(CTrack& t)
+{
+    for (list<CEdge*>::const_reverse_iterator iter = t.m_Edges.crbegin(); iter != t.m_Edges.crend(); ++iter) {
+        m_Edges.push_front(*iter);
+    }
+}
+
+void CTrack::Append(CTrack& t)
+{
+    for (list<CEdge*>::const_iterator iter = t.m_Edges.cbegin(); iter != t.m_Edges.cend(); ++iter) {
+        m_Edges.push_back(*iter);
+    }
+}
+
+double CTrack::Length()
+{
+    double l = 0.0;
+    for (CEdge* pE : m_Edges) {
+        l += pE->m_Length;
+    }
+    return l;
 }

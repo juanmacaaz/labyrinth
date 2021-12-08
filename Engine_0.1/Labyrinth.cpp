@@ -7,7 +7,7 @@
 #include "Engine.h"
 
 
-Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
+Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys, const int algorithm)
 {
 	this->space = space;
 	this->m_width = width;
@@ -15,7 +15,7 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys)
 
 	generateMaze();
 	generateVisits(n_keys,'K');
-	this->graph = CGraph(m_maze);
+	this->graph = CGraph(m_maze, algorithm);
 	generateVisits(n_keys, 'A');
 	//generateTestMap();
 	cout << "Total vertices: " << this->graph.enemyRoute.size() << endl;

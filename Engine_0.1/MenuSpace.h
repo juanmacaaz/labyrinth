@@ -3,6 +3,7 @@
 
 #include "Menu.h"
 #include "MenuItem.h"
+#include "GameSpace.h"
 
 class Camera;
 class Menu;
@@ -37,6 +38,7 @@ private:
 	Menu* current_menu;
 	
 	int current_item;
+	Dificultad current_dificultad;
 
 	vector<Menu> m_menus;
 };
