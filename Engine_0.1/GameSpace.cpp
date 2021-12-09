@@ -35,6 +35,17 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	int z = labyrinth->getEnemyRoute()[0].second;
 	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
 	getEngine()->hudSpace->updateObjectiveScore(dificultad.n_keys);
+	getEngine()->hudSpace->updateEnemyScore(0);
+	getEngine()->hudSpace->updateYouScore(0);
+
+}
+
+GameSpace::~GameSpace()
+{
+	delete this->actor;
+	delete this->labyrinth;
+	delete this->enemy;
+	for (Entitie* e : entidades) { e->deleteData(); }
 }
 
 void GameSpace::update()

@@ -21,6 +21,10 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys, 
 	generateMap();
 }
 
+Labyrinth::~Labyrinth()
+{
+}
+
 void Labyrinth::render(Camera* camera)
 {
 	for (auto cube : cubes)

@@ -36,6 +36,7 @@ class Engine
 public:
 
 	Engine();
+	~Engine();
 	int run();
 
 	map<string, GLuint> getShaders();
@@ -49,6 +50,8 @@ public:
 	void initGameSpace(Dificultad dificultad);
 
 	void setGameSpace();
+	GameSpace* getGameSpace();
+
 	void setMenuSpace();
 	HudSpace* hudSpace;
 

@@ -55,6 +55,7 @@ void Enemy::update()
 {
 	if (space->getWorld()->testOverlap(body, space->getActor()->getBody())) {
 		space->getActor()->toInitPosition();
+
 	};
 }
 

@@ -17,7 +17,7 @@ Actor::Actor(GameSpace* space)
 	this->space = space;
 	n_manzanas = 0;
 
-	original_position = Vector3(this->space->getlabyrinth()->getInitialPosition()[0], 1.5,
+	original_position = Vector3(this->space->getlabyrinth()->getInitialPosition()[0], 1.4,
 		this->space->getlabyrinth()->getInitialPosition()[1]);
 
 	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", original_position, 0.25f);
@@ -33,6 +33,11 @@ Actor::Actor(GameSpace* space)
 	body->addCollider(capsuleShape, Transform::identity());
 	body->getCollider(0)->getMaterial().setBounciness(0.0f);
 	body->getCollider(0)->getMaterial().setFrictionCoefficient(0.2f);
+}
+
+Actor::~Actor()
+{
+	delete this->entitie;
 }
 
 void Actor::setMainCamera(Camera* camera)
@@ -52,7 +57,11 @@ void Actor::addManzana() {
 }
 
 void Actor::toInitPosition() {
+	entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 	entitie->getBody()->setTransform(Transform(original_position, Quaternion::identity()));
+	entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
+	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 }
 
 void Actor::setMapCamera(Camera* camera)

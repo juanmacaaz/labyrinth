@@ -39,6 +39,11 @@ HudSpace::HudSpace(Engine* engine) : Space(engine)
 	}
 }
 
+HudSpace::~HudSpace()
+{
+	delete this->hudCamera;
+}
+
 void HudSpace::render() {
 	for (auto e : hudElements) e->render(hudCamera);
 	for (auto s : scores) s->render(hudCamera);

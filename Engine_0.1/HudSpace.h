@@ -15,6 +15,7 @@ class HudSpace : public Space
 public:
 
 	HudSpace(Engine* engine);
+	~HudSpace();
 
 	void render();
 	void update();

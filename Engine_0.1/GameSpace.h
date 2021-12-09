@@ -32,6 +32,7 @@ class GameSpace : public Space
 public:
 
 	GameSpace(Engine* engine, Dificultad dificultad);
+	~GameSpace();
 
 	void render();
 	void update();

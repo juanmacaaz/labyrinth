@@ -63,6 +63,16 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	press = false;
 }
 
+MenuSpace::~MenuSpace()
+{
+	delete this->menuCamera;
+	delete this->main_menu;
+	delete this->levels_menu;
+	delete this->pause_menu;
+	delete this->instruction_menu;
+	delete this->current_menu;
+}
+
 void MenuSpace::render()
 {
 	current_menu->render_menu();
@@ -265,6 +275,7 @@ void MenuSpace::updatePauseMenu()
 				press = true;
 				current_item = 0;
 				current_menu = main_menu;
+				delete this->engine->getGameSpace();
 			}
 			break;
 		}

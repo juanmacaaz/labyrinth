@@ -14,6 +14,7 @@ class MenuSpace : public Space
 public:
 
 	MenuSpace(Engine* engine);
+	~MenuSpace();
 
 	void render();
 	void update();

@@ -22,6 +22,7 @@ class Space
 {
 public:
 	Space(Engine* engine);
+	~Space();
 
 	virtual void render();
 	virtual void update();

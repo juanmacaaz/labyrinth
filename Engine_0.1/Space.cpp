@@ -9,6 +9,10 @@ Space::Space(Engine* engine)
 	this->engine = engine;
 }
 
+Space::~Space()
+{
+}
+
 void Space::update()
 {
 	//world->update(1.0f / 60.0f);

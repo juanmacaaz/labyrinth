@@ -77,7 +77,7 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 Entitie::~Entitie()
 {
-
+	//delete this->body;
 }
 
 void Entitie::deleteData()

@@ -27,6 +27,11 @@ Engine::Engine()
 	//models.clear();
 }
 
+Engine::~Engine()
+{
+
+}
+
 int Engine::run()
 {
 	double lasttime = glfwGetTime();
@@ -100,6 +105,11 @@ void Engine::initGameSpace(Dificultad dificultad) {
 void Engine::setGameSpace()
 {
 	currentSpace = gameSpace;
+}
+
+GameSpace* Engine::getGameSpace()
+{
+	return this->gameSpace;
 }
 
 void Engine::setMenuSpace()
