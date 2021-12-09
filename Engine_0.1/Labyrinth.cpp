@@ -17,7 +17,6 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys, 
 	generateVisits(n_keys,'K');
 	this->graph = CGraph(m_maze, algorithm);
 	generateVisits(n_keys, 'A');
-	//generateTestMap();
 	cout << "Total vertices: " << this->graph.enemyRoute.size() << endl;
 	generateMap();
 }
@@ -61,7 +60,7 @@ void Labyrinth::generateMap()
 				cubes.push_back(Cube(space, 2, Vector3(j, 1.0f, i)));
 				cubes.push_back(Cube(space, 2, Vector3(j, 2.0f, i)));
 			}
-			else if (m_maze[i][j] == 'K') {
+			else if (m_maze[i][j] == 'K' || m_maze[i][j] == 'S') {
 				cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
 				KeyEnemy* ka = new KeyEnemy(this->space, Vector3(j, 0.75, i));
 				enemyKeys.push_back(ka);
@@ -171,17 +170,6 @@ void Labyrinth::generateMaze()
 	this->m_endPosition = { y_end, x_end };
 }
 
-void Labyrinth::generateTestMap()
-{
-	vector<vector<vector<int>>> zone = {
-{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}} };
-
-	for (int i = 0; i < zone[0].size(); i++) {
-		for (int j = 0; j < zone[0][i].size(); j++) {
-			cubes.push_back(Cube(space, 1, Vector3(j, 0.0f, i)));
-		}
-	}
-}
 
 void Labyrinth::getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours) {
 	if (i >= 2) {

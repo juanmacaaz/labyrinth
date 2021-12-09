@@ -25,5 +25,6 @@ public:
 	void setEnemyVelocity(float vel);
 	float getEnemyVelocity();
 	CollisionBody* getBody();
+	int n_llave;
 };
 

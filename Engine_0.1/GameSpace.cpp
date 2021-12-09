@@ -8,6 +8,7 @@
 #include "Entitie.h"
 #include "Key.h"
 #include "Enemy.h"
+#include "HudSpace.h"
 
 GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 {
@@ -33,6 +34,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	int x = labyrinth->getEnemyRoute()[0].first;
 	int z = labyrinth->getEnemyRoute()[0].second;
 	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+	getEngine()->hudSpace->updateObjectiveScore(dificultad.n_keys);
 }
 
 void GameSpace::update()

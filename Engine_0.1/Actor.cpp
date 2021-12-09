@@ -10,6 +10,7 @@
 #include "Entitie.h"
 #include "Labyrinth.h"
 #include "Enemy.h"
+#include "HudSpace.h"
 
 Actor::Actor(GameSpace* space)
 {
@@ -41,6 +42,7 @@ void Actor::setMainCamera(Camera* camera)
 
 void Actor::addManzana() {
 	n_manzanas++;
+	space->getEngine()->hudSpace->updateYouScore(n_manzanas);
 	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
 
 	if (space->dificultad.n_keys == n_manzanas) {

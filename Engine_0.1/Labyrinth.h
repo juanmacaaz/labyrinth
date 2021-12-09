@@ -39,7 +39,7 @@ private:
 	void generateMap();
 	void generateVisits(const int n_keys, const char representar);
 	void generateMaze();
-	void generateTestMap();
+
 
 	void getFrontierUp(int i, const int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours);
 	void getFrontierRight(const int i, int j, vector<pair<int, int>>& frontiers, vector<pair<int, int>>& neighbours);

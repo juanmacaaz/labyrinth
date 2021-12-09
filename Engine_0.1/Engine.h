@@ -50,6 +50,7 @@ public:
 
 	void setGameSpace();
 	void setMenuSpace();
+	HudSpace* hudSpace;
 
 private:
 
@@ -60,8 +61,7 @@ private:
 	map<string, vector<objl::Mesh>> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
-	HudSpace* hudSpace;
-
+	
 	Space* currentSpace;
 	long double accumulator;
 

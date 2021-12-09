@@ -11,6 +11,7 @@ public:
 
 public:
 
+	int n_keys;
 	GameSpace* space_c;
 };
 

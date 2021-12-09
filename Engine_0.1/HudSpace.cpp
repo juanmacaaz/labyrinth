@@ -60,7 +60,7 @@ void HudSpace::updateYouScore(int you_score) {
 	scores[1] = vectors_numeros[NUM::left_you][left_number];
 }
 
-void HudSpace::updateEnemyScore(int  enemy_score) {
+void HudSpace::updateEnemyScore(int enemy_score) {
 	int left_number = 0;
 	int right_number = enemy_score % 10;
 

@@ -6,10 +6,12 @@
 #include "Space.h"
 #include "Engine.h"
 #include "Actor.h"
+#include "HudSpace.h"
 
 Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys):
 	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
 {
+	n_llave = 0;
 	this->n_keys = n_keys;
 	this->visita_pos = 0;
 	this->space = space;
