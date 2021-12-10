@@ -34,6 +34,10 @@ Engine::~Engine()
 
 }
 
+MenuSpace* Engine::getMenuSpace() {
+	return menuSpace;
+}
+
 int Engine::run()
 {
 	double lasttime = glfwGetTime();

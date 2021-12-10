@@ -37,6 +37,7 @@ public:
 
 	Engine();
 	~Engine();
+	MenuSpace* getMenuSpace();
 	int run();
 
 	map<string, GLuint> getShaders();
@@ -55,7 +56,7 @@ public:
 	GameSpace* getGameSpace();
 
 	void setMenuSpace();
-	MenuSpace* getMenuSpace();
+	//MenuSpace* getMenuSpace();
 	HudSpace* hudSpace;
 
 	void renderSkybox();
@@ -83,8 +84,6 @@ private:
 	void loadShaders();
 	void loadTextures(const char* wall, const char* floor);
 	void loadModels();
-	void setTexturas(const int level);
-	void loadModels(const int level);
 	void loadSkymap(int level);
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

@@ -20,7 +20,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	loading_menu = new Menu();
 	win_lose_menu = new Menu();
 
-
+	
 	//Main Menu
 	main_menu->m_items.push_back(new MenuItem(this, "start_button", Block::FLOOR, Vector3(30, -6, -12)));
 	main_menu->m_items.push_back(new MenuItem(this, "levels_button", Block::FLOOR, Vector3(30, -6, 0)));
@@ -28,14 +28,14 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	main_menu->m_items.push_back(new MenuItem(this, "main_title", Block::FLOOR, Vector3(6, 0.1, 0)));
 
-
+	
 	//Levels Menu
 	levels_menu->m_items.push_back(new MenuItem(this, "castle_button", Block::WALL, Vector3(32, 5, -10)));
 	levels_menu->m_items.push_back(new MenuItem(this, "jungle_button", Block::WALL, Vector3(32, 0, -10)));
 	levels_menu->m_items.push_back(new MenuItem(this, "desert_button", Block::WALL, Vector3(32, -5, -10)));
 
 	levels_menu->m_items.push_back(new MenuItem(this, "back_button", Block::FLOOR, Vector3(28, -8, -14)));
-
+	
 	levels_menu->m_items.push_back(new MenuItem(this, "tower", Block::WALL, Vector3(12, -1, 20)));
 	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::WALL, Vector3(12, -1, 20)));
 	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::WALL, Vector3(12, -1, 20)));
@@ -49,7 +49,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	levels_menu->m_items.push_back(new MenuItem(this, "levels_title", Block::WALL, Vector3(16, 4.5, -8)));
 	levels_menu->m_items.push_back(new MenuItem(this, "difficulty_text", Block::WALL, Vector3(30, -8, 3)));
 
-
+	
 	//Pause Menu
 	pause_menu->m_items.push_back(new MenuItem(this, "continue_button", Block::FLOOR, Vector3(30, 3, 0)));
 	pause_menu->m_items.push_back(new MenuItem(this, "return_main_menu", Block::FLOOR, Vector3(30, -3, 0)));
@@ -94,7 +94,7 @@ void MenuSpace::render()
 
 void MenuSpace::update()
 {
-	if (current_menu == main_menu) {
+	if(current_menu == main_menu) {
 		updateMainMenu();
 	}
 
@@ -128,53 +128,53 @@ Camera* MenuSpace::getCamera() {
 	return menuCamera;
 }
 
-void MenuSpace::updateMainMenu()
+void MenuSpace::updateMainMenu() 
 {
 	if (!press) {
 		switch (current_item) {
-		case 0:	main_menu->m_items[0]->move_item(Vector3(25, -6, -12));
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
-				press = true;
-				main_menu->m_items[0]->move_item(Vector3(30, -6, -12));
-				current_item = 1;
-			}
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				press = true;
-				current_menu = instruction_menu;
-			}
-			break;
+			case 0:	main_menu->m_items[0]->move_item(Vector3(25, -6, -12));
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
+					press = true;
+					main_menu->m_items[0]->move_item(Vector3(30, -6, -12));
+					current_item = 1;
+				}
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+					press = true;
+					current_menu = instruction_menu;
+				}
+				break;
 
-		case 1: main_menu->m_items[1]->move_item(Vector3(25, -6, 0));
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
-				main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
-				press = true;
-				current_item = 2;
-			}
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
-				main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
-				press = true;
-				current_item = 0;
-			}
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
-				press = true;
-				current_item = 0;
-				current_menu = levels_menu;
-			}
-			break;
+			case 1: main_menu->m_items[1]->move_item(Vector3(25, -6, 0));
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
+					main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
+					press = true;
+					current_item = 2;
+				}
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
+					main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
+					press = true;
+					current_item = 0;
+				}
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+					main_menu->m_items[1]->move_item(Vector3(30, -6, 0));
+					press = true;
+					current_item = 0;
+					current_menu = levels_menu;
+				}
+				break;
 
-		case 2: main_menu->m_items[2]->move_item(Vector3(25, -6, 12));
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
-				press = true;
-				main_menu->m_items[2]->move_item(Vector3(30, -6, 12));
-				current_item = 1;
-			}
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				glfwSetWindowShouldClose(this->getWindow(), GL_TRUE);
-			}
-			break;
+			case 2: main_menu->m_items[2]->move_item(Vector3(25, -6, 12));
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_LEFT) == GLFW_PRESS) {
+					press = true;
+					main_menu->m_items[2]->move_item(Vector3(30, -6, 12));
+					current_item = 1;
+				}
+				if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+					glfwSetWindowShouldClose(this->getWindow(), GL_TRUE);
+				}
+				break;
 		}
-	}
+	}	
 }
 
 void MenuSpace::updateLevelsMenu() {
@@ -267,7 +267,7 @@ void MenuSpace::updateLevelsMenu() {
 			}
 			break;
 		}
-	}
+	}	
 }
 
 void MenuSpace::updatePauseMenu()
@@ -304,46 +304,17 @@ void MenuSpace::updatePauseMenu()
 	}
 }
 
-void MenuSpace::updateInstructionMenu()
+void MenuSpace::updateInstructionMenu() 
 {
 	if (!press) {
 		switch (current_item) {
-		case 0:    instruction_menu->m_items[0]->move_item(Vector3(25, -5, 0));
+		case 0:	instruction_menu->m_items[0]->move_item(Vector3(25, -5, 0));
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 				instruction_menu->m_items[0]->move_item(Vector3(30, -5, 0));
 				press = true;
-				current_menu = loading_menu;
-			}
-			break;
-		}
-	}
-}
-
-void MenuSpace::updateLoadingMenu()
-{
-	loading_menu->render_menu();
-	glfwSwapBuffers(this->getWindow());
-	current_menu = pause_menu;
-	engine->initGameSpace(this->current_dificultad);
-	engine->setGameSpace();
-}
-
-void MenuSpace::updateWinLoseMenu() {
-	if (win_lose == 0) {
-		win_lose_menu->m_items[0]->move_item(Vector3(10, 2, 0));
-		win_lose_menu->m_items[1]->move_item(Vector3(-10, 2, 0));
-	}
-	else {
-		win_lose_menu->m_items[1]->move_item(Vector3(10, 2, 0));
-		win_lose_menu->m_items[0]->move_item(Vector3(-10, 2, 0));
-	}
-	if (!press) {
-		switch (current_item) {
-		case 0:    win_lose_menu->m_items[2]->move_item(Vector3(30, -7, 0));
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				win_lose_menu->m_items[2]->move_item(Vector3(35, -7, 0));
-				press = true;
-				current_menu = main_menu;
+				current_menu = pause_menu;
+				engine->initGameSpace(this->current_dificultad);
+				engine->setGameSpace();
 			}
 			break;
 		}

@@ -43,7 +43,7 @@ private:
 	Menu* win_lose_menu;
 
 	Menu* current_menu;
-
+	
 	int current_item;
 	Dificultad current_dificultad;
 
