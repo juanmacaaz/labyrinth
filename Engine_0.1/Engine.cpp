@@ -180,15 +180,15 @@ void Engine::setTexturas(const int level)
 {
 	if (level == 0) {
 		//castillo
-		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg");
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_jungla.jpg", "textures\\uncompressed\\suelo_tierra.jpg");
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg");
 	}
 }
 

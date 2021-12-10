@@ -324,6 +324,8 @@ void MenuSpace::updateLoadingMenu()
 	loading_menu->render_menu();
 	glfwSwapBuffers(this->getWindow());
 	current_menu = pause_menu;
+	engine->setTexturas(this->current_dificultad.id);
+	engine->loadModels(this->current_dificultad.id);
 	engine->initGameSpace(this->current_dificultad);
 	engine->setGameSpace();
 }
