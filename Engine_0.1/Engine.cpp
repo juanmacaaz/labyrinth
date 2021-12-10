@@ -117,6 +117,12 @@ void Engine::setMenuSpace()
 	currentSpace = menuSpace;
 }
 
+MenuSpace* Engine::getMenuSpace()
+{
+	return this->menuSpace;
+	menuSpace->setWinLose(0);
+}
+
 void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
@@ -214,6 +220,13 @@ void Engine::loadModels()
 	models["objective_text"] = loadModel2("models\\hud\\objective_text.obj", Loader);
 	models["enemy_text"] = loadModel2("models\\hud\\enemy_text.obj", Loader);
 	models["you_text"] = loadModel2("models\\hud\\you_text.obj", Loader);
+
+	//Loading Menu
+	models["loading_text"] = loadModel2("models\\extra_menus\\loading_text.obj", Loader);
+
+	//WIN - LOSE
+	models["win_text"] = loadModel2("models\\extra_menus\\win_text.obj", Loader);
+	models["lose_text"] = loadModel2("models\\extra_menus\\lose_text.obj", Loader);
 
 	//3D models
 	models["tower"] = loadModel2("models\\tower.obj", Loader);

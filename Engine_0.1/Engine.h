@@ -53,6 +53,7 @@ public:
 	GameSpace* getGameSpace();
 
 	void setMenuSpace();
+	MenuSpace* getMenuSpace();
 	HudSpace* hudSpace;
 
 private:

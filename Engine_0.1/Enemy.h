@@ -3,6 +3,7 @@
 
 class GameSpace;
 class KeyEnemy;
+class MenuSpace;
 
 class Enemy :
     public Entitie

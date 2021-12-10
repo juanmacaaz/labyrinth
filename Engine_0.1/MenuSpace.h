@@ -23,6 +23,10 @@ public:
 	void updateLevelsMenu();
 	void updatePauseMenu();
 	void updateInstructionMenu();
+	void updateLoadingMenu();
+	void updateWinLoseMenu();
+
+	void setWinLose(int m);
 
 	Camera* getCamera();
 
@@ -35,11 +39,15 @@ private:
 	Menu* levels_menu;
 	Menu* pause_menu;
 	Menu* instruction_menu;
+	Menu* loading_menu;
+	Menu* win_lose_menu;
 
 	Menu* current_menu;
 	
 	int current_item;
 	Dificultad current_dificultad;
+
+	int win_lose;
 
 	vector<Menu> m_menus;
 };

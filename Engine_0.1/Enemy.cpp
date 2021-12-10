@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "Actor.h"
 #include "HudSpace.h"
+#include "MenuSpace.h"
 
 Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys):
 	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
@@ -34,8 +35,10 @@ bool Enemy::moveTo(float x, float z)
 	if (abs(x_m) + abs(z_m) < 0.025f) {
 		visita_pos++;
 		if (visita_pos == n_keys) {
+			space->getEngine()->getMenuSpace()->setWinLose(1);
+			space->getEngine()->setMenuSpace();
 			cout << "Has PERDIDO!!" << endl;
-			exit(0);
+			//exit(0);
 		}
 		return true;
 	}

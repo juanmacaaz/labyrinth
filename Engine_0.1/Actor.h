@@ -8,6 +8,7 @@ using namespace reactphysics3d;
 
 class GameSpace;
 class Entitie;
+class MenuSpace;
 
 class Actor
 {
