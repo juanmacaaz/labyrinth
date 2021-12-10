@@ -13,6 +13,10 @@ Space::~Space()
 {
 }
 
+Camera* Space::getCamera() {
+	return nullptr;
+}
+
 void Space::update()
 {
 	//world->update(1.0f / 60.0f);

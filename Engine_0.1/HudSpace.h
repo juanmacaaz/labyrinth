@@ -24,6 +24,7 @@ public:
 	void updateEnemyScore(int enemy_score);
 	void updateObjectiveScore(int objective_score);
 
+	Camera* getCamera();
 
 private:
 

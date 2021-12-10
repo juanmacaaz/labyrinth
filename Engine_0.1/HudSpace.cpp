@@ -9,8 +9,6 @@ HudSpace::HudSpace(Engine* engine) : Space(engine)
 
 	world = pc.createPhysicsWorld(settings);
 
-
-
 	ProjectionData proyectionData = { 45.0f, 0.01f, 100.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	hudCamera = new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), proyectionData, this->engine->getWWidth(), this->engine->getWHeight());
@@ -53,6 +51,9 @@ void HudSpace::update() {
 
 }
 
+Camera* HudSpace::getCamera() {
+	return hudCamera;
+}
 
 void HudSpace::updateYouScore(int you_score) {
 	int left_number = 0;

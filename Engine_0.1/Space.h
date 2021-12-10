@@ -24,6 +24,8 @@ public:
 	Space(Engine* engine);
 	~Space();
 
+	virtual Camera* getCamera();
+
 	virtual void render();
 	virtual void update();
 

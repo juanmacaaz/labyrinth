@@ -9,6 +9,7 @@
 #include "Space.h"
 
 vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader);
+unsigned int loadCubemap(vector<std::string> faces);
 
 Engine::Engine()
 {
@@ -18,6 +19,7 @@ Engine::Engine()
 	loadModels();
 	loadModels(0);
 
+	loadSkymap(0);
 	accumulator = 0;
 
 	menuSpace = new MenuSpace(this);
@@ -51,6 +53,7 @@ int Engine::run()
 
 			currentSpace->update();
 
+			renderSkybox();
 			if (currentSpace == gameSpace) {
 				hudSpace->render();
 			}
@@ -117,9 +120,48 @@ void Engine::setMenuSpace()
 	currentSpace = menuSpace;
 }
 
+void Engine::renderSkybox()
+{
+	//glDepthMask(GL_FALSE);
+	glDepthFunc(GL_LEQUAL);
+	GLuint projection = glGetUniformLocation(shader["sky-map"], "projection");
+	GLuint view = glGetUniformLocation(shader["sky-map"], "view");
+	GLuint pos = glGetUniformLocation(shader["sky-map"], "pos");
+	GLuint skybox = glGetUniformLocation(shader["sky-map"], "skybox");
+
+	glUniform1i(skybox, 0);
+
+	glUseProgram(shader["sky-map"]);
+
+	glActiveTexture(skyboxTex);
+	glBindTexture(GL_TEXTURE_2D, skyboxTex);
+
+	mat4 p = currentSpace->getCamera()->getProyectionMatrix();
+	mat4 v = currentSpace->getCamera()->getViewMatrix();
+
+	vec3 posicion = currentSpace->getCamera()->getPosition();
+
+	glUniformMatrix4fv(projection, 1, GL_FALSE, &p[0][0]);
+	glUniformMatrix4fv(view, 1, GL_FALSE, &v[0][0]);
+	glUniform3fv(pos, 1, &posicion[0]);
+
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDisableVertexAttribArray(0);
+	glDepthFunc(GL_LESS);
+	//glDepthMask(GL_TRUE);
+}
+
 void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
+	shader["sky-map"] = LoadShader("shaders\\shader_mtl.vs", "shaders\\shader_mtl.fs");
 }
 
 void Engine::loadTextures(const char* wall, const char* floor)
@@ -167,6 +209,74 @@ void Engine::loadModels(const int level)
 		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
+}
+
+void Engine::loadSkymap(int level)
+{
+	float skyboxVertices[] = {
+		// positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f
+	};
+
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	vector<std::string> faces
+	{
+		"skymap\\right.jpg",
+		"skymap\\left.jpg",
+		"skymap\\top.jpg",
+		"skymap\\bottom.jpg",
+		"skymap\\front.jpg",
+		"skymap\\back.jpg"
+	};
+
+	skyboxTex = loadCubemap(faces);
 }
 
 
@@ -384,7 +494,7 @@ GLuint Engine::loadTexture(const char* imagepath)
 	glTexParameterf(textureID, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
 	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(false);
 
 	unsigned char* data = stbi_load(imagepath, &width, &height, &nrChannels, 0);
 
@@ -406,4 +516,36 @@ inline vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loade
 {
 	Loader->LoadFile(imagepath);
 	return Loader->LoadedMeshes;
+}
+
+unsigned int loadCubemap(vector<std::string> faces)
+{
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	int width, height, nrChannels;
+	for (unsigned int i = 0; i < faces.size(); i++)
+	{
+		unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+				0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+			);
+			stbi_image_free(data);
+		}
+		else
+		{
+			std::cout << "Cubemap tex failed to load at path: " << faces[i] << std::endl;
+			stbi_image_free(data);
+		}
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	return textureID;
 }

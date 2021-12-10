@@ -75,6 +75,11 @@ Enemy* GameSpace::getEnemy()
 	return enemy;
 }
 
+Camera* GameSpace::getCamera()
+{
+	return actor->getCamera();
+}
+
 Labyrinth* GameSpace::getlabyrinth()
 {
 	return this->labyrinth;

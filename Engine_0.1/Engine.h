@@ -55,6 +55,12 @@ public:
 	void setMenuSpace();
 	HudSpace* hudSpace;
 
+	void renderSkybox();
+
+	unsigned int skyboxVAO;
+	unsigned int skyboxVBO;
+	unsigned int skyboxTex;
+
 private:
 
 	// Atributos
@@ -76,7 +82,7 @@ private:
 	void loadModels();
 	void setTexturas(const int level);
 	void loadModels(const int level);
-
+	void loadSkymap(int level);
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 

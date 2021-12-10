@@ -39,6 +39,8 @@ public:
 
 	Actor* getActor();
 	Enemy* getEnemy();
+	Camera* getCamera();
+
 	Labyrinth* getlabyrinth();
 	void add_entitie(Entitie* e);
 	vector<Entitie*>* getEntidades();

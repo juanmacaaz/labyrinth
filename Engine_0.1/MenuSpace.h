@@ -26,7 +26,6 @@ public:
 
 	Camera* getCamera();
 
-
 private:
 
 	Camera* menuCamera;
