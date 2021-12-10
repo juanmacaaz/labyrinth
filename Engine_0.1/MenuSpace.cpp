@@ -59,7 +59,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	current_menu = main_menu;
 	current_item = 0;
-	this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+	this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 	press = false;
 }
 
@@ -175,7 +175,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[0]->move_item(Vector3(32, 5, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, 5, -4));
-				this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+				this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 			}
 			break;
 
@@ -291,6 +291,9 @@ void MenuSpace::updateInstructionMenu()
 				instruction_menu->m_items[0]->move_item(Vector3(30, -4, 0));
 				press = true;
 				current_menu = pause_menu;
+				
+				engine->setTexturas(this->current_dificultad.id);
+				engine->loadModels(this->current_dificultad.id);
 				engine->initGameSpace(this->current_dificultad);
 				engine->setGameSpace();
 			}
