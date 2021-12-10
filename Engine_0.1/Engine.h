@@ -43,6 +43,8 @@ public:
 	map<int, GLuint> getTextures();
 	map<string, vector<objl::Mesh>> getModels();
 	GLFWwindow* getEngineWindow();
+	void setTexturas(const int level);
+	void loadModels(const int level);
 
 	int getWWidth();
 	int getWHeight();
@@ -75,8 +77,6 @@ private:
 	void loadShaders();
 	void loadTextures(const char* wall, const char* floor);
 	void loadModels();
-	void setTexturas(const int level);
-	void loadModels(const int level);
 
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

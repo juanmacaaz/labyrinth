@@ -68,7 +68,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	current_menu = main_menu;
 	current_item = 0;
-	this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+	this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 	press = false;
 }
 
@@ -197,7 +197,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[0]->move_item(Vector3(32, 5, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, 5, -4));
-				this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+				this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 			}
 			break;
 
@@ -312,38 +312,9 @@ void MenuSpace::updateInstructionMenu()
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 				instruction_menu->m_items[0]->move_item(Vector3(30, -5, 0));
 				press = true;
-				current_menu = loading_menu;
-			}
-			break;
-		}
-	}
-}
-
-void MenuSpace::updateLoadingMenu()
-{
-	loading_menu->render_menu();
-	glfwSwapBuffers(this->getWindow());
-	current_menu = pause_menu;
-	engine->initGameSpace(this->current_dificultad);
-	engine->setGameSpace();
-}
-
-void MenuSpace::updateWinLoseMenu() {
-	if (win_lose == 0) {
-		win_lose_menu->m_items[0]->move_item(Vector3(10, 2, 0));
-		win_lose_menu->m_items[1]->move_item(Vector3(-10, 2, 0));
-	}
-	else {
-		win_lose_menu->m_items[1]->move_item(Vector3(10, 2, 0));
-		win_lose_menu->m_items[0]->move_item(Vector3(-10, 2, 0));
-	}
-	if (!press) {
-		switch (current_item) {
-		case 0:	win_lose_menu->m_items[2]->move_item(Vector3(30, -7, 0));
-			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				win_lose_menu->m_items[2]->move_item(Vector3(35, -7, 0));
-				press = true;
-				current_menu = main_menu;
+				current_menu = pause_menu;
+				engine->initGameSpace(this->current_dificultad);
+				engine->setGameSpace();
 			}
 			break;
 		}

@@ -144,11 +144,11 @@ void Engine::setTexturas(const int level)
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\container.jpg", "textures\\uncompressed\\suelo_tierra.jpg");
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg");
 	}
 }
 
@@ -158,19 +158,20 @@ void Engine::loadModels(const int level)
 	if (level == 0) {
 		//castillo
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
-		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["key"] = loadModel2("models\\hud\\key.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
+
 	else if (level == 1) {
 		//jungla
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
-		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["key"] = loadModel2("models\\hud\\banana.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
 	else if (level == 2) {
 		//desirto
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
-		models["key"] = loadModel2("models\\plastic_chair.obj", Loader);
+		models["key"] = loadModel2("models\\hud\\cactus.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
 }
@@ -232,10 +233,6 @@ void Engine::loadModels()
 	models["tower"] = loadModel2("models\\tower.obj", Loader);
 	models["palm"] = loadModel2("models\\palm.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
-
-	models["key_model"] = loadModel2("models\\hud\\key.obj", Loader);
-	models["banana_model"] = loadModel2("models\\hud\\banana.obj", Loader);
-	models["cactus_model"] = loadModel2("models\\hud\\cactus.obj", Loader);
 
 	//Materials
 	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);
