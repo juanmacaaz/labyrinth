@@ -11,6 +11,7 @@
 #include "Labyrinth.h"
 #include "Enemy.h"
 #include "HudSpace.h"
+#include "MenuSpace.h"
 
 Actor::Actor(GameSpace* space)
 {
@@ -51,8 +52,10 @@ void Actor::addManzana() {
 	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
 
 	if (space->dificultad.n_keys == n_manzanas) {
+		space->getEngine()->getMenuSpace()->setWinLose(0);
+		space->getEngine()->setMenuSpace();
 		cout << "Has GANADO!! " << endl;
-		exit(2);
+		//exit(2);
 	}
 }
 

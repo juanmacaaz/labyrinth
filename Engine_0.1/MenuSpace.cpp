@@ -17,6 +17,8 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	levels_menu = new Menu();
 	pause_menu = new Menu();
 	instruction_menu = new Menu();
+	loading_menu = new Menu();
+	win_lose_menu = new Menu();
 
 	
 	//Main Menu
@@ -56,11 +58,23 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	//Instruction Menu
 	instruction_menu->m_items.push_back(new MenuItem(this, "start_button", Block::FLOOR, Vector3(30, -4, 0)));
 
+	//Loading Menu
+	loading_menu->m_items.push_back(new MenuItem(this, "loading_text", Block::FLOOR, Vector3(20, 0, 0)));
+
+	//Win Lose Menu
+	win_lose_menu->m_items.push_back(new MenuItem(this, "win_text", Block::FLOOR, Vector3(-20, 20, 0)));
+	win_lose_menu->m_items.push_back(new MenuItem(this, "lose_text", Block::FLOOR, Vector3(-20, 20, 0)));
+	win_lose_menu->m_items.push_back(new MenuItem(this, "continue_button", Block::FLOOR, Vector3(-20, 20, 0)));
 
 	current_menu = main_menu;
 	current_item = 0;
-	this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+	this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 	press = false;
+}
+
+void MenuSpace::setWinLose(int m) {
+	current_menu = win_lose_menu;
+	win_lose = m;
 }
 
 MenuSpace::~MenuSpace()
@@ -97,6 +111,14 @@ void MenuSpace::update()
 
 	if (current_menu == instruction_menu) {
 		updateInstructionMenu();
+	}
+
+	if (current_menu == loading_menu) {
+		updateLoadingMenu();
+	}
+
+	if (current_menu == win_lose_menu) {
+		updateWinLoseMenu();
 	}
 
 	isPressed();
@@ -175,7 +197,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[0]->move_item(Vector3(32, 5, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, 5, -4));
-				this->current_dificultad = { 1, 8, 11, 0.2, 0.2 };
+				this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 			}
 			break;
 
@@ -286,9 +308,9 @@ void MenuSpace::updateInstructionMenu()
 {
 	if (!press) {
 		switch (current_item) {
-		case 0:	instruction_menu->m_items[0]->move_item(Vector3(25, -4, 0));
+		case 0:	instruction_menu->m_items[0]->move_item(Vector3(25, -5, 0));
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
-				instruction_menu->m_items[0]->move_item(Vector3(30, -4, 0));
+				instruction_menu->m_items[0]->move_item(Vector3(30, -5, 0));
 				press = true;
 				current_menu = pause_menu;
 				engine->initGameSpace(this->current_dificultad);

@@ -43,6 +43,8 @@ public:
 	map<int, GLuint> getTextures();
 	map<string, vector<objl::Mesh>> getModels();
 	GLFWwindow* getEngineWindow();
+	void setTexturas(const int level);
+	void loadModels(const int level);
 
 	int getWWidth();
 	int getWHeight();
@@ -53,6 +55,7 @@ public:
 	GameSpace* getGameSpace();
 
 	void setMenuSpace();
+	MenuSpace* getMenuSpace();
 	HudSpace* hudSpace;
 
 	void renderSkybox();
