@@ -17,7 +17,6 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys, 
 	generateVisits(n_keys,'K');
 	this->graph = CGraph(m_maze, algorithm);
 	generateVisits(n_keys, 'A');
-	cout << "Total vertices: " << this->graph.enemyRoute.size() << endl;
 	generateMap();
 }
 
@@ -105,8 +104,6 @@ void Labyrinth::generateVisits(const int n_keys,const char representar)
 		anterior = limit.front();
 		limit.pop();
 		m_maze[y][x] = representar;
-		if (representar == 'A')
-			cout << "Y:" << y << "X:" << x << endl;;
 	}
 }
 
