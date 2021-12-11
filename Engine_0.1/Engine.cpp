@@ -185,6 +185,9 @@ void Engine::loadTextures(const char* wall, const char* floor)
 	texture[Block::FLOOR] = loadTexture(floor);
 	//manzana y enemigo
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
+	texture[Block::PALM] = loadTexture("textures\\uncompressed\\palmera1.jpg");
+	texture[Block::TOWER] = loadTexture("textures\\uncompressed\\pared_castillo.jpg");
+	texture[Block::PYRAMID] = loadTexture("textures\\uncompressed\\pared_desierto.jpg");
 }
 
 void Engine::setTexturas(const int level)
@@ -437,7 +440,7 @@ void Engine::loadModels()
 
 	//3D models
 	models["tower"] = loadModel2("models\\tower.obj", Loader);
-	models["palm"] = loadModel2("models\\palm.obj", Loader);
+	models["palm"] = loadModel2("models\\planta.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
 
 	//Materials

@@ -36,9 +36,9 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	levels_menu->m_items.push_back(new MenuItem(this, "back_button", Block::FLOOR, Vector3(28, -8, -14)));
 
-	levels_menu->m_items.push_back(new MenuItem(this, "tower", Block::WALL, Vector3(12, -1, 20)));
-	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::WALL, Vector3(12, -1, 20)));
-	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::WALL, Vector3(12, -1, 20)));
+	levels_menu->m_items.push_back(new MenuItem(this, "tower", Block::TOWER, Vector3(12, -1, 20)));
+	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::PALM, Vector3(12, -1, 20), 0.06f));
+	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::PYRAMID, Vector3(12, -1, 20), 0.9f));
 
 	levels_menu->m_items.push_back(new MenuItem(this, "low_text", Block::WALL, Vector3(30, -8, 30)));
 	levels_menu->m_items.push_back(new MenuItem(this, "medium_text", Block::WALL, Vector3(30, -8, 30)));

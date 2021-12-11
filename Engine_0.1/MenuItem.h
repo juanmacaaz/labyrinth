@@ -23,7 +23,7 @@ class MenuItem : public Entitie
 {
 public:
 
-	MenuItem(MenuSpace* space, string name, int texture, Vector3 initPosition);
+	MenuItem(MenuSpace* space, string name, int texture, Vector3 initPosition, float scale = 1.0f);
 
 	void render_item();
 	void remove_item();

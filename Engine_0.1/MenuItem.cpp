@@ -2,8 +2,8 @@
 #include "Engine.h"
 
 
-MenuItem::MenuItem(MenuSpace* space, string name, int texture, Vector3 initPosition) : 
-	Entitie(space, name, texture, "basic-nolight", initPosition)
+MenuItem::MenuItem(MenuSpace* space, string name, int texture, Vector3 initPosition, float scale) : 
+	Entitie(space, name, texture, "basic-nolight", initPosition, scale)
 {
 	this->space = space;
 	this->pos = initPosition;
