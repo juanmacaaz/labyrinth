@@ -83,6 +83,7 @@ void Labyrinth::generateMap()
 void Labyrinth::generateVisits(const int n_keys,const char representar)
 {
 	srand((unsigned)time(NULL));
+	cout << "Semilla de las visitas:" << time(NULL) <<endl;
 	queue<int> limit;
 
 	int x, y = 0;
@@ -110,7 +111,7 @@ void Labyrinth::generateVisits(const int n_keys,const char representar)
 void Labyrinth::generateMaze()
 {
 	srand((unsigned)time(NULL));
-
+	cout << "Semilla de la matriz:" << time(NULL) << endl;
 	int x_start, y_start, x_end, y_end;
 	vector<pair<int, int>> frontiers;
 	vector<pair<int, int>> neighbours;
