@@ -4,41 +4,51 @@
 
 // SalesmanTrackGreedy =========================================================
 
-void SalesmanTrackGreedy(CGraph& graph, list<CVertex*>& visits)
-{
-	CTrack t(&graph);
-	list<CVertex*> candidats;
-	for (auto& i : visits) {
-		if (i != visits.front() && i != visits.back()) {
-			candidats.push_back(i);
+CVertex* getVertexMinDistance(list<CVertex*> candidats, CVertex* v1) {
+	float minDistance = DBL_MAX;
+
+	for (CVertex* v : candidats) {
+
+		if (v->m_DijkstraDistance < minDistance) {
+			v1 = v;
+			minDistance = v1->m_DijkstraDistance;
 		}
 	}
+	return v1;
+}
 
+void getInverseTrack(CVertex* pOrigen, CVertex* pDestino, CTrack& track) {
+	list<CEdge*> path;
+	CVertex* pActual = pDestino;
+	while (pActual != pOrigen) {
+		path.push_front(pActual->m_Origen);
+		pActual = pActual->m_Origen->m_pOrigin;
+	}
+	for (CEdge* e : path) { track.m_Edges.push_back(e); }
+}
+
+
+void SalesmanTrackGreedy(CGraph& graph, list<CVertex*>& visits)
+{
 	CVertex* v = visits.front();
+	CVertex* v1 = v;
+	CTrack track(&graph);
+	list<CVertex*> candidats = visits;
+	candidats.pop_front();
+	candidats.pop_back();
+
 	while (!candidats.empty()) {
 		DijkstraQueue(graph, v);
-		CVertex* v1 = candidats.front();
-		for (auto& j : candidats) {
-			if (j->m_DijkstraDistance < v1->m_DijkstraDistance) {
-				v1 = j;
-			}
-		}
-		CVertex* aux = v1;
-		while (aux != v) {
-			t.m_Edges.push_back(aux->arestaMinima);
-			aux = aux->arestaMinima->m_pOrigin;
-		}
+		v1 = getVertexMinDistance(candidats, v1);
+		getInverseTrack(v, v1, track);
 		candidats.remove(v1);
 		v = v1;
 	}
-	DijkstraQueue(graph, v);
-	CVertex* final = visits.back();
-	while (v != final) {
-		t.m_Edges.push_back(final->arestaMinima);
-		final = final->arestaMinima->m_pOrigin;
-	}
 
-	for (CEdge* pE : t.m_Edges) {
+	DijkstraQueue(graph, v);
+	getInverseTrack(v, visits.back(), track);
+
+	for (CEdge* pE : track.m_Edges) {
 		graph.enemyRoute.push_back(make_pair(pE->m_pDestination->m_Point.m_X, pE->m_pDestination->m_Point.m_Y));
 	}
 }

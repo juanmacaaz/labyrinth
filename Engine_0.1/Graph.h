@@ -55,8 +55,6 @@ public:
 	double m_DijkstraDistance;
 	bool m_Visited, m_isVisita, m_DijkstraVisit;
 	int id;
-	bool m_JaHePassat;
-	CEdge* arestaMinima;
 	// M�todes
 	CEdge* FindEdge(const char* name);
 	bool MemberP(CEdge* pEdge);
