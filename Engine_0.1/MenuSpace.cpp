@@ -141,6 +141,7 @@ void MenuSpace::updateMainMenu()
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
 				press = true;
 				current_menu = instruction_menu;
+				engine->LoadInstructions();
 			}
 			break;
 
@@ -160,6 +161,7 @@ void MenuSpace::updateMainMenu()
 				press = true;
 				current_item = 0;
 				current_menu = levels_menu;
+				engine->LoadCoin(5);
 			}
 			break;
 

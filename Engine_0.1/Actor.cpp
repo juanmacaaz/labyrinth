@@ -47,9 +47,14 @@ void Actor::setMainCamera(Camera* camera)
 }
 
 void Actor::addManzana() {
+	space->getEngine()->LoadCoin(space->getEngine()->levelmusic);
 	n_manzanas++;
 	space->getEngine()->hudSpace->updateYouScore(n_manzanas);
 	cout << "Has cogido una manzana tienes " << n_manzanas << endl;
+
+	if (space->dificultad.n_keys - 3 == n_manzanas) {
+		space->getEngine()->LoadCoin(3);
+	}
 
 	if (space->dificultad.n_keys == n_manzanas) {
 		space->getEngine()->getMenuSpace()->setWinLose(0);
@@ -102,7 +107,7 @@ void Actor::updateMain()
 	glfwSetCursorPos(space->getWindow(), space->getEngine()->getWWidth() / 2, space->getEngine()->getWHeight() / 2);
 
 	camera[MAIN_CAMERA]->computeNewOrientation(xpos, ypos);
-	
+
 	float verticalAngle = camera[MAIN_CAMERA]->getVerticalAngle();
 	float horizontalAngle = camera[MAIN_CAMERA]->getHorizantalAngle();
 
@@ -166,13 +171,13 @@ void Actor::updateMain()
 		entitie->getBody()->applyForceToCenterOfMass(directionM * VEL);
 	}
 
-	orientation = Matrix3x3 ( cos(horizontalAngle), 0, sin(horizontalAngle),
-								0,1,0,
-							 -sin(horizontalAngle), 0, cos(horizontalAngle));
+	orientation = Matrix3x3(cos(horizontalAngle), 0, sin(horizontalAngle),
+		0, 1, 0,
+		-sin(horizontalAngle), 0, cos(horizontalAngle));
 
 	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
 	entitie->getBody()->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
-	
+
 	//entitie->getBody()->setAngularVelocity(Vector3(0.0f, 0.0f, 0.0f));
 
 	camera[MAIN_CAMERA]->setUP(up);

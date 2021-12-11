@@ -7,6 +7,13 @@
 #include "MenuSpace.h"
 #include "HudSpace.h"
 #include "Space.h"
+#pragma comment(lib, "Winmm.lib")
+#include <iostream>
+#include <cstdlib>
+#include <windows.h>
+#include <ctime>
+using namespace std;
+HWAVEOUT hwo; //To contreol de volume
 
 vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader);
 unsigned int loadCubemap(vector<std::string> faces);
@@ -18,6 +25,7 @@ Engine::Engine()
 	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
 	loadModels();
 	loadModels(0);
+	LoadMusicDefault();
 
 	loadSkymap(0);
 	accumulator = 0;
@@ -68,7 +76,7 @@ int Engine::run()
 			glfwPollEvents();
 			accumulator = 0;
 		}
-		
+
 	}
 
 	glfwTerminate();
@@ -112,16 +120,19 @@ void Engine::initGameSpace(Dificultad dificultad) {
 void Engine::setGameSpace()
 {
 	currentSpace = gameSpace;
+	LoadMusic(levelmusic);
 }
 
 GameSpace* Engine::getGameSpace()
 {
 	return this->gameSpace;
+
 }
 
 void Engine::setMenuSpace()
 {
 	currentSpace = menuSpace;
+	LoadMusicDefault();
 }
 
 void Engine::renderSkybox()
@@ -194,6 +205,7 @@ void Engine::setTexturas(const int level)
 
 void Engine::loadModels(const int level)
 {
+	levelmusic = level;
 	objl::Loader* Loader = new objl::Loader();
 	if (level == 0) {
 		//castillo
@@ -215,6 +227,92 @@ void Engine::loadModels(const int level)
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
 }
+
+
+/* Audio Settings
+	SILENT = 0,
+	LOW = 858993459,
+	NORMAL = 1717986918,
+	MEDIUM = -1717986919,
+	HIGH = -858993460     */
+
+int cont = 0;
+void Engine::LoadMusic(const int level) {
+	if (level == 0) {
+
+		mciSendString(TEXT("play  \"music\\voices\\welcome_castle.mp3\" "), NULL, 0, 0);
+
+		mciSendString(TEXT("close sound"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\castle.mp3\" alias sound"), NULL, 0, NULL);
+		mciSendString(TEXT("play sound"), NULL, 0, NULL);
+
+	}
+	else if (level == 1) {
+
+		mciSendString(TEXT("play \"music\\voices\\welcome_jungle.mp3\" "), NULL, 0, 0);
+
+		mciSendString(TEXT("close sound"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\jungle.wav\" alias sound"), NULL, 0, NULL);
+		mciSendString(TEXT("play sound"), NULL, 0, NULL);
+
+	}
+	else if (level == 2) {
+
+		mciSendString(TEXT("play \"music\\voices\\welcome_desert.mp3\" "), NULL, 0, 0);
+
+		mciSendString(TEXT("close sound"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\desert.wav\" alias sound"), NULL, 0, NULL);
+		mciSendString(TEXT("play sound"), NULL, 0, NULL);
+
+	}
+}
+void Engine::LoadInstructions() {
+
+
+	mciSendString(TEXT("close sound"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"music\\voices\\instructions.mp3\" alias sound"), NULL, 0, NULL);
+	mciSendString(TEXT("play sound"), NULL, 0, NULL);
+	//mciSendString(TEXT("play  \"music\\voices\\instructions.mp3\" "), NULL, 0, 0);
+}
+void Engine::LoadMusicDefault() {
+	if (cont == 0)
+		mciSendString(TEXT("play \"music\\voices\\welcome.mp3\" "), NULL, 0, 0);
+	//waveOutSetVolume(hwo, 858993459);
+	mciSendString(TEXT("close sound"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"music\\lab.mp3\" alias sound"), NULL, 0, NULL);
+	mciSendString(TEXT("play sound"), NULL, 0, NULL);
+	cont++;
+}
+void Engine::LoadCoin(const int level) {
+	if (level == 0) {
+		mciSendString(TEXT("close coin"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\coin.mp3\" alias coin"), NULL, 0, NULL);
+		mciSendString(TEXT("play coin"), NULL, 0, NULL);
+	}
+	else if (level == 1) {
+		mciSendString(TEXT("close coin"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\banana.mp3\" alias coin"), NULL, 0, NULL);
+		mciSendString(TEXT("play coin"), NULL, 0, NULL);
+	}
+	else if (level == 2) {
+		mciSendString(TEXT("close coin"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"music\\captus.mp3\" alias coin"), NULL, 0, NULL);
+		mciSendString(TEXT("play coin"), NULL, 0, NULL);
+	}
+	else if (level == 3) {
+		mciSendString(TEXT("play \"music\\voices\\about_to_win.mp3\" "), NULL, 0, 0);
+	}
+	else if (level == 4) {
+		mciSendString(TEXT("play \"music\\voices\\enemy_about_win_feme.mp3\" "), NULL, 0, 0);
+	}
+	else if (level == 5) {
+		mciSendString(TEXT("play \"music\\voices\\level.mp3\" "), NULL, 0, 0);
+	}
+}
+
+
+
+
 
 void Engine::loadSkymap(int level)
 {

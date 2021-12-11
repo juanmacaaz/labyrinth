@@ -46,7 +46,10 @@ public:
 	GLFWwindow* getEngineWindow();
 	void setTexturas(const int level);
 	void loadModels(const int level);
-
+	void LoadMusic(const int level);
+	void LoadInstructions();
+	int levelmusic = 0;
+	void LoadCoin(const int level);
 	int getWWidth();
 	int getWHeight();
 
@@ -74,16 +77,17 @@ private:
 	map<string, vector<objl::Mesh>> models;
 	GameSpace* gameSpace;
 	MenuSpace* menuSpace;
-	
+
 	Space* currentSpace;
 	long double accumulator;
 
 	int w_width, w_height;
-	
+
 	// Funciones privadas
 	void loadShaders();
 	void loadTextures(const char* wall, const char* floor);
 	void loadModels();
+	void LoadMusicDefault();
 	void loadSkymap(int level);
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

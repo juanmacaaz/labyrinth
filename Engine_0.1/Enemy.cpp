@@ -9,7 +9,7 @@
 #include "HudSpace.h"
 #include "MenuSpace.h"
 
-Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys):
+Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys) :
 	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
 {
 	n_llave = 0;
@@ -29,11 +29,16 @@ bool Enemy::moveTo(float x, float z)
 {
 	Vector3 actPos = body->getTransform().getPosition();
 
-	float x_m = x - actPos.x;  
+	float x_m = x - actPos.x;
 	float z_m = z - actPos.z;
 
 	if (abs(x_m) + abs(z_m) < 0.025f) {
 		visita_pos++;
+		
+		if (visita_pos == n_keys-3) {
+			space->getEngine()->LoadCoin(4);
+		}
+
 		if (visita_pos == n_keys) {
 			space->getEngine()->getMenuSpace()->setWinLose(1);
 			space->getEngine()->setMenuSpace();
@@ -42,7 +47,7 @@ bool Enemy::moveTo(float x, float z)
 		}
 		return true;
 	}
-	
+
 	int x_o = 0;
 	int z_o = 0;
 
@@ -50,7 +55,7 @@ bool Enemy::moveTo(float x, float z)
 	if (abs(z_m) > 0.001) z_o = (z_m >= 0) ? 2 : -2;
 
 	qua<float> a = safeQuatLookAt(vec3(x, 1, z), vec3(actPos.x, 1, actPos.z), vec3(0, 1, 0), vec3(0, 1, 0));
-	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y, (velocity * z_o) + actPos.z),  Quaternion(a.x, a.y, a.z, a.w)));
+	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y, (velocity * z_o) + actPos.z), Quaternion(a.x, a.y, a.z, a.w)));
 	return false;
 }
 
