@@ -28,7 +28,10 @@ enum Block
 	FLOOR = 1,
 	WALL = 2,
 	WOOD = 4,
-	KEY = 5
+	KEY = 5,
+	TOWER = 6,
+	PALM = 7,
+	PYRAMID = 8
 };
 
 class Engine
