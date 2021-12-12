@@ -39,7 +39,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	getEngine()->hudSpace->updateEnemyScore(0);
 	getEngine()->hudSpace->updateYouScore(0);
 
-	max_render = 30;
+	max_render = 45;
 	if (dificultad.id == 2) {
 		max_render = 13.5;
 	}
