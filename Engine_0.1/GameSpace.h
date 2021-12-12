@@ -47,6 +47,9 @@ public:
 
 	void deleteEntitie(Entitie* entitie);
 	Dificultad dificultad;
+	
+	int id_dificultad;
+	int max_render;
 
 private:
 	// Atributos

@@ -24,10 +24,10 @@ Labyrinth::~Labyrinth()
 {
 }
 
-void Labyrinth::render(Camera* camera)
+void Labyrinth::render(Camera* camera, int MAX_RENDER)
 {
 	for (auto cube : cubes)
-		cube.render(camera);
+		cube.render(camera, MAX_RENDER);
 }
 
 CGraph Labyrinth::getGraph()

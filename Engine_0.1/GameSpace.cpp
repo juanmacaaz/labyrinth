@@ -20,7 +20,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	world = pc.createPhysicsWorld(settings);
 	
 	ProjectionData proyectionDataMain = { 75.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
-	ProjectionData proyectionDataMap = { 30.0f, 0.01f, 15.0f, this->engine->getWWidth() , this->engine->getWHeight() };
+	ProjectionData proyectionDataMap = { 40.0f, 0.01f, 17.0f, this->engine->getWWidth() , this->engine->getWHeight() };
 
 	this->labyrinth = new Labyrinth(this, dificultad.size_map, dificultad.size_map, dificultad.n_keys, dificultad.id);
 
@@ -38,6 +38,18 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	getEngine()->hudSpace->updateEnemyScore(0);
 	getEngine()->hudSpace->updateYouScore(0);
 
+	max_render = 30;
+	if (dificultad.id == 2) {
+		max_render = 13.5;
+	}
+
+	switch (dificultad.id)
+	{
+		case 0: this->actor->distance_view = 14; break;
+		case 1: this->actor->distance_view = 13; break;
+		case 2: this->actor->distance_view = 12; break;
+	}
+	id_dificultad = dificultad.id;
 }
 
 GameSpace::~GameSpace()
@@ -102,6 +114,6 @@ void GameSpace::deleteEntitie(Entitie* entitie)
 void GameSpace::render()
 {
 	enemy->render(actor->getCamera());
-	labyrinth->render(actor->getCamera());
+	labyrinth->render(actor->getCamera(), max_render);
 	for (auto e : entidades) e->render(actor->getCamera());
 }

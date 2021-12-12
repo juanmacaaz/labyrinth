@@ -62,17 +62,24 @@ public:
 	GameSpace* getGameSpace();
 
 	void setMenuSpace();
+	void setSkybox(int skymap_new_tex);
 	//MenuSpace* getMenuSpace();
 	HudSpace* hudSpace;
 
 	void renderSkybox();
 
-	unsigned int skyboxVAO;
-	unsigned int skyboxVBO;
-	unsigned int skyboxTex;
+	unsigned int skyboxTex_act;
+
+	unsigned int skyboxTex_menu;
+	unsigned int skyboxTex_easy;
+	unsigned int skyboxTex_medium;
+	unsigned int skyboxTex_hard;
+
+	unsigned int fog = 0;
 
 private:
-
+	unsigned int skyboxVAO;
+	unsigned int skyboxVBO;
 	// Atributos
 	GLFWwindow* window;
 	map<string, GLuint> shader;
@@ -91,7 +98,7 @@ private:
 	void loadTextures(const char* wall, const char* floor);
 	void loadModels();
 	void LoadMusicDefault();
-	void loadSkymap(int level);
+	void loadSkymaps();
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 

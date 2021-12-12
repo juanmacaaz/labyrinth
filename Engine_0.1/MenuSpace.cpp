@@ -89,6 +89,8 @@ MenuSpace::~MenuSpace()
 
 void MenuSpace::render()
 {
+	engine->fog = 0;
+	engine->skyboxTex_act = engine->skyboxTex_menu;
 	current_menu->render_menu();
 }
 
@@ -283,6 +285,10 @@ void MenuSpace::updatePauseMenu()
 				current_item = 1;
 			}
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+				if (engine->getGameSpace()->id_dificultad == 2) {
+					engine->fog = 0;
+					engine->skyboxTex_act = engine->skyboxTex_hard;
+				}
 				press = true;
 				engine->setGameSpace();
 			}

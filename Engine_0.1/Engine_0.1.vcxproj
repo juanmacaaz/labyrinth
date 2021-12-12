@@ -136,6 +136,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)librerias\glfw\include;$(ProjectDir)librerias\glew-2.1.0\include;$(ProjectDir)librerias\glm;$(ProjectDir)librerias\reactphysics3d\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Qpar %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

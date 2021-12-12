@@ -39,7 +39,7 @@ public:
 	void toInitPosition();
 
 	int n_manzanas;
-
+	int distance_view;
 	Vector3 original_position;
 
 private:

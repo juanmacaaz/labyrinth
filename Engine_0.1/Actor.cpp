@@ -200,7 +200,7 @@ inline void Actor::updateMap()
 
 	entitie->getBody()->setTransform(Transform(entitie->getBody()->getTransform().getPosition(), orientation));
 	memcpy((void*)&pos[0], (void*)&entitie->getBody()->getTransform().getPosition()[0], sizeof(float) * 3);
-	camera[MAP_CAMERA]->setPosition(vec3(pos[0], 15, pos[2] + 0.001f));
+	camera[MAP_CAMERA]->setPosition(vec3(pos[0], distance_view, pos[2] + 0.001f));
 	camera[MAP_CAMERA]->setDirection(vec3(camera[MAIN_CAMERA]->getDirectrion()[0] * 0.0005f, -1, camera[MAIN_CAMERA]->getDirectrion()[2] * 0.0005f));
 	entitie->render(camera[MAP_CAMERA]);
 }
