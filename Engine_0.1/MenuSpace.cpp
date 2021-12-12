@@ -199,6 +199,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[0]->move_item(Vector3(32, 5, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, 5, -4));
+				engine->LoadCoin(6);
 				this->current_dificultad = { 0, 8, 11, 0.2, 0.2 };
 			}
 			break;
@@ -225,6 +226,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[1]->move_item(Vector3(32, 0, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, 0, -4));
+				engine->LoadCoin(7);
 				this->current_dificultad = { 1, 15, 21, 0.2, 0.2 };
 			}
 			break;
@@ -251,6 +253,7 @@ void MenuSpace::updateLevelsMenu() {
 				press = true;
 				levels_menu->m_items[2]->move_item(Vector3(32, -5, -10));
 				levels_menu->m_items[10]->move_item(Vector3(32, -5, -4));
+				engine->LoadCoin(8);
 				this->current_dificultad = { 2, 22, 31, 0.2, 0.2 };
 			}
 			break;

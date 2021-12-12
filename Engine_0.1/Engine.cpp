@@ -280,9 +280,8 @@ void Engine::LoadInstructions() {
 void Engine::LoadMusicDefault() {
 	if (cont == 0)
 		mciSendString(TEXT("play \"music\\voices\\welcome.mp3\" "), NULL, 0, 0);
-	//waveOutSetVolume(hwo, 858993459);
 	mciSendString(TEXT("close sound"), NULL, 0, NULL);
-	mciSendString(TEXT("open \"music\\lab.mp3\" alias sound"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"music\\lab2.mp3\" alias sound"), NULL, 0, NULL);
 	mciSendString(TEXT("play sound"), NULL, 0, NULL);
 	cont++;
 }
@@ -310,6 +309,15 @@ void Engine::LoadCoin(const int level) {
 	}
 	else if (level == 5) {
 		mciSendString(TEXT("play \"music\\voices\\level.mp3\" "), NULL, 0, 0);
+	}
+	else if (level == 6) {
+		mciSendString(TEXT("play \"music\\voices\\world_castle.mp3\" "), NULL, 0, 0);
+	}
+	else if (level == 7) {
+		mciSendString(TEXT("play \"music\\voices\\world_jungle.mp3\" "), NULL, 0, 0);
+	}
+	else if (level == 8) {
+		mciSendString(TEXT("play \"music\\voices\\world_desert.mp3\" "), NULL, 0, 0);
 	}
 }
 
