@@ -205,12 +205,12 @@ void Engine::setTexturas(const int level)
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\pared_jungla.jpg", "textures\\uncompressed\\suelo_tierra.jpg", "textures\\uncompressed\\banana.jpg");
+		loadTextures("textures\\uncompressed\\final\\jungle_leaves.jpg", "textures\\uncompressed\\final\\mossy.jpg", "textures\\uncompressed\\banana.jpg");
 		fog = 0;
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg", "textures\\uncompressed\\cactus.jpg");
+		loadTextures("textures\\uncompressed\\final\\sand_red.jpg", "textures\\uncompressed\\final\\sand.jpg", "textures\\uncompressed\\cactus.jpg");
 		setSkybox(skyboxTex_hard);
 		fog = 1;
 	}
