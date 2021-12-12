@@ -5,7 +5,7 @@
 #include "Enemy.h"
 #include "HudSpace.h"
 
-KeyEnemy::KeyEnemy(GameSpace* space, Vector3 initPosition): Key(space, initPosition, Block::KEY)
+KeyEnemy::KeyEnemy(GameSpace* space, Vector3 initPosition): Key(space, initPosition, Block::EKEY)
 {
 	n_keys = 0;
 	this->space_c = (GameSpace*) space;

@@ -60,13 +60,8 @@ CGraph::CGraph(vector<vector<char>>& map, const int algorithm)
     createNodes(map);
     createEdges(map);
     //SalesmanTrackBacktracking(*this, m_Visits);
-    if (algorithm == 2) {
-        //SalesmanTrackBranchAndBound(*this, m_Visits);
-        SalesmanTrackGreedy(*this, m_Visits);
-    }
-    else {
-        SalesmanTrackGreedy(*this, m_Visits);
-    }
+    if (algorithm == 2) { SalesmanTrackBranchAndBound(*this, m_Visits); }
+    else { SalesmanTrackGreedy(*this, m_Visits); }
 }
 
 // Clear =======================================================================

@@ -22,7 +22,7 @@ Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
-	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
 	loadModels();
 	loadModels(0);
 	
@@ -184,10 +184,11 @@ void Engine::loadShaders()
 	shader["shader_fog"] = LoadShader("shaders\\shader_fog.vs", "shaders\\shader_fog.fs");
 }
 
-void Engine::loadTextures(const char* wall, const char* floor)
+void Engine::loadTextures(const char* wall, const char* floor, const char* key)
 {
 	texture[Block::WALL] = loadTexture(wall);
 	texture[Block::FLOOR] = loadTexture(floor);
+	texture[Block::KEY] = loadTexture(key);
 	//manzana y enemigo
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
 	texture[Block::PALM] = loadTexture("textures\\uncompressed\\palmera1.jpg");
@@ -199,17 +200,17 @@ void Engine::setTexturas(const int level)
 {
 	if (level == 0) {
 		//castillo
-		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
 		fog = 0;
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\pared_jungla.jpg", "textures\\uncompressed\\suelo_tierra.jpg");
+		loadTextures("textures\\uncompressed\\pared_jungla.jpg", "textures\\uncompressed\\suelo_tierra.jpg", "textures\\uncompressed\\banana.jpg");
 		fog = 0;
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg");
+		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg", "textures\\uncompressed\\cactus.jpg");
 		setSkybox(skyboxTex_hard);
 		fog = 1;
 	}

@@ -31,7 +31,8 @@ enum Block
 	KEY = 5,
 	TOWER = 6,
 	PALM = 7,
-	PYRAMID = 8
+	PYRAMID = 8,
+	EKEY = 9
 };
 
 class Engine
@@ -95,7 +96,7 @@ private:
 
 	// Funciones privadas
 	void loadShaders();
-	void loadTextures(const char* wall, const char* floor);
+	void loadTextures(const char* wall, const char* floor, const char* key);
 	void loadModels();
 	void LoadMusicDefault();
 	void loadSkymaps();
