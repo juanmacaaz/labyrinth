@@ -484,7 +484,6 @@ void Engine::loadModels()
 
 	//Materials
 	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);
-	models["materias"] = loadModel2("models\\box_stack.obj", Loader);
 }
 
 void Engine::initGlfwGL()
@@ -636,10 +635,13 @@ GLuint Engine::loadTexture(const char* imagepath)
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
-	glTexParameterf(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameterf(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameterf(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(textureID, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(textureID, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true);

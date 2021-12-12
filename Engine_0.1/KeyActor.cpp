@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include "Entitie.h"
 
-KeyActor::KeyActor(GameSpace* space, Vector3 initPosition) : Key(space, initPosition, Block::WOOD)
+KeyActor::KeyActor(GameSpace* space, Vector3 initPosition) : Key(space, initPosition, Block::PALM)
 {
 	this->space_c = (GameSpace*)space;
 }

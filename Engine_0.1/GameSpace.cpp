@@ -34,6 +34,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	int x = labyrinth->getEnemyRoute()[0].first;
 	int z = labyrinth->getEnemyRoute()[0].second;
 	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+	enemy2 = NULL;
 	getEngine()->hudSpace->updateObjectiveScore(dificultad.n_keys);
 	getEngine()->hudSpace->updateEnemyScore(0);
 	getEngine()->hudSpace->updateYouScore(0);
@@ -46,8 +47,14 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	switch (dificultad.id)
 	{
 		case 0: this->actor->distance_view = 14; break;
-		case 1: this->actor->distance_view = 13; break;
-		case 2: this->actor->distance_view = 12; break;
+		case 1: this->actor->distance_view = 13;
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+			enemy2->setEnemyVelocity(0.0055f);
+			break;
+		case 2: this->actor->distance_view = 12;
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+			enemy2->setEnemyVelocity(0.004f);
+			break;
 	}
 	id_dificultad = dificultad.id;
 }
@@ -69,6 +76,12 @@ void GameSpace::update()
 
 	actor->update();
 	enemy->update();
+
+	if (enemy2 != NULL) {
+		enemy2->update();
+		Vector3 temp_pos = actor->getBody()->getTransform().getPosition();
+		enemy2->moveTo2(temp_pos[0], temp_pos[2]);
+	}
 
 	for (auto e : entidades) e->update();
 	world->update(1.0f / 60.0f);
@@ -113,6 +126,8 @@ void GameSpace::deleteEntitie(Entitie* entitie)
 
 void GameSpace::render()
 {
+	if (enemy2 != NULL)
+		enemy2->render(actor->getCamera());
 	enemy->render(actor->getCamera());
 	labyrinth->render(actor->getCamera(), max_render);
 	for (auto e : entidades) e->render(actor->getCamera());
