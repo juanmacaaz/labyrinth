@@ -9,9 +9,10 @@
 #include "HudSpace.h"
 #include "MenuSpace.h"
 
-Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys) :
+Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys, int main) :
 	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
 {
+	this->main = main;
 	this->initPosition = initPosition;
 	n_llave = 0;
 	this->n_keys = n_keys;
@@ -59,17 +60,20 @@ bool Enemy::moveTo(float x, float z)
 	if (abs(x_m) + abs(z_m) < 0.025f) {
 		visita_pos++;
 		
-		if (visita_pos == n_keys-3) {
+		if (n_llave == n_keys-3) {
 			space->getEngine()->LoadCoin(4);
 		}
 
-		if (visita_pos == n_keys - 1) {
-			space->getEngine()->getMenuSpace()->setWinLose(1);
-			space->getEngine()->setMenuSpace();
-			cout << "Has PERDIDO!!" << endl;
-			//exit(0);
-		}
 		return true;
+	}
+
+	cout << n_llave << " " << n_keys << endl;
+
+	if (n_llave == n_keys + 1) {
+		space->getEngine()->getMenuSpace()->setWinLose(1);
+		space->getEngine()->setMenuSpace();
+		cout << "Has PERDIDO!!" << endl;
+		//exit(0);
 	}
 
 	int x_o = 0;

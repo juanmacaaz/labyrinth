@@ -33,7 +33,7 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 
 	int x = labyrinth->getEnemyRoute()[0].first;
 	int z = labyrinth->getEnemyRoute()[0].second;
-	enemy = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+	enemy = new Enemy(this, Vector3(x, 0.505, z), dificultad.n_keys);
 	enemy2 = NULL;
 	getEngine()->hudSpace->updateObjectiveScore(dificultad.n_keys);
 	getEngine()->hudSpace->updateEnemyScore(0);
@@ -48,11 +48,11 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	{
 		case 0: this->actor->distance_view = 14; break;
 		case 1: this->actor->distance_view = 13;
-			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), false);
 			enemy2->setEnemyVelocity(0.0055f);
 			break;
 		case 2: this->actor->distance_view = 12;
-			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size());
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), false);
 			enemy2->setEnemyVelocity(0.004f);
 			break;
 	}
