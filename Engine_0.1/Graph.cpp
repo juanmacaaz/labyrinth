@@ -141,7 +141,6 @@ CEdge* CGraph::NewEdge(CVertex* pVOrigin, CVertex* pVDestination, int distance)
 {
     char name[10];
     size_t i = m_Edges.size() + 1;
-
     for (;;) {
         sprintf_s(name, "E%04llu", i);
         if (FindEdge(name) == NULL) break;
@@ -251,8 +250,7 @@ void CGraph::createNodes(vector<vector<char>>& map) {
     CVertex* start_end;
 
     for (int i = 1; i < map.size() - 1; i++) {
-        for (int j = 1; j < map.size() - 1; j++) {
-
+        for (int j = 1; j < map[i].size() - 1; j++) {
             if (map[i][j] == '1') {
                 if (getNumVecinos(map, i, j) > 2) {
                     addNodoToGraph(mapV, index, i, j);
@@ -307,7 +305,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
     int jOriginal = j;
     j++;
     int distance = 1;
-    while (j < map.size() - 1 && map[i][j] != '#') {
+    while (j < map[i].size() - 1 && map[i][j] != '#') {
         if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
             NewEdge(GetVertex(jOriginal, iOriginal), GetVertex(j, i), distance);
             break;
@@ -319,7 +317,7 @@ void CGraph::findAndCreateRightEdge(vector<vector<char>>& map, const int i, int 
 
 void CGraph::createEdges(vector<vector<char>>& map) {
     for (int i = 1; i < map.size() - 1; i++) {
-        for (int j = 1; j < map.size() - 1; j++) {
+        for (int j = 1; j < map[i].size() - 1; j++) {
             if (map[i][j] == 'V' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'K') {
                 findandCreateUpEdge(map, i, j);
                 findAndCreateRightEdge(map, i, j);
