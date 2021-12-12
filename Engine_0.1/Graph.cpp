@@ -58,10 +58,13 @@ void CVertex::Unlink(CEdge* pEdge)
 CGraph::CGraph(vector<vector<char>>& map, const int algorithm)
 {
     createNodes(map);
+    cout << "Generacion de nodos" << endl;
     createEdges(map);
+    cout << "Generacion de arestas" << endl;
     //SalesmanTrackBacktracking(*this, m_Visits);
     if (algorithm == 2) { SalesmanTrackBranchAndBound(*this, m_Visits); }
     else { SalesmanTrackGreedy(*this, m_Visits); }
+    cout << "Generacion de recorrido enemigo" << endl;
 }
 
 // Clear =======================================================================

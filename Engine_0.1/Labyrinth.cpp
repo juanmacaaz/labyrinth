@@ -14,10 +14,15 @@ Labyrinth::Labyrinth(GameSpace* space, int width, int height, const int n_keys, 
 	this->m_height = height;
 
 	generateMaze();
+	cout << "Generacion de matrix char" << endl;
 	generateVisits(n_keys,'K');
+	cout << "Generacion de visitas enemigo" << endl;
 	this->graph = CGraph(m_maze, algorithm);
+
 	generateVisits(n_keys, 'A');
+	cout << "Generacion de visitas jugador" << endl;
 	generateMap();
+	cout << "Generacion del laberinto grafico" << endl;
 }
 
 Labyrinth::~Labyrinth()
