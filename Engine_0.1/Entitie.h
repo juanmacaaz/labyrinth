@@ -32,6 +32,15 @@ protected:
 
 	BoxShape* genereateBoindingBox(Transform& transform);
 
+	GLuint model_id;
+	GLuint position_id;
+	GLuint view_id;
+	GLuint tex_id;
+	GLuint CameraEye;
+	GLuint pos_id;
+	GLuint fog_id;
+	GLuint fog;
+
 public:
 
 	Entitie(Space* space, string model, int texture, string shader, Vector3 initPosition, float scale = 1);
@@ -46,9 +55,10 @@ public:
 
 	void movePosition(const Vector3& v);
 
-	void render(Camera* camera);
+	void render(Camera* camera, int MAX_RENDER = 45);
 	virtual void update() {};
 	RigidBody* getBody();
+
 
 	static float Distance(vec3 c1, Vector3 c2, float distance)
 	{

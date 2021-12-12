@@ -22,18 +22,18 @@ Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
-	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg");
+	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
 	loadModels();
 	loadModels(0);
-	LoadMusicDefault();
-
-	loadSkymap(0);
+	
+	loadSkymaps();
 	accumulator = 0;
 
 	menuSpace = new MenuSpace(this);
 	hudSpace = new HudSpace(this);
 	currentSpace = menuSpace;
-
+	LoadMusicDefault();
+	
 	//models.clear();
 }
 
@@ -135,6 +135,10 @@ void Engine::setMenuSpace()
 	LoadMusicDefault();
 }
 
+void Engine::setSkybox(int skymap_new_tex) {
+	skyboxTex_act = skymap_new_tex;
+}
+
 void Engine::renderSkybox()
 {
 	//glDepthMask(GL_FALSE);
@@ -148,8 +152,8 @@ void Engine::renderSkybox()
 
 	glUseProgram(shader["sky-map"]);
 
-	glActiveTexture(skyboxTex);
-	glBindTexture(GL_TEXTURE_2D, skyboxTex);
+	glActiveTexture(skyboxTex_act);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTex_act);
 
 	mat4 p = currentSpace->getCamera()->getProyectionMatrix();
 	mat4 v = currentSpace->getCamera()->getViewMatrix();
@@ -177,12 +181,14 @@ void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
 	shader["sky-map"] = LoadShader("shaders\\shader_mtl.vs", "shaders\\shader_mtl.fs");
+	shader["shader_fog"] = LoadShader("shaders\\shader_fog.vs", "shaders\\shader_fog.fs");
 }
 
-void Engine::loadTextures(const char* wall, const char* floor)
+void Engine::loadTextures(const char* wall, const char* floor, const char* key)
 {
 	texture[Block::WALL] = loadTexture(wall);
 	texture[Block::FLOOR] = loadTexture(floor);
+	texture[Block::KEY] = loadTexture(key);
 	//manzana y enemigo
 	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
 	texture[Block::PALM] = loadTexture("textures\\uncompressed\\palmera1.jpg");
@@ -194,15 +200,19 @@ void Engine::setTexturas(const int level)
 {
 	if (level == 0) {
 		//castillo
-		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg");
+		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
+		fog = 0;
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\pared_jungla.jpg", "textures\\uncompressed\\suelo_tierra.jpg");
+		loadTextures("textures\\uncompressed\\final\\jungle_leaves.jpg", "textures\\uncompressed\\final\\mossy.jpg", "textures\\uncompressed\\banana.jpg");
+		fog = 0;
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\pared_desierto.jpg", "textures\\uncompressed\\arena.jpg");
+		loadTextures("textures\\uncompressed\\final\\sand_red.jpg", "textures\\uncompressed\\final\\sand.jpg", "textures\\uncompressed\\cactus.jpg");
+		setSkybox(skyboxTex_hard);
+		fog = 1;
 	}
 }
 
@@ -321,11 +331,7 @@ void Engine::LoadCoin(const int level) {
 	}
 }
 
-
-
-
-
-void Engine::loadSkymap(int level)
+void Engine::loadSkymaps()
 {
 	float skyboxVertices[] = {
 		// positions          
@@ -380,7 +386,7 @@ void Engine::loadSkymap(int level)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-	vector<std::string> faces
+	vector<std::string> menu
 	{
 		"skymap\\right.jpg",
 		"skymap\\left.jpg",
@@ -390,7 +396,41 @@ void Engine::loadSkymap(int level)
 		"skymap\\back.jpg"
 	};
 
-	skyboxTex = loadCubemap(faces);
+	vector<std::string> easy
+	{
+		"skymap\\right.jpg",
+		"skymap\\left.jpg",
+		"skymap\\top.jpg",
+		"skymap\\bottom.jpg",
+		"skymap\\front.jpg",
+		"skymap\\back.jpg"
+	};
+
+	vector<std::string> medium
+	{
+		"skymap\\right.jpg",
+		"skymap\\left.jpg",
+		"skymap\\top.jpg",
+		"skymap\\bottom.jpg",
+		"skymap\\front.jpg",
+		"skymap\\back.jpg"
+	};
+
+	vector<std::string> hard
+	{
+		"skymap\\desert.jpg",
+		"skymap\\desert.jpg",
+		"skymap\\desert.jpg",
+		"skymap\\desert.jpg",
+		"skymap\\desert.jpg",
+		"skymap\\desert.jpg"
+	};
+
+	skyboxTex_menu = loadCubemap(menu);
+	skyboxTex_easy = loadCubemap(easy);
+	skyboxTex_medium = loadCubemap(medium);
+	skyboxTex_hard = loadCubemap(hard);
+	skyboxTex_act = skyboxTex_menu;
 }
 
 
@@ -451,9 +491,11 @@ void Engine::loadModels()
 	models["palm"] = loadModel2("models\\planta.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
 
+	//Instructions Menu
+	models["instructions_text"] = loadModel2("models\\extra_menus\\instructions_text.obj", Loader);
+
 	//Materials
 	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);
-	models["materias"] = loadModel2("models\\box_stack.obj", Loader);
 }
 
 void Engine::initGlfwGL()
@@ -497,9 +539,9 @@ void Engine::initGlfwGL()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
+	//glFrontFace(GL_CCW);
 }
 
 void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -605,13 +647,16 @@ GLuint Engine::loadTexture(const char* imagepath)
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
-	glTexParameterf(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameterf(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameterf(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(textureID, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(textureID, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
 	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(false);
+	stbi_set_flip_vertically_on_load(true);
 
 	unsigned char* data = stbi_load(imagepath, &width, &height, &nrChannels, 0);
 
@@ -640,7 +685,7 @@ unsigned int loadCubemap(vector<std::string> faces)
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
-
+	stbi_set_flip_vertically_on_load(false);
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < faces.size(); i++)
 	{

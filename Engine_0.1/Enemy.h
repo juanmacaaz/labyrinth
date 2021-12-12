@@ -15,10 +15,12 @@ private:
 	int visita_pos;
 	long timer;
 	int n_keys;
+	Vector3 initPosition;
 
 public:
 
-	Enemy(GameSpace* space, Vector3 initPosition, int n_keys);
+	Enemy(GameSpace* space, Vector3 initPosition, int n_keys, int main = true);
+	bool moveTo2(float x, float z);
 	bool moveTo(float x, float y);
 	void update();
 	void nextPosition();
@@ -27,5 +29,6 @@ public:
 	float getEnemyVelocity();
 	CollisionBody* getBody();
 	int n_llave;
+	bool main;
 };
 

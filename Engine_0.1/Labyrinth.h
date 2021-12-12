@@ -16,7 +16,7 @@ public:
 
 	Labyrinth(GameSpace* space, int width, int height, const int n_keys, const int algorithm);
 	~Labyrinth();
-	void render(Camera* camera);
+	void render(Camera* camera, int MAX_RENDER);
 	CGraph getGraph();
 	vector<vector<char>> getMaze();
 	vector<int> getInitialPosition();

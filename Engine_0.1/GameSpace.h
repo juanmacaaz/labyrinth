@@ -47,12 +47,16 @@ public:
 
 	void deleteEntitie(Entitie* entitie);
 	Dificultad dificultad;
+	
+	int id_dificultad;
+	int max_render;
 
 private:
 	// Atributos
 	Actor* actor;
 	Labyrinth* labyrinth;
 	Enemy* enemy;
+	Enemy* enemy2;
 
 	vector<Entitie*> entidades;
 };

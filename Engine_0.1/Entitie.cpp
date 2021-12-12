@@ -9,7 +9,7 @@ using namespace std;
 
 #include "OBJ_Loader.h"
 
-#define MAX_RENDER_DISTANCE 20
+#define MAX_RENDER_DISTANCE 10
 
 BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 {
@@ -40,8 +40,9 @@ BoxShape* Entitie::genereateBoindingBox(Transform& transform)
 
 Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vector3 initPosition, float scale)
 {
+	fog = space->getEngine()->fog;
 	this->texture = space->getEngine()->getTextures()[texture];
-	this->shader = space->getEngine()->getShaders()[shader];
+	this->shader = space->getEngine()->getShaders()["shader_fog"];
 	this->space = space;
 
 	vector<objl::Mesh> model = space->getEngine()->getModels()[modelName];
@@ -73,6 +74,15 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+
+	model_id = glGetUniformLocation(this->shader, "model");
+	position_id = glGetUniformLocation(this->shader, "projection");
+	view_id = glGetUniformLocation(this->shader, "view");
+	tex_id = glGetUniformLocation(this->shader, "tex");
+	pos_id = glGetUniformLocation(this->shader, "pos");
+	fog_id = glGetUniformLocation(this->shader, "fog");
+
+	CameraEye = glGetUniformLocation(this->shader, "CameraEye");
 }
 
 Entitie::~Entitie()
@@ -117,29 +127,30 @@ void Entitie::movePosition(const Vector3& v) {
 	body->setTransform(Transform(body->getTransform().getPosition() + v, Quaternion::identity()));
 }
 
-void Entitie::render(Camera* camera)
+void Entitie::render(Camera* camera, int MAX_RENDER)
 {
-	//if (!Distance(camera->getPosition(), body->getTransform().getPosition(), MAX_RENDER_DISTANCE)) return;
-
-	GLuint gWVP = glGetUniformLocation(shader, "gWVP");
-	GLuint tex = glGetUniformLocation(shader, "tex");
+	if (!Distance(camera->getPosition(), body->getTransform().getPosition(), MAX_RENDER)) return;
 
 	mat4 p = camera->getProyectionMatrix();
 	mat4 v = camera->getViewMatrix();
 
-	float t[16];
-
-	body->getTransform().getOpenGLMatrix(t);
-	mat4 test = glm::make_mat4(t);
-	mat4 w = p * v * test;
+	float m[16];
+	body->getTransform().getOpenGLMatrix(m);
 
 	glUseProgram(shader);
 
 	glActiveTexture(texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glUniformMatrix4fv(gWVP, 1, GL_FALSE, &w[0][0]);
-	glUniform1i(tex, 0);
+	glUniformMatrix4fv(view_id, 1, GL_FALSE, &v[0][0]);
+	glUniformMatrix4fv(position_id, 1, GL_FALSE, &p[0][0]);
+	glUniformMatrix4fv(model_id, 1, GL_FALSE, &m[0]);
+
+	glUniform3fv(CameraEye, 1, &camera->getPosition()[0]);
+	glUniform3fv(pos_id, 1, &body->getTransform().getPosition()[0]);
+
+	glUniform1i(tex_id, 0);
+	glUniform1i(fog_id, fog);
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);

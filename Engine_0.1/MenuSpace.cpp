@@ -40,14 +40,14 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::PALM, Vector3(12, -1, 20), 0.06f));
 	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::PYRAMID, Vector3(12, -1, 20), 0.9f));
 
-	levels_menu->m_items.push_back(new MenuItem(this, "low_text", Block::WALL, Vector3(30, -8, 30)));
-	levels_menu->m_items.push_back(new MenuItem(this, "medium_text", Block::WALL, Vector3(30, -8, 30)));
-	levels_menu->m_items.push_back(new MenuItem(this, "high_text", Block::WALL, Vector3(30, -8, 30)));
+	levels_menu->m_items.push_back(new MenuItem(this, "low_text", Block::FLOOR, Vector3(30, -8, 30)));
+	levels_menu->m_items.push_back(new MenuItem(this, "medium_text", Block::FLOOR, Vector3(30, -8, 30)));
+	levels_menu->m_items.push_back(new MenuItem(this, "high_text", Block::FLOOR, Vector3(30, -8, 30)));
 
-	levels_menu->m_items.push_back(new MenuItem(this, "x", Block::WALL, Vector3(32, 5, -4)));
+	levels_menu->m_items.push_back(new MenuItem(this, "x", Block::FLOOR, Vector3(32, 5, -4)));
 
-	levels_menu->m_items.push_back(new MenuItem(this, "levels_title", Block::WALL, Vector3(16, 4.5, -8)));
-	levels_menu->m_items.push_back(new MenuItem(this, "difficulty_text", Block::WALL, Vector3(30, -8, 3)));
+	levels_menu->m_items.push_back(new MenuItem(this, "levels_title", Block::FLOOR, Vector3(16, 4.5, -8)));
+	levels_menu->m_items.push_back(new MenuItem(this, "difficulty_text", Block::FLOOR, Vector3(30, -8, 3)));
 
 
 	//Pause Menu
@@ -57,6 +57,7 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 	//Instruction Menu
 	instruction_menu->m_items.push_back(new MenuItem(this, "start_button", Block::FLOOR, Vector3(30, -4, 0)));
+	instruction_menu->m_items.push_back(new MenuItem(this, "instructions_text", Block::FLOOR, Vector3(30, 8, 0), 0.48));
 
 	//Loading Menu
 	loading_menu->m_items.push_back(new MenuItem(this, "loading_text", Block::FLOOR, Vector3(20, 0, 0)));
@@ -89,6 +90,8 @@ MenuSpace::~MenuSpace()
 
 void MenuSpace::render()
 {
+	engine->fog = 0;
+	engine->skyboxTex_act = engine->skyboxTex_menu;
 	current_menu->render_menu();
 }
 
@@ -286,6 +289,10 @@ void MenuSpace::updatePauseMenu()
 				current_item = 1;
 			}
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {
+				if (engine->getGameSpace()->id_dificultad == 2) {
+					engine->fog = 0;
+					engine->skyboxTex_act = engine->skyboxTex_hard;
+				}
 				press = true;
 				engine->setGameSpace();
 			}

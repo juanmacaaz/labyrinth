@@ -5,7 +5,7 @@
 #include "Enemy.h"
 #include "HudSpace.h"
 
-KeyEnemy::KeyEnemy(GameSpace* space, Vector3 initPosition): Key(space, initPosition, Block::KEY)
+KeyEnemy::KeyEnemy(GameSpace* space, Vector3 initPosition): Key(space, initPosition, Block::EKEY)
 {
 	n_keys = 0;
 	this->space_c = (GameSpace*) space;
@@ -17,9 +17,11 @@ void KeyEnemy::update()
 {
 	Key::update();
 	if (space_c->getWorld()->testOverlap(body, space_c->getEnemy()->getBody())) {
-		space->getEngine()->hudSpace->updateEnemyScore(space_c->getEnemy()->n_llave++);
-		deleteData();
-		space_c->deleteEntitie(this);
-		cout << "El enemigo tiene una manzana" << endl;
+		if (space_c->getEnemy()->main) {
+			space->getEngine()->hudSpace->updateEnemyScore(space_c->getEnemy()->n_llave++);
+			deleteData();
+			space_c->deleteEntitie(this);
+			cout << "El enemigo tiene una manzana" << endl;
+		}
 	};
 }
