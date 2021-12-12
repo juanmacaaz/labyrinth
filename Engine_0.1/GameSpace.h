@@ -56,6 +56,7 @@ private:
 	Actor* actor;
 	Labyrinth* labyrinth;
 	Enemy* enemy;
+	Enemy* enemy2;
 
 	vector<Entitie*> entidades;
 };
