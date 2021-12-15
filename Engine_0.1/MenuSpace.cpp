@@ -30,15 +30,15 @@ MenuSpace::MenuSpace(Engine* engine) : Space(engine)
 
 
 	//Levels Menu
-	levels_menu->m_items.push_back(new MenuItem(this, "castle_button", Block::WALL, Vector3(32, 5, -10)));
-	levels_menu->m_items.push_back(new MenuItem(this, "jungle_button", Block::WALL, Vector3(32, 0, -10)));
-	levels_menu->m_items.push_back(new MenuItem(this, "desert_button", Block::WALL, Vector3(32, -5, -10)));
+	levels_menu->m_items.push_back(new MenuItem(this, "castle_button", Block::FLOOR, Vector3(32, 5, -10)));
+	levels_menu->m_items.push_back(new MenuItem(this, "jungle_button", Block::FLOOR, Vector3(32, 0, -10)));
+	levels_menu->m_items.push_back(new MenuItem(this, "desert_button", Block::FLOOR, Vector3(32, -5, -10)));
 
 	levels_menu->m_items.push_back(new MenuItem(this, "back_button", Block::FLOOR, Vector3(28, -8, -14)));
 
 	levels_menu->m_items.push_back(new MenuItem(this, "tower", Block::TOWER, Vector3(12, -1, 20)));
-	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::PALM, Vector3(12, -1, 20), 0.06f));
-	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::PYRAMID, Vector3(12, -1, 20), 0.9f));
+	levels_menu->m_items.push_back(new MenuItem(this, "palm", Block::PALM, Vector3(12, -1, 20)));
+	levels_menu->m_items.push_back(new MenuItem(this, "pyramid", Block::PYRAMID, Vector3(12, -1, 20)));
 
 	levels_menu->m_items.push_back(new MenuItem(this, "low_text", Block::FLOOR, Vector3(30, -8, 30)));
 	levels_menu->m_items.push_back(new MenuItem(this, "medium_text", Block::FLOOR, Vector3(30, -8, 30)));

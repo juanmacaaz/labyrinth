@@ -22,7 +22,7 @@ Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
-	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
+	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg");
 	loadModels();
 	loadModels(0);
 	
@@ -488,7 +488,7 @@ void Engine::loadModels()
 
 	//3D models
 	models["tower"] = loadModel2("models\\tower.obj", Loader);
-	models["palm"] = loadModel2("models\\planta.obj", Loader);
+	models["palm"] = loadModel2("models\\palm.obj", Loader);
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
 
 	//Instructions Menu
