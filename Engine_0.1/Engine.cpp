@@ -201,11 +201,13 @@ void Engine::setTexturas(const int level)
 	if (level == 0) {
 		//castillo
 		loadTextures("textures\\uncompressed\\final\\castle_wall.jpg", "textures\\uncompressed\\final\\castle_floor.jpg", "textures\\uncompressed\\key.jpg");
+		setSkybox(skyboxTex_easy);
 		fog = 0;
 	}
 	else if (level == 1) {
 		//jungla
 		loadTextures("textures\\uncompressed\\final\\jungle_wall.jpg", "textures\\uncompressed\\final\\jungle_floor.jpg", "textures\\uncompressed\\banana.jpg");
+		setSkybox(skyboxTex_medium);
 		fog = 0;
 	}
 	else if (level == 2) {
@@ -411,12 +413,12 @@ void Engine::loadSkymaps()
 
 	vector<std::string> medium
 	{
-		"skymap\\right.jpg",
-		"skymap\\left.jpg",
-		"skymap\\top.jpg",
-		"skymap\\bottom.jpg",
-		"skymap\\front.jpg",
-		"skymap\\back.jpg"
+		"skymap\\jungle\\right_jungle.jpg",
+		"skymap\\jungle\\left_jungle.jpg",
+		"skymap\\jungle\\top_jungle.jpg",
+		"skymap\\jungle\\bottom_jungle.jpg",
+		"skymap\\jungle\\front_jungle.jpg",
+		"skymap\\jungle\\back_jungle.jpg"
 	};
 
 	vector<std::string> hard
