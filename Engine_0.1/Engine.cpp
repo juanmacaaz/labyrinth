@@ -223,7 +223,7 @@ void Engine::loadModels(const int level)
 	if (level == 0) {
 		//castillo
 		models["player"] = loadModel2("models\\waifu.obj", Loader);
-		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["waifu"] = loadModel2("models\\Caballero.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\key.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
@@ -231,14 +231,14 @@ void Engine::loadModels(const int level)
 	else if (level == 1) {
 		//jungla
 		models["player"] = loadModel2("models\\waifu.obj", Loader);
-		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["waifu"] = loadModel2("models\\jordi.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\banana.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
 	else if (level == 2) {
 		//desirto
 		models["player"] = loadModel2("models\\waifu.obj", Loader);
-		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
+		models["waifu"] = loadModel2("models\\camel.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\cactus.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
