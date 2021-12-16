@@ -21,7 +21,7 @@ Actor::Actor(GameSpace* space)
 	original_position = Vector3(this->space->getlabyrinth()->getInitialPosition()[0], 1.4,
 		this->space->getlabyrinth()->getInitialPosition()[1]);
 
-	entitie = new Entitie(space, "waifu", Block::WOOD, "basic-nolight", original_position, 0.25f);
+	entitie = new Entitie(space, "player", Block::WOOD, "basic-nolight", original_position, 0.25f);
 
 	RigidBody* body = entitie->getBody();
 

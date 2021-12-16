@@ -200,12 +200,12 @@ void Engine::setTexturas(const int level)
 {
 	if (level == 0) {
 		//castillo
-		loadTextures("textures\\uncompressed\\pared_castillo.jpg", "textures\\uncompressed\\bedrock.jpg", "textures\\uncompressed\\key.jpg");
+		loadTextures("textures\\uncompressed\\final\\castle_wall.jpg", "textures\\uncompressed\\final\\castle_floor.jpg", "textures\\uncompressed\\key.jpg");
 		fog = 0;
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\final\\jungle_leaves.jpg", "textures\\uncompressed\\final\\mossy.jpg", "textures\\uncompressed\\banana.jpg");
+		loadTextures("textures\\uncompressed\\final\\jungle_wall.jpg", "textures\\uncompressed\\final\\jungle_floor.jpg", "textures\\uncompressed\\banana.jpg");
 		fog = 0;
 	}
 	else if (level == 2) {
@@ -222,6 +222,7 @@ void Engine::loadModels(const int level)
 	objl::Loader* Loader = new objl::Loader();
 	if (level == 0) {
 		//castillo
+		models["player"] = loadModel2("models\\waifu.obj", Loader);
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\key.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
@@ -229,12 +230,14 @@ void Engine::loadModels(const int level)
 
 	else if (level == 1) {
 		//jungla
+		models["player"] = loadModel2("models\\waifu.obj", Loader);
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\banana.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
 	}
 	else if (level == 2) {
 		//desirto
+		models["player"] = loadModel2("models\\waifu.obj", Loader);
 		models["waifu"] = loadModel2("models\\waifu.obj", Loader);
 		models["key"] = loadModel2("models\\hud\\cactus.obj", Loader);
 		models["cube"] = loadModel2("models\\cube.obj", Loader);
