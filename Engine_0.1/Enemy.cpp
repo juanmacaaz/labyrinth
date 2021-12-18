@@ -31,12 +31,11 @@ Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys, string model, i
 bool Enemy::moveTo2(float x, float z) {
 	Vector3 actPos = body->getTransform().getPosition();
 	timer++;
+
 	float x_m = x - actPos.x;
 	float z_m = z - actPos.z;
 
 	if (abs(x_m) + abs(z_m) < 0.025f) {
-		body->setTransform(Transform(initPosition, Quaternion::identity()));
-		space->getActor()->toInitPosition();
 		return false;
 	}
 
@@ -47,7 +46,7 @@ bool Enemy::moveTo2(float x, float z) {
 	if (abs(z_m) > 0.001) z_o = (z_m >= 0) ? 2 : -2;
 
 	qua<float> a = safeQuatLookAt(vec3(x, 1, z), vec3(actPos.x, 1, actPos.z), vec3(0, 1, 0), vec3(0, 1, 0));
-	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y + (0.015f* sin(0.015f*timer)), (velocity * z_o) + actPos.z), Quaternion(a.x, a.y, a.z, a.w)));
+	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, 1.55 + (0.5 * sin(0.023f*timer)), (velocity * z_o) + actPos.z), Quaternion(a.x, a.y, a.z, a.w)));
 	return false;
 }
 
@@ -91,7 +90,20 @@ bool Enemy::moveTo(float x, float z)
 void Enemy::update()
 {
 	if (space->getWorld()->testOverlap(body, space->getActor()->getBody())) {
-		space->getActor()->toInitPosition();
+		if (main)
+			space->getActor()->toInitPosition();
+		else {
+			int DISTANCE = 7.5f;
+			space->getActor()->toInitPosition();
+			Vector3 new_pos = space->getActor()->getBody()->getTransform().getPosition();
+			switch (rand() % 4) {
+			case 0: new_pos[0] += DISTANCE;  new_pos[2] += DISTANCE; break;
+			case 1: new_pos[0] += DISTANCE;  new_pos[2] -= DISTANCE; break;
+			case 2: new_pos[0] -= DISTANCE;  new_pos[2] += DISTANCE; break;
+			case 3: new_pos[0] -= DISTANCE;  new_pos[2] -= DISTANCE; break;
+			}
+			body->setTransform(Transform(new_pos, Quaternion::identity()));
+		}
 	};
 }
 
