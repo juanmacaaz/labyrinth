@@ -1,6 +1,5 @@
 #pragma once
 #include "Entitie.h"
-
 class GameSpace;
 class KeyEnemy;
 class MenuSpace;
@@ -19,7 +18,7 @@ private:
 
 public:
 
-	Enemy(GameSpace* space, Vector3 initPosition, int n_keys, int main = true);
+	Enemy(GameSpace* space, Vector3 initPosition, int n_keys, string model = "waifu", int main = true, float dim = 0.60f, int block = 4);
 	bool moveTo2(float x, float z);
 	bool moveTo(float x, float y);
 	void update();

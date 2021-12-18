@@ -71,10 +71,16 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
+
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3 * sizeof(GLfloat)));
 	model_id = glGetUniformLocation(this->shader, "model");
 	position_id = glGetUniformLocation(this->shader, "projection");
 	view_id = glGetUniformLocation(this->shader, "view");
@@ -83,6 +89,7 @@ Entitie::Entitie(Space* space, string modelName, int texture, string shader, Vec
 	fog_id = glGetUniformLocation(this->shader, "fog");
 
 	CameraEye = glGetUniformLocation(this->shader, "CameraEye");
+	glActiveTexture(texture);
 }
 
 Entitie::~Entitie()
@@ -138,8 +145,6 @@ void Entitie::render(Camera* camera, int MAX_RENDER)
 	body->getTransform().getOpenGLMatrix(m);
 
 	glUseProgram(shader);
-
-	glActiveTexture(texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glUniformMatrix4fv(view_id, 1, GL_FALSE, &v[0][0]);
@@ -155,16 +160,13 @@ void Entitie::render(Camera* camera, int MAX_RENDER)
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3 * sizeof(GLfloat)));
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
+	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3 * sizeof(GLfloat)));
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 5);
 
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
+	//glDisableVertexAttribArray(0);
+	//glDisableVertexAttribArray(1);
 }
 
 RigidBody* Entitie::getBody()

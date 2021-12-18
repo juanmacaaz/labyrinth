@@ -9,9 +9,10 @@
 #include "HudSpace.h"
 #include "MenuSpace.h"
 
-Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys, int main) :
-	Entitie(space, "waifu", Block::WOOD, "basic-nolight", initPosition, 0.60f)
+Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys, string model, int main, float dim, int block) :
+	Entitie(space, model, block, "basic-nolight", initPosition, dim)
 {
+	timer = 0;
 	this->main = main;
 	this->initPosition = initPosition;
 	n_llave = 0;
@@ -29,7 +30,7 @@ Enemy::Enemy(GameSpace* space, Vector3 initPosition, int n_keys, int main) :
 
 bool Enemy::moveTo2(float x, float z) {
 	Vector3 actPos = body->getTransform().getPosition();
-
+	timer++;
 	float x_m = x - actPos.x;
 	float z_m = z - actPos.z;
 
@@ -46,7 +47,7 @@ bool Enemy::moveTo2(float x, float z) {
 	if (abs(z_m) > 0.001) z_o = (z_m >= 0) ? 2 : -2;
 
 	qua<float> a = safeQuatLookAt(vec3(x, 1, z), vec3(actPos.x, 1, actPos.z), vec3(0, 1, 0), vec3(0, 1, 0));
-	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y, (velocity * z_o) + actPos.z), Quaternion(a.x, a.y, a.z, a.w)));
+	body->setTransform(Transform(Vector3((velocity * x_o) + actPos.x, actPos.y + (0.015f* sin(0.015f*timer)), (velocity * z_o) + actPos.z), Quaternion(a.x, a.y, a.z, a.w)));
 	return false;
 }
 
@@ -67,7 +68,7 @@ bool Enemy::moveTo(float x, float z)
 		return true;
 	}
 
-	cout << n_llave << " " << n_keys << endl;
+	//cout << n_llave << " " << n_keys << endl;
 
 	if (n_llave == n_keys + 1) {
 		space->getEngine()->getMenuSpace()->setWinLose(1);

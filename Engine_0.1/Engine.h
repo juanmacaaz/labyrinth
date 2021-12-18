@@ -32,7 +32,7 @@ enum Block
 	TOWER = 6,
 	PALM = 7,
 	PYRAMID = 8,
-	EKEY = 9
+	EKEY = 9,
 };
 
 class Engine
@@ -68,6 +68,7 @@ public:
 	HudSpace* hudSpace;
 
 	void renderSkybox();
+	void renderIntrucciones();
 
 	unsigned int skyboxTex_act;
 
@@ -76,11 +77,17 @@ public:
 	unsigned int skyboxTex_medium;
 	unsigned int skyboxTex_hard;
 
+	unsigned int instrucciones;
+	
 	unsigned int fog = 0;
 
 private:
 	unsigned int skyboxVAO;
 	unsigned int skyboxVBO;
+
+	unsigned int instruccionesVAO;
+	unsigned int instruccionesVBO;
+	unsigned int instruccionesEBO;
 	// Atributos
 	GLFWwindow* window;
 	map<string, GLuint> shader;
@@ -100,9 +107,11 @@ private:
 	void loadModels();
 	void LoadMusicDefault();
 	void loadSkymaps();
+	void loadImages();
 	void initGlfwGL();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	GLuint LoadShader(const char* vertex_file_path, const char* fragment_file_path);
 	GLuint loadTexture(const char* imagepath);
+	GLuint loadImatge(const char* imagepath);
 };

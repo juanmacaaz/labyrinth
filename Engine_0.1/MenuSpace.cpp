@@ -319,6 +319,7 @@ void MenuSpace::updatePauseMenu()
 void MenuSpace::updateInstructionMenu()
 {
 	if (!press) {
+		engine->renderIntrucciones();
 		switch (current_item) {
 		case 0:    instruction_menu->m_items[0]->move_item(Vector3(25, -5, 0));
 			if (glfwGetKey(this->getWindow(), GLFW_KEY_ENTER) == GLFW_PRESS) {

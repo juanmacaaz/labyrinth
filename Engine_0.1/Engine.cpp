@@ -23,10 +23,11 @@ Engine::Engine()
 	initGlfwGL();
 	loadShaders();
 	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg");
+	texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
 	loadModels();
 	loadModels(0);
-	
 	loadSkymaps();
+	loadImages();
 	accumulator = 0;
 
 	menuSpace = new MenuSpace(this);
@@ -71,7 +72,7 @@ int Engine::run()
 			}
 
 			currentSpace->render();
-
+			//renderIntrucciones();
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 			accumulator = 0;
@@ -126,7 +127,6 @@ void Engine::setGameSpace()
 GameSpace* Engine::getGameSpace()
 {
 	return this->gameSpace;
-
 }
 
 void Engine::setMenuSpace()
@@ -177,11 +177,58 @@ void Engine::renderSkybox()
 	//glDepthMask(GL_TRUE);
 }
 
+void Engine::renderIntrucciones()
+{
+	glUseProgram(shader["instrucciones"]);
+	glActiveTexture(instrucciones);
+	glBindTexture(GL_TEXTURE_2D, instrucciones);
+
+	GLuint instrucciones2 = glGetUniformLocation(shader["instrucciones"], "ourTexture");
+
+	glBindVertexArray(instruccionesVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, instruccionesVBO);
+
+	glUniform1i(instrucciones2, 0);
+
+	
+	glDrawArrays(GL_TRIANGLES,0, 6);
+}
+
+void Engine::loadImages()
+{
+	instrucciones = loadImatge("textures/instrucciones.jpg");
+
+	float vertices[] = {
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	};
+
+	glGenVertexArrays(1, &instruccionesVAO);
+	glGenBuffers(1, &instruccionesVBO);
+
+	glBindVertexArray(instruccionesVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, instruccionesVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// texture coord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+}
+
 void Engine::loadShaders()
 {
 	shader["basic-nolight"] = LoadShader("shaders\\shader.vs", "shaders\\shader.fs");
 	shader["sky-map"] = LoadShader("shaders\\shader_mtl.vs", "shaders\\shader_mtl.fs");
 	shader["shader_fog"] = LoadShader("shaders\\shader_fog.vs", "shaders\\shader_fog.fs");
+	shader["instrucciones"] = LoadShader("shaders\\shader_img.vs", "shaders\\shader_img.fs");
 }
 
 void Engine::loadTextures(const char* wall, const char* floor, const char* key)
@@ -285,8 +332,6 @@ void Engine::LoadMusic(const int level) {
 	}
 }
 void Engine::LoadInstructions() {
-
-
 	mciSendString(TEXT("close sound"), NULL, 0, NULL);
 	mciSendString(TEXT("open \"music\\voices\\instructions.mp3\" alias sound"), NULL, 0, NULL);
 	mciSendString(TEXT("play sound"), NULL, 0, NULL);
@@ -300,39 +345,42 @@ void Engine::LoadMusicDefault() {
 	mciSendString(TEXT("play sound"), NULL, 0, NULL);
 	cont++;
 }
+
 void Engine::LoadCoin(const int level) {
-	if (level == 0) {
+	switch (level) {
+	case 0:
 		mciSendString(TEXT("close coin"), NULL, 0, NULL);
 		mciSendString(TEXT("open \"music\\coin.mp3\" alias coin"), NULL, 0, NULL);
 		mciSendString(TEXT("play coin"), NULL, 0, NULL);
-	}
-	else if (level == 1) {
+		break;
+	case 1:
 		mciSendString(TEXT("close coin"), NULL, 0, NULL);
 		mciSendString(TEXT("open \"music\\banana.mp3\" alias coin"), NULL, 0, NULL);
 		mciSendString(TEXT("play coin"), NULL, 0, NULL);
-	}
-	else if (level == 2) {
+		break;
+	case 2:
 		mciSendString(TEXT("close coin"), NULL, 0, NULL);
 		mciSendString(TEXT("open \"music\\captus.mp3\" alias coin"), NULL, 0, NULL);
 		mciSendString(TEXT("play coin"), NULL, 0, NULL);
-	}
-	else if (level == 3) {
+		break;
+	case 3:
 		mciSendString(TEXT("play \"music\\voices\\about_to_win.mp3\" "), NULL, 0, 0);
-	}
-	else if (level == 4) {
+		break;
+	case 4:
 		mciSendString(TEXT("play \"music\\voices\\enemy_about_win_feme.mp3\" "), NULL, 0, 0);
-	}
-	else if (level == 5) {
+		break;
+	case 5:
 		mciSendString(TEXT("play \"music\\voices\\level.mp3\" "), NULL, 0, 0);
-	}
-	else if (level == 6) {
+		break;
+	case 6:
 		mciSendString(TEXT("play \"music\\voices\\world_castle.mp3\" "), NULL, 0, 0);
-	}
-	else if (level == 7) {
+		break;
+	case 7:
 		mciSendString(TEXT("play \"music\\voices\\world_jungle.mp3\" "), NULL, 0, 0);
-	}
-	else if (level == 8) {
+		break;
+	case 8:
 		mciSendString(TEXT("play \"music\\voices\\world_desert.mp3\" "), NULL, 0, 0);
+		break;
 	}
 }
 
@@ -439,6 +487,8 @@ void Engine::loadSkymaps()
 }
 
 
+
+
 void Engine::loadModels()
 {
 	objl::Loader* Loader = new objl::Loader();
@@ -497,8 +547,8 @@ void Engine::loadModels()
 	models["pyramid"] = loadModel2("models\\pyramid.obj", Loader);
 
 	//Instructions Menu
-	models["instructions_text"] = loadModel2("models\\extra_menus\\instructions_text.obj", Loader);
-
+	models["instructions_text"] = loadModel2("models\\extra_menus\\tower.obj", Loader);
+	models["fantasma"] = loadModel2("models\\ghost.obj", Loader);
 	//Materials
 	//models["title_material"] = loadModel2("models\\materials\\title.mtl", Loader);
 }
@@ -678,6 +728,41 @@ GLuint Engine::loadTexture(const char* imagepath)
 	std::cout << "Loaded:" << textureID << std::endl;
 	return textureID;
 }
+
+GLuint Engine::loadImatge(const char* imagepath)
+{
+	GLuint textureID;
+
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	//glTexParameterf(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameterf(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(textureID, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(textureID, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(false);
+
+	unsigned char* data = stbi_load(imagepath, &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+	std::cout << "Loaded:" << textureID << std::endl;
+	return textureID;
+}
+
 
 inline vector<objl::Mesh>& loadModel2(const char* imagepath, objl::Loader* Loader)
 {
