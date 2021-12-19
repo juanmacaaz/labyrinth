@@ -22,7 +22,7 @@ Engine::Engine()
 {
 	initGlfwGL();
 	loadShaders();
-	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg");
+	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg", "textures\\uncompressed\\metal.jpg");
 	texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
 	loadModels();
 	loadModels(0);
@@ -231,13 +231,13 @@ void Engine::loadShaders()
 	shader["instrucciones"] = LoadShader("shaders\\shader_img.vs", "shaders\\shader_img.fs");
 }
 
-void Engine::loadTextures(const char* wall, const char* floor, const char* key)
+void Engine::loadTextures(const char* wall, const char* floor, const char* key, const char* enemy)
 {
 	texture[Block::WALL] = loadTexture(wall);
 	texture[Block::FLOOR] = loadTexture(floor);
 	texture[Block::KEY] = loadTexture(key);
 	//manzana y enemigo
-	texture[Block::WOOD] = loadTexture("textures\\uncompressed\\madera-min.jpg");
+	texture[Block::WOOD] = loadTexture(enemy);
 	texture[Block::PALM] = loadTexture("textures\\uncompressed\\palmera1.jpg");
 	texture[Block::TOWER] = loadTexture("textures\\uncompressed\\pared_castillo.jpg");
 	texture[Block::PYRAMID] = loadTexture("textures\\uncompressed\\pared_desierto.jpg");
@@ -247,19 +247,19 @@ void Engine::setTexturas(const int level)
 {
 	if (level == 0) {
 		//castillo
-		loadTextures("textures\\uncompressed\\final\\castle_wall.jpg", "textures\\uncompressed\\final\\castle_floor.jpg", "textures\\uncompressed\\key.jpg");
+		loadTextures("textures\\uncompressed\\final\\castle_wall.jpg", "textures\\uncompressed\\final\\castle_floor.jpg", "textures\\uncompressed\\key.jpg", "textures\\uncompressed\\metal.jpg");
 		setSkybox(skyboxTex_easy);
 		fog = 0;
 	}
 	else if (level == 1) {
 		//jungla
-		loadTextures("textures\\uncompressed\\final\\jungle_wall.jpg", "textures\\uncompressed\\final\\jungle_floor.jpg", "textures\\uncompressed\\banana.jpg");
+		loadTextures("textures\\uncompressed\\final\\jungle_wall.jpg", "textures\\uncompressed\\final\\jungle_floor.jpg", "textures\\uncompressed\\banana.jpg", "textures\\uncompressed\\pelo.jpg");
 		setSkybox(skyboxTex_medium);
 		fog = 0;
 	}
 	else if (level == 2) {
 		//desirto
-		loadTextures("textures\\uncompressed\\final\\sand_red.jpg", "textures\\uncompressed\\final\\sand.jpg", "textures\\uncompressed\\cactus.jpg");
+		loadTextures("textures\\uncompressed\\final\\sand_red.jpg", "textures\\uncompressed\\final\\sand.jpg", "textures\\uncompressed\\cactus.jpg", "textures\\uncompressed\\pelo.jpg");
 		setSkybox(skyboxTex_hard);
 		fog = 1;
 	}

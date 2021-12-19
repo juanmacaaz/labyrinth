@@ -103,7 +103,7 @@ private:
 
 	// Funciones privadas
 	void loadShaders();
-	void loadTextures(const char* wall, const char* floor, const char* key);
+	void loadTextures(const char* wall, const char* floor, const char* key, const char* enemy);
 	void loadModels();
 	void LoadMusicDefault();
 	void loadSkymaps();
