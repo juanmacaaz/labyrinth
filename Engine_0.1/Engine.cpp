@@ -23,7 +23,7 @@ Engine::Engine()
 	initGlfwGL();
 	loadShaders();
 	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg", "textures\\uncompressed\\metal.jpg");
-	texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
+	//texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
 	loadModels();
 	loadModels(0);
 	loadSkymaps();
@@ -199,12 +199,12 @@ void Engine::loadImages()
 	instrucciones = loadImatge("textures/instrucciones.jpg");
 
 	float vertices[] = {
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-1.0f, -1.0f,  0.5f,  0.0f, 0.0f,
+	 1.0f, -1.0f,  0.5f,  1.0f, 0.0f,
+	 1.0f,  1.0f,  0.5f,  1.0f, 1.0f,
+	 1.0f,  1.0f,  0.5f,  1.0f, 1.0f,
+	-1.0f,  1.0f,  0.5f,  0.0f, 1.0f,
+	-1.0f, -1.0f,  0.5f,  0.0f, 0.0f,
 	};
 
 	glGenVertexArrays(1, &instruccionesVAO);
@@ -569,7 +569,7 @@ void Engine::initGlfwGL()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(w_width, w_height, "Game", NULL, NULL);
+	window = glfwCreateWindow(w_width, w_height, "Game", monitor, NULL);
 	if (!window)
 	{
 		glfwTerminate();
