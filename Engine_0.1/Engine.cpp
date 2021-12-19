@@ -23,7 +23,7 @@ Engine::Engine()
 	initGlfwGL();
 	loadShaders();
 	loadTextures("textures\\uncompressed\\wall-min.jpg", "textures\\uncompressed\\White-min.jpg", "textures\\uncompressed\\key.jpg", "textures\\uncompressed\\metal.jpg");
-	//texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
+	texture[10] = loadTexture("textures\\uncompressed\\blanco.jpg");
 	loadModels();
 	loadModels(0);
 	loadSkymaps();

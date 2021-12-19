@@ -48,11 +48,11 @@ GameSpace::GameSpace(Engine* engine, Dificultad dificultad) : Space(engine)
 	{
 		case 0: this->actor->distance_view = 14; break;
 		case 1: this->actor->distance_view = 13;
-			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), "fantasma", false, 0.10f, 1);
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), "fantasma", false, 0.10f, 10);
 			enemy2->setEnemyVelocity(0.0055f);
 			break;
 		case 2: this->actor->distance_view = 12;
-			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), "fantasma", false, 0.10f, 1);
+			enemy2 = new Enemy(this, Vector3(x, 0.505, z), labyrinth->getEnemyRoute().size(), "fantasma", false, 0.10f, 10);
 			enemy2->setEnemyVelocity(0.004f);
 			break;
 	}
