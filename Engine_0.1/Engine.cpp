@@ -381,6 +381,12 @@ void Engine::LoadCoin(const int level) {
 	case 8:
 		mciSendString(TEXT("play \"music\\voices\\world_desert.mp3\" "), NULL, 0, 0);
 		break;
+	case 9:
+		mciSendString(TEXT("play \"music\\voices\\fantas.mp3\" "), NULL, 0, 0);
+		break;
+	case 10:
+		mciSendString(TEXT("play \"music\\voices\\colision.mp3\" "), NULL, 0, 0);
+		break;
 	}
 }
 

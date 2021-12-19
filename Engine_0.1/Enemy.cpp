@@ -90,9 +90,11 @@ bool Enemy::moveTo(float x, float z)
 void Enemy::update()
 {
 	if (space->getWorld()->testOverlap(body, space->getActor()->getBody())) {
+		space->getEngine()->LoadCoin(10);
 		if (main)
 			space->getActor()->toInitPosition();
 		else {
+			space->getEngine()->LoadCoin(9);
 			int DISTANCE = 7.5f;
 			space->getActor()->toInitPosition();
 			Vector3 new_pos = space->getActor()->getBody()->getTransform().getPosition();
